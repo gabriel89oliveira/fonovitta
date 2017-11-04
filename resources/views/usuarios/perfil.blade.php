@@ -171,7 +171,8 @@
 								<li class="active" role="presentation"><a  data-toggle="tab" id="atividades_tab" role="tab" href="#atividades_tab_" aria-expanded="false"><span>Atividades</span></a></li>
 								<li role="presentation" class="next"><a aria-expanded="true" data-toggle="tab" role="tab" id="internacao_tab" href="#internacao_tab_"><span>Internação</span></a></li>
 								<li role="presentation" class=""><a  data-toggle="tab" id="domiciliar_tab" role="tab" href="#domiciliar_tab_" aria-expanded="false"><span>Domiciliar</span></a></li>
-								<li role="presentation" class=""><a  data-toggle="tab" id="earning_tab_8" role="tab" href="#earnings_8" aria-expanded="false"><span>earnings</span></a></li>
+								
+								<!-- <li role="presentation" class=""><a  data-toggle="tab" id="earning_tab_8" role="tab" href="#earnings_8" aria-expanded="false"><span>earnings</span></a></li>
 								<li role="presentation" class=""><a  data-toggle="tab" id="settings_tab_8" role="tab" href="#settings_8" aria-expanded="false"><span>settings</span></a></li>
 								<li class="dropdown" role="presentation">
 									<a  data-toggle="dropdown" class="dropdown-toggle" id="myTabDrop_7" href="#" aria-expanded="false"><span>More</span> <span class="caret"></span></a>
@@ -181,7 +182,8 @@
 										<li class=""><a  data-toggle="tab" id="dropdown_15_tab" role="tab" href="#dropdown_15" aria-expanded="false">Likes</a></li>
 										<li class=""><a  data-toggle="tab" id="dropdown_16_tab" role="tab" href="#dropdown_16" aria-expanded="false">Reviews</a></li>
 									</ul>
-								</li>
+								</li> -->
+								
 							</ul>
 							
 							<div class="tab-content" id="myTabContent_8">

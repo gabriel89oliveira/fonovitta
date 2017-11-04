@@ -46,7 +46,7 @@ class ObjetivoController extends Controller
 			->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
 			->orderBy('objetivos.prazo', 'asc')
 			->orderBy('objetivos.id', 'desc')
-			->get();
+			->paginate(10);
 
         return view('objetivos.index', compact('objetivos'))->with(["page" => "todos_objetivos"]);
     }

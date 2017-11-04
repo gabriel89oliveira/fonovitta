@@ -57,7 +57,7 @@
 					<a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
 					<form id="search_form" role="search" class="top-nav-search collapse pull-left">
 						<div class="input-group">
-							<input type="text" name="example-input1-group2" class="form-control" placeholder="Search">
+							<input type="text" name="example-input1-group2" class="form-control" placeholder="Buscar">
 							<span class="input-group-btn">
 							<button type="button" class="btn  btn-default"  data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true"><i class="zmdi zmdi-search"></i></button>
 							</span>
@@ -66,7 +66,8 @@
 				</div>
 				<div id="mobile_only_nav" class="mobile-only-nav pull-right">
 					<ul class="nav navbar-right top-nav pull-right">
-						<li>
+						
+						<!-- <li>
 							<a id="open_right_sidebar" href="#"><i class="zmdi zmdi-settings top-nav-icon"></i></a>
 						</li>
 						<li class="dropdown app-drp">
@@ -306,11 +307,13 @@
 									</div>
 								</li>
 							</ul>
-						</li>
+						</li> -->
+
 						<li class="dropdown auth-drp">
 							<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="{{ URL::asset('dist/img/avatar/'.Auth::user()->foto) }}" alt="{{ Auth::user()->name }}" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
 							<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-								<li>
+								
+								<!-- <li>
 									<a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
 								</li>
 								<li>
@@ -337,10 +340,12 @@
 										</li>
 									</ul>	
 								</li>
-								<li class="divider"></li>
+								<li class="divider"></li> -->
+
 								<li>
 									<a href="{{ action('Auth\AuthController@logout') }}"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
 								</li>
+
 							</ul>
 						</li>
 					</ul>
@@ -996,15 +1001,17 @@
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						  <h5 class="txt-dark"> @yield('titulo') </h5>
 						</div>
+						
 						<!-- Breadcrumb -->
-						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+						<!-- <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 						  <ol class="breadcrumb">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="#"><span>Pacientes</span></a></li>
 							<li class="active"><span>Perfil</span></li>
 						  </ol>
-						</div>
+						</div> -->
 						<!-- /Breadcrumb -->
+						
 					</div>
 					<!-- /Title -->
 					

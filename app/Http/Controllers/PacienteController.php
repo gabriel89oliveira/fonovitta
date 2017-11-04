@@ -33,7 +33,7 @@ class PacienteController extends Controller
     */
     public function index() {
 	
-        $pacientes = Paciente::where('status', '=', 'ativo')->orderby('nome', 'desc')->paginate(10);
+        $pacientes = Paciente::where('status', '=', 'ativo')->orderby('nome', 'asc')->paginate(15);
         return view('pacientes.index', compact('pacientes'))->with(["page" => "todos_pacientes"]);
 		
     }

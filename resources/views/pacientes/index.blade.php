@@ -1,6 +1,8 @@
 ﻿@extends('layouts.master')
 
-
+@section('titulo')
+Pacientes
+@endsection
 
 @section('content')
 	
@@ -10,12 +12,6 @@
 		<div class="col-sm-12">
 			<div class="panel panel-default card-view">
 				
-				<div class="panel-heading">
-					<div class="pull-left">
-						<h6 class="panel-title txt-dark">data Table</h6>
-					</div>
-					<div class="clearfix"></div>
-				</div>
 				
 				<div class="panel-wrapper collapse in">
 					<div class="panel-body">
@@ -57,6 +53,11 @@
 										
 									</tbody>
 								</table>
+
+								@if($pacientes)
+								{{ $pacientes->render() }}
+								@endif
+
 							</div>
 						</div>
 					</div>
