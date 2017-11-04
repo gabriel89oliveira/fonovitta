@@ -267,7 +267,7 @@ class PacienteController extends Controller
 			->select('pacientes.*')
 			->where('fonos.id_responsavel', '=', Auth::user()->id)
 			->orderBy('nome', 'desc')
-			->get();
+			->paginate(15);
 
         return view('pacientes.index', compact('pacientes'))->with(["page" => "meus_pacientes"]);
 		

@@ -213,7 +213,7 @@ class ObjetivoController extends Controller
 			->where('objetivos.id_usuario', '=', $id)
 			->orderBy('objetivos.prazo', 'asc')
 			->orderBy('objetivos.id', 'desc')
-			->get();
+			->paginate(10);
 
         return view('objetivos.index', compact('objetivos'))->with(["page" => "meus_objetivos"]);
 		
