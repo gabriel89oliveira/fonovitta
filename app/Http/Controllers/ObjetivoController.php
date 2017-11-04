@@ -41,11 +41,11 @@ class ObjetivoController extends Controller
     {
         //
 		$objetivos = DB::table('objetivos')
-            ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
+            // ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
 			->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
-			->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
-			->orderBy('objetivos.prazo', 'asc')
-			->orderBy('objetivos.id', 'desc')
+			// ->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
+			// ->orderBy('objetivos.prazo', 'asc')
+			// ->orderBy('objetivos.id', 'desc')
 			->get();
 
         return view('objetivos.index', compact('objetivos'))->with(["page" => "todos_objetivos"]);

@@ -43,7 +43,12 @@
 										</tr>
 									</tfoot>
 									<tbody>
-									
+										
+										<tr>
+												<td>Ola</td>
+										</tr>
+
+
 										<?php $k = 0; ?>
 										@foreach ($objetivos as $objetivo)
 										
