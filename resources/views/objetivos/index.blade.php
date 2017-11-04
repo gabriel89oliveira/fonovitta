@@ -43,10 +43,6 @@
 										</tr>
 									</tfoot>
 									<tbody>
-										
-										<tr>
-												<td>Ola</td>
-										</tr>
 
 
 										<?php $k = 0; ?>
