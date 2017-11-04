@@ -44,7 +44,6 @@ class ObjetivoController extends Controller
             ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
 			->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
 			->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
-			->where('objetivos.status', '=', 'ativo')
 			->orderBy('objetivos.prazo', 'asc')
 			->orderBy('objetivos.id', 'desc')
 			->get();
