@@ -11,16 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
-
-
-
+Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/', function () {
 		$id_usuario = Auth::user()->id;
@@ -67,3 +60,6 @@ Route::get('/home', 'HomeController@index');
 	Route::resource('users', 'UserController');
 	Route::resource('roles', 'RoleController');
 	Route::resource('permissions', 'PermissionController');
+
+
+});
