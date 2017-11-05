@@ -20,7 +20,6 @@
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Data/Hora Adicionado</th>
                     <th>Perfis do usuário</th>
                     <th></th>
 					<th></th>
@@ -29,23 +28,24 @@
 
             <tbody>
                 @foreach ($users as $user)
+
                 <tr>
 
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
-                    <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
+                    
+                    <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>
 
                     <td>
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Editar</a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Editar</a>
 					</td>
 					
 					<td>
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
-                    {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-
+                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
+                        {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
                     </td>
+
                 </tr>
                 @endforeach
             </tbody>

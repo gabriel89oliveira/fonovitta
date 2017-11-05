@@ -5,18 +5,17 @@
 @section('content')
 
 <div class="col-lg-10 col-lg-offset-1">
+    
     <h2>
-	
 		<i class="fa fa-key"></i> Perfil
-
 		<a href="{{ route('users.index') }}" class="btn btn-default pull-right ma-5">Usuários</a>
 		<a href="{{ route('permissions.index') }}" class="btn btn-default pull-right ma-5">Permissões</a>
-		
 	</h2>
 	
     <hr>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
+            
             <thead>
                 <tr>
                     <th>Perfil</th>
