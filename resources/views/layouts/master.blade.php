@@ -466,7 +466,22 @@
 							</a>
 						</li>
 					
-					
+					<li class="navigation-header">
+						<span>Outros</span> 
+						<i class="zmdi zmdi-more"></i>
+					</li>
+
+						<li>
+							<a class="{{ $page == 'sugestao' ? 'active-page' : '' }}" href="{{ route('sugestao.create') }}">
+								<div class="pull-left">
+									<i class="zmdi zmdi-comment-outline mr-20"></i><span class="right-nav-text">Sugestões</span>
+								</div>
+								<div class="clearfix"></div>
+							</a>
+						</li>
+
+
+
 					@can('Administrativo')
 						
 						<li class="navigation-header">

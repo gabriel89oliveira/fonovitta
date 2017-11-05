@@ -24,14 +24,21 @@ use Session;
 
 class AltaController extends Controller
 {
-    //
+    
+
+    /**
+     * Alta fonoaudiológica.
+     *
+     */
 	public function alta($id)
 	{
 		
+		// Busca dados de atendimento de fono
 		$Paciente = DB::table('fonos')
 			->where('id_paciente', '=', $id)
 			->first();
 		
+		// Salva dados no historico de atendimentos de fono
 		$Historico = DB::table('historico_fonos')->insertGetId([
 			'id_paciente'      => $Paciente->id_paciente,
 			'id_responsavel'   => $Paciente->id_responsavel,
@@ -47,33 +54,37 @@ class AltaController extends Controller
 			'updated_by'       => Auth::user()->id
 		]);
 		
+		// Remove atendimento de fono para paciente
 		DB::table('pacientes')
 			->where('id', '=', $id)
 			->update(['fon' => 0]);
 		
-		
+		// Exclui paciente dos atendimentos de fono
 		DB::table('fonos')
 			->where('id_paciente', '=', $id)
 			->delete();
-		
-		// return Response::json([
-			// 'success' => 'Record has been deleted successfully!'
-		// ]);
-		
+
+		// Retorna resposta para AJAX
 		return response()->json([
 			'success' => 'Record has been deleted successfully!'
 		]);
 		
 	}
+
 	
-	
+	/**
+     * Suspensão do atendimento.
+     *
+     */
 	public function suspensao($id)
 	{
 		
+		// Busca dados de atendimento de fono
 		$Paciente = DB::table('fonos')
 			->where('id_paciente', '=', $id)
 			->first();
 		
+		// Salva dados no historico de atendimentos de fono
 		$Historico = DB::table('historico_fonos')->insertGetId([
 			'id_paciente'      => $Paciente->id_paciente,
 			'id_responsavel'   => $Paciente->id_responsavel,
@@ -89,27 +100,37 @@ class AltaController extends Controller
 			'updated_by'       => Auth::user()->id
 		]);
 		
+		// Remove atendimento de fono para paciente
 		DB::table('pacientes')
 			->where('id', '=', $id)
 			->update(['fon' => 0]);
 		
+		// Exclui paciente dos atendimentos de fono
 		DB::table('fonos')
 			->where('id_paciente', '=', $id)
 			->delete();
 		
+		// Retorna resposta para AJAX
 		return response()->json([
 			'success' => 'Record has been deleted successfully!'
 		]);
 		
 	}
 	
+
+	/**
+     * Óbito de um paciente.
+     *
+     */
 	public function obito($id)
 	{
 		
+		// Busca dados de atendimento de fono
 		$Paciente = DB::table('fonos')
 			->where('id_paciente', '=', $id)
 			->first();
 		
+		// Salva dados no historico de atendimentos de fono
 		$Historico = DB::table('historico_fonos')->insertGetId([
 			'id_paciente'      => $Paciente->id_paciente,
 			'id_responsavel'   => $Paciente->id_responsavel,
@@ -125,6 +146,7 @@ class AltaController extends Controller
 			'updated_by'       => Auth::user()->id
 		]);
 		
+		// Remove atendimento de fono para paciente
 		DB::table('pacientes')
 			->where('id', '=', $id)
 			->update([
@@ -132,14 +154,17 @@ class AltaController extends Controller
 				'status' => 'inativo'
 			]);
 		
+		// Exclui paciente dos atendimentos de fono
 		DB::table('fonos')
 			->where('id_paciente', '=', $id)
 			->delete();
 		
+		// Retorna resposta para AJAX
 		return response()->json([
 			'success' => 'Record has been deleted successfully!'
 		]);
 		
 	}
+	
 	
 }

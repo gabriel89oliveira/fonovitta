@@ -41,7 +41,7 @@
 					</td>
 					
 					<td>
-                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
+                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'onsubmit' => 'return confirm("Deseja excluir esse usuário?") ' ]) !!}
                         {!! Form::submit('Excluir', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     </td>

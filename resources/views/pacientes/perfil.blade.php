@@ -254,7 +254,7 @@
 										<div class="sl-item">
 											<a href="javascript:void(0)" data-toggle="modal" data-target="#historico-modal-{{ $k }}">
 												<div class="sl-avatar avatar avatar-sm avatar-circle">
-													<img class="img-responsive img-circle" src="dist/img/user.png" alt="avatar"/>
+													<img class="img-responsive img-circle" src="{{ URL::asset('dist/img/avatar/' . $terapia_i->foto) }}" alt="avatar"/>
 												</div>
 												<div class="sl-content">
 													<p class="inline-block"><span class="capitalize-font txt-success mr-5 weight-500">{{ $terapia_i->name }}</span><span>{{ $terapia_i->terapia }}</span></p>
@@ -316,6 +316,10 @@
 										</div>
 										
 									@endforeach
+
+									@if($terapia)
+									{{ $terapia->render() }}
+									@endif
 									
 								</div>
 							</div>

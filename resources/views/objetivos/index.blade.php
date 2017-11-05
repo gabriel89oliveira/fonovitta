@@ -53,7 +53,10 @@ Objetivos
 													{{ $objetivo->usuario_nome }}<br>
 													<small>{{ \Carbon\Carbon::parse($objetivo->data)->diffForHumans() }}</small>
 												</td>
-												<td>{{ $objetivo->objetivo }}</td>
+												<td>
+													{{ $objetivo->objetivo }}
+													<small>{{ $objetivo->status }}</small>
+												</td>
 												<td>
 													<div class="progress">
 														<div class="progress-bar progress-bar-primary" style="width: {{ $objetivo->progresso }}%;" role="progressbar">
@@ -77,16 +80,13 @@ Objetivos
 														
 														<ul class="list-inline">
 															<li>
-																<button data-toggle="modal" data-target="#check-modal-{{ $k }}" class="btn btn-success btn-sm btn-icon-anim btn-square"><i class="fa fa-check"></i></button>
+																<a href="#" data-toggle="modal" data-target="#check-modal-{{ $k }}"><i class="fa fa-check txt-success"></i></a>
 															</li>
 															<li>
-																<button data-toggle="modal" data-target="#editar-modal-{{ $k }}" class="btn btn-warning btn-sm btn-icon-anim btn-square"><i class="fa fa-pencil"></i></button>
+																<a href="#" data-toggle="modal" data-target="#editar-modal-{{ $k }}"><i class="fa fa-pencil txt-primary"></i></a>
 															</li>
 															<li>
-																{!! Form::open(array('action' => array('ObjetivoController@destroy', $objetivo->id), 'method' => 'PUT', 'id' => 'confirm_delete_$objetivo->id', 'data-form' => '$objetivo->id', 'onsubmit' => 'return ConfirmDelete()' )) !!}
-																	{{ method_field('DELETE') }}
-																	{{Form::button('<i class="zmdi zmdi-delete"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm btn-icon-anim btn-square'))}}
-																{!! Form::close() !!}
+																<a href="#" onClick='confirmarDeletar("{{ $objetivo->id }}");'><i class="zmdi zmdi-delete txt-danger"></i></a>
 															</li>
 														</ul>
 														
@@ -137,6 +137,11 @@ Objetivos
 																		], $objetivo->progresso, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 																</div>
 																
+																<div class="form-group">
+																	{{ Form::label('status', 'Status') }}
+																	{{ Form::text('status', $objetivo->status, ['class' => 'form-control']) }}
+																</div>
+
 																<div class="form-group">
 																	{{ Form::label('prazo', 'Prazo') }}
 																	{{ Form::date('prazo', $objetivo->prazo, ['class' => 'form-control']) }}
@@ -208,16 +213,12 @@ Objetivos
 	<script type="text/javascript">
 		
 		
-		function ConfirmDelete()
+		function confirmarDeletar(id)
 		{
-			
-			event.preventDefault(); // prevent form submit
-			var form = event.target.data; // storing the form
-			var data = event.target.attributes.getNamedItem("data-form").value ;
 			
 			swal({
 				title: 'Confirmar?',
-				text: 'Se esse objetivo for deletado, você não poderá mais recuperá-lo!',
+				text: 'Deseja deletar esse objetivo? Você não poderá mais recuperá-lo!',
 				icon: 'warning',
 				buttons: true,
 				dangerMode: true,
@@ -225,25 +226,43 @@ Objetivos
 			.then((willDelete) => {
 				if(willDelete){
 					
-					swal({
-						text: 'Feito! Esse objetivo foi deletado!',
-						icon: 'success',
-						button: false,
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+
+					$.ajax(
+					{
+						url: "{{ url('objetivos/deletar') }}"+"/"+id,
+						type: 'delete',
+						dataType: "JSON",
+						data: {
+							"id": id
+						},
+						success: function ()
+						{
+							swal({
+								text: 'Feito! Objetivo excluído!',
+								icon: 'success',
+								button: false,
+								closeOnClickOutside: false,
+							});
+							
+							setTimeout(function () {
+								location.reload();
+							}, 800);
+							
+						},
+						error: function(xhr) {
+							console.log(xhr.responseText); // this line will save you tons of hours while debugging
+						}
 					});
 					
-					setTimeout(function () {
-						document.getElementById('confirm_delete_'+data).submit();
-					}, 800);
-					
-					
-				}else{
-					swal('Esse objetivo não foi deletado!');
 				}
 			});
-			
+		   
 		}
-		
-		
 		
 	</script>
 	

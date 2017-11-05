@@ -50,11 +50,19 @@ Route::group(['middleware' => ['auth']], function() {
 	
 	
 	// Resources para objetivos
+	Route::delete('objetivos/deletar/{id}', ['uses' => 'ObjetivoController@deletar', 'as' => 'objetivos.deletar']);
 	Route::put('objetivos/conclude/{id}', ['uses' => 'ObjetivoController@conclude', 'as' => 'objetivos.conclude']);
 	Route::get('objetivos/meus_objetivos/{id}', ['uses' => 'ObjetivoController@mine', 'as' => 'objetivos.mine']);
 	Route::get('objetivos/estatistica', ['uses' => 'ObjetivoEstatisticaController@estatistica', 'as' => 'objetivos.estatistica']);
 	Route::resource('objetivos', 'ObjetivoController');
 	
+
+	// Resources para sugestoes
+	Route::get('sugestoes/cadastrar', ['uses' => 'SugestaoController@create', 'as' => 'sugestao.create']);
+	Route::get('sugestoes/meus_tickets', ['uses' => 'SugestaoController@meus', 'as' => 'sugestao.meus']);
+	Route::get('sugestoes/tickets', ['uses' => 'SugestaoController@tickets', 'as' => 'sugestao.tickets']);
+	Route::post('sugestoes/store', ['uses' => 'SugestaoController@store', 'as' => 'objetivos.store']);
+
 	
 	// Controle de permissões
 	Route::resource('users', 'UserController');

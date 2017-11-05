@@ -126,11 +126,12 @@ class PacienteController extends Controller
 		
 		$terapia = DB::table('terapias')
             ->join('users', 'terapias.id_usuario', '=', 'users.id')
-			->select('terapias.*', 'users.name')
+            ->join('usuarios', 'terapias.id_usuario', '=', 'usuarios.id')
+			->select('terapias.*', 'users.name', 'usuarios.foto')
 			->where('id_paciente', '=', $id)
 			->orderBy('data', 'desc')
 			->orderBy('id', 'desc')
-			->get();
+			->paginate(7);
 		
 		$equipe = DB::table('usuarios')->pluck('nome', 'id');
 		

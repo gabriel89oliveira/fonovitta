@@ -26,20 +26,15 @@ use Session;
 class ObjetivoController extends Controller
 {
 	
-	// Apenas usuários com a permissão 'Administrativo'
-	public function __construct() {
-        $this->middleware(['auth', 'clearance']);
-    }
-	
 	
     /**
-     * Display a listing of the resource.
+     * Listar todos objetivos.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        
+        // Listar todos objetivos
 		$objetivos = DB::table('objetivos')
             ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
 			->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
@@ -48,17 +43,20 @@ class ObjetivoController extends Controller
 			->orderBy('objetivos.id', 'desc')
 			->paginate(10);
 
+        // Retorna página de objetivos
         return view('objetivos.index', compact('objetivos'))->with(["page" => "todos_objetivos"]);
+
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Formulário para criar um novo objetivo.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        
+        // Buscar pacientes que não tem objetivo associado
 		$paciente = DB::table('pacientes')
 			->leftJoin('objetivos', 'pacientes.id', '=', 'objetivos.id_paciente')
 			->select('pacientes.nome', 'pacientes.id')
@@ -66,15 +64,15 @@ class ObjetivoController extends Controller
 			->where('pacientes.fon', '=', 1)
 			->pluck('pacientes.nome', 'pacientes.id');
 		
+        // Retorna página para criar objetivo
 		return view('objetivos/cadastrar', ['paciente' => $paciente])->with(["page" => "cadastrar_objetivo"]);
 		
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * Cadastrar novo objetivo.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -98,89 +96,90 @@ class ObjetivoController extends Controller
 			'updated_by'    => Auth::user()->id
 		]);
 		
+        // Retorna página de objetivos
 		return redirect()->action('ObjetivoController@index');
 		
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
+     * Atualizar objetivo.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        // Valida dados de entrada
 		$this->validate($request, [
 			'objetivo'      =>'required',
 			'progresso' 	=>'required',
 			'prazo'    		=>'required'
 		]);
 		
+        // Atualiza tabela de objetivos
 		DB::table('objetivos')
             ->where('id', $id)
             ->update([
 				'objetivo'      => $request->objetivo,
 				'progresso' 	=> $request->progresso,
+                'status'        => $request->status,
 				'prazo'    		=> $request->prazo,
 				'updated_by'    => Auth::user()->id
 			]);
-			
+		
+        // Retorna página de objetivos
 		return redirect()->action('ObjetivoController@index');
 		
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Excluir um registro. FORA DE USO
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        
+        // Excluir item da tabela de objetivos
 		Objetivo::destroy($id);
 		
+        // Retorna resposta para AJAX
 		return redirect()->action('ObjetivoController@index');
 		
     }
-	
-	/**
-     * Conclude the specified resource from storage.
+
+
+    /**
+     * Deletar um objetivo.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     */
+    public function deletar($id)
+    {
+        
+        // Excluir item da tabela de objetivos
+        Objetivo::destroy($id);
+        
+        // Retorna resposta para AJAX
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+        
+    }
+
+
+	/**
+     * Concluir um objetivo.
+     *
      */
     public function conclude(Request $request, $id)
     {
-        //
+        
+        // Busca dados do objetivo
 		$objetivo = DB::table('objetivos')
             ->where('id', $id)
 			->first();
-			
+		
+        // Salva dados no historico de objetivos
 		$historico = DB::table('historico_objetivos')->insertGetId([
 			'data'			=> $objetivo->data,
 			'id_paciente'   => $objetivo->id_paciente, 
@@ -190,22 +189,23 @@ class ObjetivoController extends Controller
 			'conclusao'		=> $request->data,
 			'updated_by'    => Auth::user()->id
 		]);
-			
+		
+        // Excluir item da tabela de objetivos
 		Objetivo::destroy($id);
 		
+        // Retorna resposta para AJAX
 		return redirect()->action('ObjetivoController@index');
 		
     }
-	
+
+
 	/**
-     * Conclude the specified resource from storage.
+     * Mostrar meus objetivos.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function mine($id)
     {
-        //
+        
 		$objetivos = DB::table('objetivos')
             ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
 			->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
