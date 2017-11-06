@@ -201,6 +201,20 @@
 							<div class="panel-body">
 								<div class="form-wrap">
 									
+									@if(!empty($dieta->dieta))
+										<div class="form-group">
+											<p>Dieta</p>
+											<h6> {{ $dieta->dieta }} </h6>
+										</div>
+									@endif
+
+									@if(!empty($dieta->liquido))
+										<div class="form-group">
+											<p>Líquido</p>
+											<h6> {{ $dieta->liquido }} </h6>
+										</div>
+									@endif
+
 									<div class="form-group">
 										<p>Frequência do atendimento</p>
 										<h6> {{ $fono->frequencia }} </h6>

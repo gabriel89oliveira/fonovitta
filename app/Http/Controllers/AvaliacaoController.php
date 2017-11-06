@@ -142,6 +142,23 @@ class AvaliacaoController extends Controller
 					'id_usuario'     => Auth::user()->id
 				]);
 			
+
+			// Insere novas dietas
+			$id_insert = DB::table('historico_dietas')->insertGetId([
+    				'id_paciente' 	=> $request->id_paciente,
+					'dieta' 		=> $request->dieta,
+					'liquido' 		=> $request->liquido,
+					'data'			=> date("Y-m-d")
+				]);
+
+				// Histórico
+				DB::table('historicos')->insert([
+					'tabela'         => 'historico_dietas',
+					'id_linha'       => $id_insert,
+					'acao'           => 'criar',
+					'id_usuario'     => Auth::user()->id
+				]);
+
 			
 			// Atualiza atendimento de fono na tabela 'pacientes'
 			DB::table('pacientes')

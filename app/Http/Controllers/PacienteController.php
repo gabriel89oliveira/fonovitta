@@ -141,7 +141,11 @@ class PacienteController extends Controller
 			->where('id_paciente', $paciente->id)
 			->orderBy('data_inicio', 'desc')->first();
 		
-		return view('pacientes/perfil', ['paciente' => $paciente, 'idade' => $idade, 'aniversario' => $aniversario, 'terapia' => $terapia, 'fono' => $fono, 'equipe' => $equipe])->with(["page" => ""]);
+		$dieta = DB::table('historico_dietas')
+			->where('id_paciente', $paciente->id)
+			->orderBy('id', 'desc')->first();
+
+		return view('pacientes/perfil', ['paciente' => $paciente, 'idade' => $idade, 'aniversario' => $aniversario, 'terapia' => $terapia, 'fono' => $fono, 'equipe' => $equipe, 'dieta' => $dieta])->with(["page" => ""]);
 		
     }
 	

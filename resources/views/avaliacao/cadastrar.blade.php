@@ -24,10 +24,25 @@
 							<div class="form-wrap">
 								
 								<div class="form-group">
+									
+									<div class="row">
+										
+										<div class="col-sm-6">
+											<div class="checkbox checkbox-primary">
+												{{ Form::checkbox('prescricao', '1') }}
+												{{ Form::label('prescricao', 'Houve prescrição médica') }}
+											</div>
+										</div>
+									</div>
+									
+								</div>
+
+								<div class="form-group">
 									{{ Form::label('dieta_inicial', 'Consistência da dieta atual') }}
 									{{ Form::select('dieta_inicial', [
-											'Pastosa heteroênea'    => 'Pastosa heteroênea', 
-											'Pastosa homogênea'     => 'Pastosa homogênea', 
+											'Líquida'				=> 'Líquida',
+											'Pastosa heterogênea'   => 'Pastosa heterogênea', 
+											'Pastosa homogênea'     => 'Pastosa homogênea (papa ou leve batida)', 
 											'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
 											'Branda'                => 'Branda', 
 											'Geral'                 => 'Geral', 
@@ -153,49 +168,45 @@
 									{{ Form::label('conduta', 'Conduta') }}
 									{{ Form::select('conduta', [
 											'Mantida' 	                    => 'Mantida', 
+											'Sugestão de SNE'				=> 'Sugestão de SNE',
+											'Sugestão de PEG'				=> 'Sugestão de PEG',
+											'Suspensão de dieta via oral'   => 'Suspensão de dieta via oral',
+											'Início de treino VO'			=> 'Início de treino VO',
+											'Treino VO com maior volume'	=> 'Treino VO com maior volume',
 											'Liberação de pequeno volume'   => 'Liberação de pequeno volume',
 											'Liberação de dieta'            => 'Liberação de dieta',
 											'Liberação de dieta por prazer' => 'Liberação de dieta por prazer',
 											'Evolução de consistência' 	  	=> 'Evolução de consistência', 
 											'Regressão de consistência' 	=> 'Regressão de consistência', 
-											'Suspensão de dieta via oral'   => 'Suspensão de dieta via oral',
 											'Uso de espessante' 	        => 'Uso de espessante', 
 											'Gerenciamento' 	            => 'Gerenciamento'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
-								
-								<!-- ************************************************************************************** -->
-								
-								
-									<div class="form-group">
+								<div class="form-group">
 									{{ Form::label('dieta', 'Consistência da dieta') }}
 									{{ Form::select('dieta', [
-											'Mantida' 	            => 'Mantida', 
-											'Pastosa heteroênea'    => 'Pastosa heteroênea', 
-											'Pastosa homogênea'     => 'Pastosa homogênea', 
+											'Líquida'				=> 'Líquida',
+											'Pastosa heterogênea'   => 'Pastosa heterogênea', 
+											'Pastosa homogênea'     => 'Pastosa homogênea (papa ou leve batida)', 
 											'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
 											'Branda'                => 'Branda', 
 											'Geral'                 => 'Geral', 
 											'Suspenso'              => 'Suspenso'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
-									</div>
-									
-									<div class="form-group">
-										{{ Form::label('liquido', 'Consistência de líquidos') }}
-										{{ Form::select('liquido', [
-												'Mantida' 	        => 'Mantida', 
-												'Líquido fino'    	=> 'Líquido fino', 
-												'Líquido néctar' 	=> 'Líquido néctar',
-												'Líquido mel'     	=> 'Líquido mel',
-												'Líquido pudim'   	=> 'Líquido pudim',
-												'Suspenso'         	=> 'Suspenso'
-											], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
-									</div>
-									
-									
-								<!-- ************************************************************************************** -->
+								</div>
 								
+								<div class="form-group">
+									{{ Form::label('liquido', 'Consistência de líquidos') }}
+									{{ Form::select('liquido', [
+											'Líquido fino'    	=> 'Líquido fino', 
+											'Líquido néctar' 	=> 'Líquido néctar',
+											'Líquido mel'     	=> 'Líquido mel',
+											'Líquido pudim'   	=> 'Líquido pudim',
+											'Suspenso'         	=> 'Suspenso'
+										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+								</div>
+									
 								<div class="form-group">
 									{{ Form::hidden('id_paciente', $paciente->id) }}
 									{{ Form::submit('Cadastrar', ['class' => 'btn btn-primary btn-anim pull-right']) }}
