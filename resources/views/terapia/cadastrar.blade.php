@@ -5,7 +5,7 @@
 	@endsection
 
 @section('content')
-	
+
 	<!-- Row -->
 	<div class="row">
 	

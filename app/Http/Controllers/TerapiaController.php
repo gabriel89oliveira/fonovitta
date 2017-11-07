@@ -21,6 +21,7 @@ use Session;
 
 class TerapiaController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +30,7 @@ class TerapiaController extends Controller
     {
         //
     }
+
 
     /**
      * Pagina para criar nova terapia
@@ -75,6 +77,7 @@ class TerapiaController extends Controller
 		
     }
 
+    
     /**
      * Salvar a terapia
      *

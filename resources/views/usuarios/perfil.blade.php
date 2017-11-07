@@ -420,8 +420,6 @@
 		
 	@endif
 		
-	
-	<!-- <script src="{{ URL::asset('dist/js/init.js') }}"></script> -->
 
 
 @endsection

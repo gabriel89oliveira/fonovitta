@@ -53,15 +53,59 @@
 								
 								<div class="form-group">
 									{{ Form::label('diagnostico_1', 'Diagnóstico 1') }}
-									{{ Form::text('diagnostico_1', $paciente->diagnostico_1, ['class' => 'form-control']) }}
+									{{ Form::select('diagnostico_1', [
+											'Demência'					=> 'Demência',
+											'Parkinson' 				=> 'Parkinson', 
+											'AVCi'						=> 'AVCi',
+											'AVCh'						=> 'AVCh',
+											'Idade avançada'   			=> 'Idade avançada',
+											'Depressão'					=> 'Depressão',
+											'Câncer'					=> 'Câncer',
+											'ITU'						=> 'ITU',
+											'Delirium'					=> 'Delirium',
+											'Doença cardiológica'		=> 'Doença cardiológica',
+											'Doença pulmonar'			=> 'Doença pulmonar',
+											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
+											'Outros'					=> 'Outros'
+										], $paciente->diagnostico_1, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
+								
 								<div class="form-group">
 									{{ Form::label('diagnostico_2', 'Diagnóstico 2') }}
-									{{ Form::text('diagnostico_2', $paciente->diagnostico_2, ['class' => 'form-control']) }}
+									{{ Form::select('diagnostico_2', [
+											'Demência'					=> 'Demência',
+											'Parkinson' 				=> 'Parkinson', 
+											'AVCi'						=> 'AVCi',
+											'AVCh'						=> 'AVCh',
+											'Idade avançada'   			=> 'Idade avançada',
+											'Depressão'					=> 'Depressão',
+											'Câncer'					=> 'Câncer',
+											'ITU'						=> 'ITU',
+											'Delirium'					=> 'Delirium',
+											'Doença cardiológica'		=> 'Doença cardiológica',
+											'Doença pulmonar'			=> 'Doença pulmonar',
+											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
+											'Outros'					=> 'Outros'
+										], $paciente->diagnostico_2, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
+
 								<div class="form-group">
 									{{ Form::label('diagnostico_3', 'Diagnóstico 3') }}
-									{{ Form::text('diagnostico_3', $paciente->diagnostico_3, ['class' => 'form-control']) }}
+									{{ Form::select('diagnostico_3', [
+											'Demência'					=> 'Demência',
+											'Parkinson' 				=> 'Parkinson', 
+											'AVCi'						=> 'AVCi',
+											'AVCh'						=> 'AVCh',
+											'Idade avançada'   			=> 'Idade avançada',
+											'Depressão'					=> 'Depressão',
+											'Câncer'					=> 'Câncer',
+											'ITU'						=> 'ITU',
+											'Delirium'					=> 'Delirium',
+											'Doença cardiológica'		=> 'Doença cardiológica',
+											'Doença pulmonar'			=> 'Doença pulmonar',
+											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
+											'Outros'					=> 'Outros'
+										], $paciente->diagnostico_3, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
 							</div>

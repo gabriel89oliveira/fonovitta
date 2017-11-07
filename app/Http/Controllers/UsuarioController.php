@@ -96,18 +96,17 @@ class UsuarioController extends Controller
 		$usuario = DB::table('usuarios')->where('id', $id)->first();
 		$idade = Carbon::parse($usuario->nascimento)->age;
 		
-		if($usuario->nascimento == Carbon::today()){
-			$aniversario = 0;
-		}else{
-			$hoje = Carbon::now();
-			$nascimento = Carbon::parse($usuario->nascimento)->year(date('Y'));
-			
-			$aniversario = Carbon::now()->diffInDays($nascimento, false);
-			
-			if($aniversario>0 && $aniversario<1){
-				$aniversario = 1;
-			}
-		}
+		// Aniversário
+		$ano = date('Y', strtotime($usuario->nascimento));
+		$mes = date('m', strtotime($usuario->nascimento));
+		$dia = date('d', strtotime($usuario->nascimento));
+
+		$aniversario = date('Y-m-d', mktime(0,0,0,$mes,$dia,$ano+$idade+1));
+		$hoje = date('Y-m-d', mktime(0,0,0,date('m'),date('d'),date('Y') ) );
+
+		$diff=date_diff(date_create($hoje), date_create($aniversario));
+		$aniversario = $diff->format("%a");
+
 		
 		$terapias = DB::table('terapias')
             ->join('pacientes', 'terapias.id_paciente', '=', 'pacientes.id')
@@ -209,18 +208,17 @@ class UsuarioController extends Controller
         $usuario = DB::table('usuarios')->where('id', $id)->first();
 		$idade = Carbon::parse($usuario->nascimento)->age;
 		
-		if($usuario->nascimento == Carbon::today()){
-			$aniversario = 0;
-		}else{
-			$hoje = Carbon::now();
-			$nascimento = Carbon::parse($usuario->nascimento)->year(date('Y'));
-			
-			$aniversario = Carbon::now()->diffInDays($nascimento, false);
-			
-			if($aniversario>0 && $aniversario<1){
-				$aniversario = 1;
-			}
-		}
+		// Aniversário
+		$ano = date('Y', strtotime($usuario->nascimento));
+		$mes = date('m', strtotime($usuario->nascimento));
+		$dia = date('d', strtotime($usuario->nascimento));
+
+		$aniversario = date('Y-m-d', mktime(0,0,0,$mes,$dia,$ano+$idade+1));
+		$hoje = date('Y-m-d', mktime(0,0,0,date('m'),date('d'),date('Y') ) );
+
+		$diff=date_diff(date_create($hoje), date_create($aniversario));
+		$aniversario = $diff->format("%a");
+		
 		
 		$terapias = DB::table('terapias')
             ->join('pacientes', 'terapias.id_paciente', '=', 'pacientes.id')

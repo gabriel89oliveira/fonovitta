@@ -27,34 +27,36 @@ class AvaliacaoController extends Controller
 		$this->middleware('auth');
 	}
 	
+	
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Página para criar nova avaliação
      *
-     * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
-        //
+        
+        // Busca dados do paciente
 		$paciente = DB::table('pacientes')->where('id', $request->id)->first();
 		
+		// Encaminha para view
 		return view('avaliacao/cadastrar', ['paciente' => $paciente])->with(["page" => ""]);
+
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * Salvar dados da avaliação.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -65,8 +67,8 @@ class AvaliacaoController extends Controller
 			$this->validate($request, [
 				'id_paciente'=>'required|integer',
 				'dieta_inicial'=>'required|min:3',
+				'liquido_inicial'=>'required|min:3',
 				'motivo_avaliacao'=>'required|min:3',
-				'comentario'=>'required|min:3',
 				'frequencia'=>'required',
 				'local'=>'required',
 				'terapia'=>'required|min:3',
@@ -93,6 +95,10 @@ class AvaliacaoController extends Controller
 					$terapia_2 .= " / ".$add;
 				}
 				
+			}
+
+			if($terapia_2==null){
+				$terapia_2 = "Nenhuma";
 			}
 			
 			
@@ -185,45 +191,40 @@ class AvaliacaoController extends Controller
 		
     }
 
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
     }
 
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

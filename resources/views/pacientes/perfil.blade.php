@@ -7,6 +7,7 @@
 
 @section('content')
 	
+
 	<!-- Row -->
 	<div class="row">
 		
@@ -522,7 +523,7 @@
 @section('scripts')
 
 	<!-- Init JavaScript -->
-	@if( $aniversario == 0 )
+	@if( $aniversario == 365 OR $aniversario == 0 )
 		
 		<script>
 			$(document).ready(function() {
@@ -541,7 +542,7 @@
 			});
 		</script>
 		
-	@elseif($aniversario>=0 && $aniversario<=10)
+	@elseif($aniversario>0 && $aniversario<=10)
 		
 		<script>
 			$(document).ready(function() {
@@ -549,7 +550,7 @@
 				
 				$.toast({
 					heading: 'Lembrete de aniversário',
-					text: 'Falta(m) {{ $aniversario+1 }} dia(s) para o aniversário de {{ $paciente->nome }}.',
+					text: 'Falta(m) {{ $aniversario }} dia(s) para o aniversário de {{ $paciente->nome }}.',
 					position: 'top-right',
 					loaderBg:'#e69a2a',
 					icon: 'warning',
@@ -563,9 +564,6 @@
 	@endif
 	
 	
-	<script src="{{ URL::asset('dist/js/init.js') }}"></script>
-
-
 @endsection
 
 

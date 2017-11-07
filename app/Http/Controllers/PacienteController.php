@@ -111,18 +111,17 @@ class PacienteController extends Controller
         $paciente = DB::table('pacientes')->where('id', $id)->first();
 		$idade = Carbon::parse($paciente->nascimento)->age;
 		
-		if($paciente->nascimento == Carbon::today()){
-			$aniversario = 0;
-		}else{
-			$hoje = Carbon::now();
-			$nascimento = Carbon::parse($paciente->nascimento)->year(date('Y'));
-			
-			$aniversario = Carbon::now()->diffInDays($nascimento, false);
-			
-			if($aniversario>0 && $aniversario<1){
-				$aniversario = 1;
-			}
-		}
+		// Aniversário
+		$ano = date('Y', strtotime($paciente->nascimento));
+		$mes = date('m', strtotime($paciente->nascimento));
+		$dia = date('d', strtotime($paciente->nascimento));
+
+		$aniversario = date('Y-m-d', mktime(0,0,0,$mes,$dia,$ano+$idade+1));
+		$hoje = date('Y-m-d', mktime(0,0,0,date('m'),date('d'),date('Y') ) );
+
+		$diff=date_diff(date_create($hoje), date_create($aniversario));
+		$aniversario = $diff->format("%a");
+
 		
 		$terapia = DB::table('terapias')
             ->join('users', 'terapias.id_usuario', '=', 'users.id')
