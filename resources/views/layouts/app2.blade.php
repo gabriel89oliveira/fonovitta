@@ -77,7 +77,7 @@
 								</div>	
 							</div>
 
-							<div class="row hidden-sm">
+							<div class="row hidden-sm hidden-md hidden-lg hidden-xl">
 								<div class="col-xs-10 col-xs-offset-1 text-center">
 									
 									@if (Auth::guest())
