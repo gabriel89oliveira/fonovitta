@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 	
-<!-- Mirrored from hencework.com/theme/dexter/fixed-width-light/modals.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Oct 2017 23:47:16 GMT -->
 <head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<title>Fonovitta I Fonoaudiologia de Excelencia</title>
-		<meta name="description" content="Dexter is a Dashboard & Admin Site Responsive Template by hencework." />
-		<meta name="keywords" content="fonovitta, fonoaudiologia" />
+		<meta name="description" content="Fonovitta | Fonoaudiologia de Excelência." />
+		<meta name="keywords" content="Fonoaudiologia, Fonovitta, hospital" />
 		<meta name="author" content="hencework"/>
 		
 		<!-- CSRF Token -->
@@ -40,21 +39,30 @@
 			<div class="la-anim-1"></div>
 		</div>
 		<!--/Preloader-->
+
 		<div class="wrapper theme-1-active box-layout pimary-color-blue">
+
 			<!-- Top Menu Items -->
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="mobile-only-brand pull-left">
+					
 					<div class="nav-header pull-left">
 						<div class="logo-wrap">
-							<a href="index.html">
+							<a href="{{ route('usuarios.mine') }}">
 								<img class="brand-img" src="{{ URL::asset('dist/img/logo.png') }}" alt="brand"/>
 								<span class="brand-text">Fonovitta</span>
 							</a>
 						</div>
-					</div>	
-					<a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="zmdi zmdi-menu"></i></a>
+					</div>
+
+					<!-- Botao para menu -->
+					<a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);">
+						<i class="zmdi zmdi-menu"></i>
+					</a>
+
 					<a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-search"></i></a>
 					<a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
+					
 					<form id="search_form" role="search" class="top-nav-search collapse pull-left">
 						<div class="input-group">
 							<input type="text" name="example-input1-group2" class="form-control" placeholder="Buscar">

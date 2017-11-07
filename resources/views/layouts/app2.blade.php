@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	
-<!-- Mirrored from hencework.com/theme/dexter/fixed-width-light/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Oct 2017 23:48:22 GMT -->
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>Fonovitta I Fonoaudiologia de Excelência</title>
-	<meta name="description" content="Dexter is a Dashboard & Admin Site Responsive Template by hencework." />
-	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Dexter Admin, Dexteradmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
+	<meta name="description" content="Fonovitta | Fonoaudiologia de Excelência." />
+	<meta name="keywords" content="Fonoaudiologia, Fonovitta, hospital" />
 	<meta name="author" content="hencework"/>
 	
 	<!-- Favicon -->
@@ -43,10 +42,8 @@
 				</a>
 			</div>
 			
-				
-			
 			<!-- Right Side Of Navbar -->
-			<div class="form-group mb-0 pull-right">
+			<div class="form-group mb-0 pull-right hidden-xs">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
@@ -73,9 +70,25 @@
 					<div class="table-cell vertical-align-middle auth-form-wrap">
 						
 							<div class="row">
-								<div class="col-sm-12 col-xs-12">
+								<div class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
 									
 									 @yield('content')
+									 
+								</div>	
+							</div>
+
+							<div class="row hidden-sm">
+								<div class="col-xs-10 col-xs-offset-1 text-center">
+									
+									@if (Auth::guest())
+										<a class="inline-block " href="{{ url('/register') }}">Cadastrar</a>
+										<a class="inline-block ml-15 mr-25" href="{{ url('/login') }}">Login</a>
+				                    @else
+				                       
+										{{ Auth::user()->name }}
+				                        <a class="inline-block btn btn-default btn-rounded btn-outline ml-15 mr-25" href="{{ url('/logout') }}">Logout</a>
+										
+				                    @endif
 									 
 								</div>	
 							</div>
@@ -87,7 +100,6 @@
 			
 		</div>
 		<!-- /Main Content -->
-
 		
 
     <!-- JavaScripts -->

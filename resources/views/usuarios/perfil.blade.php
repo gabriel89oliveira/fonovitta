@@ -98,13 +98,16 @@
 														</div>
 													</a>	
 												</div>
-												
+
 												@empty
 												
 													<span class="name block capitalize-font mb-15">Nenhuma atividade</span>
 													
-												
 												@endforelse
+
+												@if($terapias)
+												{{ $terapias->render() }}
+												@endif
 												
 											</div>
 										</div>
@@ -418,7 +421,7 @@
 	@endif
 		
 	
-	<script src="{{ URL::asset('dist/js/init.js') }}"></script>
+	<!-- <script src="{{ URL::asset('dist/js/init.js') }}"></script> -->
 
 
 @endsection

@@ -115,7 +115,7 @@ class UsuarioController extends Controller
 			->where('id_usuario', '=', $id)
 			->orderBy('data', 'desc')
 			->orderBy('id', 'desc')
-			->get();
+			->paginate(15);
 			
 		$internacao = DB::table('fonos')
             ->join('pacientes', 'fonos.id_paciente', '=', 'pacientes.id')
