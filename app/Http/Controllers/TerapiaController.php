@@ -111,6 +111,10 @@ class TerapiaController extends Controller
 			}
 			
 		}
+
+		if($terapia_2==null){
+			$terapia_2 = "Nenhuma";
+		}
 		
 		$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 0;
 		$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 0;
@@ -136,7 +140,8 @@ class TerapiaController extends Controller
 			'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
 			'treino_anterior'				=> $request->treino_anterior,
 			'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
-			'data'				   			=> $request->data_terapia
+			'data'				   			=> $request->data_terapia,
+			'prescricao'		   			=> $request->prescricao
 		]);
 			
 			// Histórico
@@ -297,6 +302,10 @@ class TerapiaController extends Controller
 			}
 			
 		}
+
+		if($terapia_2==null){
+			$terapia_2 = "Nenhuma";
+		}
 		
 		$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 0;
 		$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 0;
@@ -317,7 +326,8 @@ class TerapiaController extends Controller
 				'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
 				'treino_anterior'				=> $request->treino_anterior,
 				'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
-				'data'				   			=> $request->data_terapia
+				'data'				   			=> $request->data_terapia,
+				'prescricao'		   			=> $request->prescricao,
 			]);
 			
 			// Histórico

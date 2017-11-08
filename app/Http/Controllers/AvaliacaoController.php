@@ -114,7 +114,8 @@ class AvaliacaoController extends Controller
 				'liquido_inicial'      => $request->liquido_inicial,
 				'motivo_avaliacao'     => $request->motivo_avaliacao,
 				'comentario'           => $request->comentario,
-				'local'				   => $request->local
+				'local'				   => $request->local,
+				'numero_atendimento'   => $request->numero_atendimento
 			]);
 			
 				// Histórico
@@ -137,6 +138,7 @@ class AvaliacaoController extends Controller
 				'comentario'           => $request->comentario,
 				'aval_dieta'           => $request->dieta,
 				'aval_liquido'         => $request->liquido,
+				'prescricao'		   => $request->prescricao,
 				'data'				   => date("Y-m-d")
 			]);
 				

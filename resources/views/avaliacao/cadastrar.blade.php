@@ -33,6 +33,14 @@
 												{{ Form::label('prescricao', 'Houve prescrição médica') }}
 											</div>
 										</div>
+
+										<div class="col-sm-6">
+											<div class="form-group">
+												{{ Form::label('numero_atendimento', 'Número do atendimento') }}
+												{{ Form::text('numero_atendimento', null, ['class' => 'form-control']) }}
+											</div>
+										</div>
+
 									</div>
 									
 								</div>
