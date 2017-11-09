@@ -15,7 +15,12 @@
 			<div class="panel panel-primary card-view">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h4 class="panel-title txt-light">{{ $paciente->nome }} <br><small class="txt-light">{{ $idade }} anos</small></h4>
+						<h4 class="panel-title txt-light">
+							{{ $paciente->nome }} 
+							@if($fono->paliativo == "Sim")
+								<span class="label label-warning ml-10">Cuidados Paliativos</span>
+							@endif
+						<br><small class="txt-light">{{ $idade }} anos</small></h4>
 					</div>
 					<div class="pull-right">
 						<div class="dropdown">
@@ -106,7 +111,7 @@
 									@endif
 
 									<div class="form-group">
-										<p>Diagnóstico</p>
+										<p>Antecedentes</p>
 										<h6> 
 											{{ $paciente->antecedente_1 }} 
 
@@ -204,6 +209,24 @@
 							<div class="panel-body">
 								<div class="form-wrap">
 									
+									@if(!empty($fono->diagnostico_1))
+									<div class="form-group">
+										<p>Diagnóstico</p>
+										<h6> 
+											{{ $fono->diagnostico_1 }} 
+
+											@if($fono->diagnostico_2<>"")
+												{{ " / ".$fono->diagnostico_2 }}
+											@endif
+
+											@if($fono->diagnostico_3<>"")
+												{{ " / ".$fono->diagnostico_3 }}
+											@endif
+											
+										</h6>
+									</div>
+									@endif
+
 									@if(!empty($dieta->dieta))
 										<div class="form-group">
 											<p>Dieta</p>

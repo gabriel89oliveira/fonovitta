@@ -1049,9 +1049,9 @@
 					    </div>
 					@endif
 
-					<!-- Row -->
-						@yield('content')
-					<!-- /Row -->
+					
+					@yield('content')
+					
 				</div>
 				
 				<!-- Footer -->
@@ -1108,5 +1108,4 @@
 		
 	</body>
 
-<!-- Mirrored from hencework.com/theme/dexter/fixed-width-light/modals.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Oct 2017 23:47:19 GMT -->
 </html>

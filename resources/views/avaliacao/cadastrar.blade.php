@@ -29,11 +29,11 @@
 										
 										<div class="col-sm-6">
 											<div class="checkbox checkbox-primary">
-												{{ Form::checkbox('prescricao', '1') }}
+												{{ Form::checkbox('prescricao', 'Sim') }}
 												{{ Form::label('prescricao', 'Houve prescrição médica') }}
 											</div>
 											<div class="checkbox checkbox-primary">
-												{{ Form::checkbox('paliativo', '1') }}
+												{{ Form::checkbox('paliativo', 'Sim') }}
 												{{ Form::label('paliativo', 'Paciente em cuidados paliativos') }}
 											</div>
 										</div>

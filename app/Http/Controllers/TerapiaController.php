@@ -93,113 +93,122 @@ class TerapiaController extends Controller
 			
 		$id_fonos = DB::table('fonos')->where('id_paciente', $request->id_paciente)->first();
 
-		// Dados adicionais da terapia
-		$adicional[1] = $request->input('adicional_1');
-		$adicional[2] = $request->input('adicional_2');
-		$adicional[3] = $request->input('adicional_3');
-		$adicional[4] = $request->input('adicional_4');
-		$adicional[5] = $request->input('adicional_5');
-		$adicional[6] = $request->input('adicional_6');
-		$adicional[7] = $request->input('adicional_7');
-		$adicional[8] = $request->input('adicional_8');
-		
-		$terapia_2 = null;
-		
-		foreach($adicional as $add){
+		// Confirma se o paciente já possui uma avaliação
+		if($id_fonos->id > 0){
+
+			// Dados adicionais da terapia
+			$adicional[1] = $request->input('adicional_1');
+			$adicional[2] = $request->input('adicional_2');
+			$adicional[3] = $request->input('adicional_3');
+			$adicional[4] = $request->input('adicional_4');
+			$adicional[5] = $request->input('adicional_5');
+			$adicional[6] = $request->input('adicional_6');
+			$adicional[7] = $request->input('adicional_7');
+			$adicional[8] = $request->input('adicional_8');
 			
-			if(isset($add) and $terapia_2==null){
-				$terapia_2 = $add;
-			}elseif(isset($add) and $terapia_2!=null){
-				$terapia_2 .= " / ".$add;
+			$terapia_2 = null;
+			
+			foreach($adicional as $add){
+				
+				if(isset($add) and $terapia_2==null){
+					$terapia_2 = $add;
+				}elseif(isset($add) and $terapia_2!=null){
+					$terapia_2 .= " / ".$add;
+				}
+				
+			}
+
+			if($terapia_2==null){
+				$terapia_2 = "Nenhuma";
 			}
 			
-		}
-
-		if($terapia_2==null){
-			$terapia_2 = "Nenhuma";
-		}
-		
-		$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 0;
-		$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 0;
-		$prescricao		  = !empty($request->input('prescricao')) 		? $request->input('prescricao') 	: 'Não';
-		
-		
-		/* ----- INSERIR OS DADOS NAS TABELAS ----- */
-		
-		// Inserir nova terapia
-		$id_insert = DB::table('terapias')->insertGetId([
-			'id_paciente'          			=> $request->id_paciente,
-			'id_usuario'           			=> Auth::user()->id,
-			'id_fonos'						=> $id_fonos,
-			'equipe'               			=> 'fon',
-			'terapia'              			=> $request->terapia,
-			'terapia_2'            			=> $terapia_2,
-			'evolucao'			   			=> $request->evolucao,
-			'conduta'              			=> $request->conduta,
-			'comentario'           			=> $request->comentario,
-			'aval_dieta'           			=> $acomp_refeicao,
-			'aval_liquido'         			=> $acomp_liquido,
-			'prescricao'					=> $prescricao,
-			'dieta_anterior'				=> $request->dieta_anterior,
-			'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
-			'treino_anterior'				=> $request->treino_anterior,
-			'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
-			'data'				   			=> $request->data_terapia,
-			'prescricao'		   			=> $request->prescricao
-		]);
+			$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 'Sim';
+			$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 'Sim';
+			$prescricao		  = !empty($request->input('prescricao')) 		? $request->input('prescricao') 	: 'Não';
 			
-			// Histórico
-			DB::table('historicos')->insert([
-				'tabela'         => 'terapia',
-				'id_linha'       => $id_insert,
-				'acao'           => 'criar',
-				'id_usuario'     => Auth::user()->id
+			
+			/* ----- INSERIR OS DADOS NAS TABELAS ----- */
+			
+			// Inserir nova terapia
+			$id_insert = DB::table('terapias')->insertGetId([
+				'id_paciente'          			=> $request->id_paciente,
+				'id_usuario'           			=> Auth::user()->id,
+				'id_fonos'						=> $id_fonos->id,
+				'equipe'               			=> 'fon',
+				'terapia'              			=> $request->terapia,
+				'terapia_2'            			=> $terapia_2,
+				'evolucao'			   			=> $request->evolucao,
+				'conduta'              			=> $request->conduta,
+				'comentario'           			=> $request->comentario,
+				'aval_dieta'           			=> $acomp_refeicao,
+				'aval_liquido'         			=> $acomp_liquido,
+				'prescricao'					=> $prescricao,
+				'dieta_anterior'				=> $request->dieta_anterior,
+				'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
+				'treino_anterior'				=> $request->treino_anterior,
+				'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
+				'data'				   			=> $request->data_terapia,
+				'prescricao'		   			=> $request->prescricao
 			]);
-
-
-		// Busca último registro na tabela de dietas
-		$dietas = DB::table('historico_dietas')->where('id_paciente', $id)->orderBy('id', 'desc')->first();
-
-		// Inserir nova dieta e liquido
-		if($request->dieta != 'Mantida' && $request->liquido != 'Mantida'){
-
-			DB::table('historico_dietas')
-    			->insert([
-    				'id_paciente' 	=> $request->id_paciente,
-					'dieta' 		=> $request->dieta,
-					'liquido' 		=> $request->liquido,
-					'data'			=> $request->data_terapia
+				
+				// Histórico
+				DB::table('historicos')->insert([
+					'tabela'         => 'terapia',
+					'id_linha'       => $id_insert,
+					'acao'           => 'criar',
+					'id_usuario'     => Auth::user()->id
 				]);
 
-		}
 
-		// Inserir nova dieta
-		if($request->dieta != 'Mantida' && $request->liquido == 'Mantida'){
+			// Busca último registro na tabela de dietas
+			$dietas = DB::table('historico_dietas')->where('id_paciente', $request->id_paciente)->orderBy('id', 'desc')->first();
 
-			DB::table('historico_dietas')
-    			->insert([
-					'id_paciente' 	=> $request->id_paciente,
-					'dieta' 		=> $request->dieta,
-					'liquido' 		=> $dietas->liquido,
-					'data'			=> $request->data_terapia
-				]);
+			// Inserir nova dieta e liquido
+			if($request->dieta != 'Mantida' && $request->liquido != 'Mantida'){
 
-		}
+				DB::table('historico_dietas')
+	    			->insert([
+	    				'id_paciente' 	=> $request->id_paciente,
+	    				'id_fonos'		=> $id_fonos->id,
+	    				'id_terapias'	=> $id_insert,
+						'dieta' 		=> $request->dieta,
+						'liquido' 		=> $request->liquido,
+						'data'			=> $request->data_terapia
+					]);
 
-		// Inserir novo liquido
-		if($request->dieta == 'Mantida' && $request->liquido != 'Mantida'){
+			}
 
-			DB::table('historico_dietas')
-    			->insert([
-					'id_paciente' 	=> $request->id_paciente,
-					'dieta' 		=> $dietas->dieta,
-					'liquido' 		=> $request->liquido,
-					'data'			=> $request->data_terapia
-				]);
+			// Inserir nova dieta
+			if($request->dieta != 'Mantida' && $request->liquido == 'Mantida'){
 
-		}
+				DB::table('historico_dietas')
+	    			->insert([
+						'id_paciente' 	=> $request->id_paciente,
+						'id_fonos'		=> $id_fonos->id,
+	    				'id_terapias'	=> $id_insert,
+						'dieta' 		=> $request->dieta,
+						'liquido' 		=> $dietas->liquido,
+						'data'			=> $request->data_terapia
+					]);
+
+			}
+
+			// Inserir novo liquido
+			if($request->dieta == 'Mantida' && $request->liquido != 'Mantida'){
+
+				DB::table('historico_dietas')
+	    			->insert([
+						'id_paciente' 	=> $request->id_paciente,
+						'id_fonos'		=> $id_fonos->id,
+	    				'id_terapias'	=> $id_insert,
+						'dieta' 		=> $dietas->dieta,
+						'liquido' 		=> $request->liquido,
+						'data'			=> $request->data_terapia
+					]);
+
+			}
 		
-			
+		}
 		
 		/* ----- ENCAMINHA PARA NOVA PÁGINA ----- */
 		return redirect()->route('pacientes.show', ['id' => $request->id_paciente]);
@@ -230,26 +239,23 @@ class TerapiaController extends Controller
 		// Dados do paciente
 		$terapia = DB::table('terapias')->where('id', $id)->first();
 		$paciente = DB::table('pacientes')->where('id', $terapia->id_paciente)->first();
+		$historico_dietas = DB::table('historico_dietas')->where('id_terapias', $terapia->id)->orderBy('id', 'desc')->first();
 		
 		
 		// Acesso para editar todos pacientes
-		if (Auth::user()->hasPermissionTo('Terapia_Editar_Todos')){
-			return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente])->with(["page" => ""]);
-		}else{
+		if (!Auth::user()->hasPermissionTo('Terapia_Editar_Todos')){
 			
 			// Verifica se o paciente esta sendo atendido pela equipe
 			if($paciente->fon == 1){
 				
 				// Aceso para editar pacientes da minha equipe
-				if(Auth::user()->hasPermissionTo('Terapia_Editar_Equipe')){
-					return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente])->with(["page" => ""]);
-				}else{
-					
+				if(!Auth::user()->hasPermissionTo('Terapia_Editar_Equipe')){
+
 					$equipe = DB::table(Auth::user()->equipe.'s')->where('id_paciente', $id)->first();
 					
 					// Acesso para editar pacientes que o usuario atende
 					if(Auth::user()->hasPermissionTo('Terapia_Editar_Meu') AND $equipe->id_responsavel == Auth::user()->id){
-						return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente])->with(["page" => ""]);
+						// return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente])->with(["page" => ""]);
 					}else{
 						abort('401');
 					}
@@ -261,6 +267,8 @@ class TerapiaController extends Controller
 			}
 			
 		}
+
+		return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente, 'historico_dietas' => $historico_dietas])->with(["page" => ""]);
 		
     }
 
@@ -273,12 +281,14 @@ class TerapiaController extends Controller
     {
         //
 		$this->validate($request, [
-				'id_paciente'=>'required|integer',
-				'conduta'=>'required'
+				'id_paciente'	=> 'required|integer',
+				'conduta'		=> 'required',
+				'dieta'			=> 'required',
+				'liquido'		=> 'required'
 			]);
 
 		/**
-		 * Busca os dados da terapia anterior
+		 * Busca os dados da terapia anterior (que esta sendo editada)
 		 * Para validação de datas das dietas
 		 *
 		 */
@@ -311,8 +321,8 @@ class TerapiaController extends Controller
 			$terapia_2 = "Nenhuma";
 		}
 		
-		$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 0;
-		$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 0;
+		$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 'Sim';
+		$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 'Sim';
 		$prescricao		  = !empty($request->input('prescricao')) 		? $request->input('prescricao') 	: 'Não';
 		
 		DB::table('terapias')
@@ -343,34 +353,38 @@ class TerapiaController extends Controller
 			]);
 
 
-			// Busca último registro na tabela de dietas
-			$dietas = DB::table('historico_dietas')->where('id_paciente', $request->id_paciente)->orderBy('id', 'desc')->first();
 
-			// Checa se foi alterado dieta na terapia que esta sendo editada
-			if($dietas->data == $terapia_anterior->data){
-
-				
-				/**
-				 * Busca os dados da dieta anterior
-				 * Para caso a dieta/liquido escolhida seja 'Mantida'
-				 *
-				 */
-				$dietas_2 = DB::table('historico_dietas')
-					->where('id_paciente', $request->id_paciente)
-					->where('id', '!=', $dietas->id)
-					->orderBy('id', 'desc')->first();
+		/**
+		 * Busca os dados da dieta anterior
+		 * Para caso a dieta/liquido escolhida seja 'Mantida'
+		 *
+		 */
+		$dieta_antiga = DB::table('historico_dietas')
+			->where('id_paciente', $terapia_anterior->id_paciente)
+			->where('id_terapias', '<', $id)
+			->orderBy('id', 'desc')
+			->first();
 
 
-				/**
-				 * Se a dieta e liquido foi mantida, a linha deve ser excluida
-				 * Já foi verificado as datas, isso significa que a linha foi criada errada
-				 *
-				 */
-				if($request->dieta == 'Mantida' && $request->liquido == 'Mantida'){
+		// Checa se foi alterado dieta na terapia que esta sendo editada
+		if( DB::table('historico_dietas')->where('id_terapias', $id)->exists() ){
 
-					DB::table('historico_dietas')->where('id', $dietas->id)->delete();
+			// Busca registro na tabela de dietas
+			$dietas = DB::table('historico_dietas')->where('id_terapias', $id)->first();
 
-				}
+			/**
+			 * Se a dieta e liquido foi mantida, a linha deve ser excluida
+			 * Já foi verificado as datas, isso significa que a linha foi criada errada
+			 *
+			 */
+			if($request->dieta == 'Mantida' && $request->liquido == 'Mantida'){
+
+				DB::table('historico_dietas')
+					->where('id', $dietas->id)
+					->where('id_terapias', '>', 0)
+					->delete();
+
+			}else{
 
 
 				// Atualizar dieta
@@ -399,7 +413,7 @@ class TerapiaController extends Controller
 						->where('id', $dietas->id)
 	        			->update([
 	        				'data'	=> $request->data_terapia,
-							'dieta' => $dieta_2->dieta
+							'dieta' => $dieta_antiga->dieta
 						]);
 
 				}
@@ -431,53 +445,61 @@ class TerapiaController extends Controller
 						->where('id', $dietas->id)
 	        			->update([
 	        				'data'	=> $request->data_terapia,
-							'liquido' => $dieta_2->liquido
-						]);
-
-				}
-
-			}else{
-
-				// Inserir nova dieta e liquido
-				if($request->dieta != 'Mantida' && $request->liquido != 'Mantida'){
-
-					DB::table('historico_dietas')
-		    			->insert([
-		    				'id_paciente' 	=> $request->id_paciente,
-							'dieta' 		=> $request->dieta,
-							'liquido' 		=> $request->liquido,
-							'data'			=> $request->data_terapia
-						]);
-
-				}
-
-				// Inserir nova dieta
-				if($request->dieta != 'Mantida' && $request->liquido == 'Mantida'){
-
-					DB::table('historico_dietas')
-		    			->insert([
-							'id_paciente' 	=> $request->id_paciente,
-							'dieta' 		=> $request->dieta,
-							'liquido' 		=> $dietas->liquido,
-							'data'			=> $request->data_terapia
-						]);
-
-				}
-
-				// Inserir novo liquido
-				if($request->dieta == 'Mantida' && $request->liquido != 'Mantida'){
-
-					DB::table('historico_dietas')
-		    			->insert([
-							'id_paciente' 	=> $request->id_paciente,
-							'dieta' 		=> $dietas->dieta,
-							'liquido' 		=> $request->liquido,
-							'data'			=> $request->data_terapia
+							'liquido' => $dieta_antiga->liquido
 						]);
 
 				}
 
 			}
+
+		}else{
+
+			// Inserir nova dieta e liquido
+			if($request->dieta != 'Mantida' && $request->liquido != 'Mantida'){
+
+				DB::table('historico_dietas')
+	    			->insert([
+	    				'id_paciente' 	=> $request->id_paciente,
+	    				'id_fonos'		=> $terapia_anterior->id_fonos,
+	    				'id_terapias'	=> $terapia_anterior->id,
+						'dieta' 		=> $request->dieta,
+						'liquido' 		=> $request->liquido,
+						'data'			=> $request->data_terapia
+					]);
+
+			}
+
+			// Inserir nova dieta
+			if($request->dieta != 'Mantida' && $request->liquido == 'Mantida'){
+
+				DB::table('historico_dietas')
+	    			->insert([
+						'id_paciente' 	=> $request->id_paciente,
+						'id_fonos'		=> $terapia_anterior->id_fonos,
+	    				'id_terapias'	=> $terapia_anterior->id,
+						'dieta' 		=> $request->dieta,
+						'liquido' 		=> $dieta_antiga->liquido,
+						'data'			=> $request->data_terapia
+					]);
+
+			}
+
+			// Inserir novo liquido
+			if($request->dieta == 'Mantida' && $request->liquido != 'Mantida'){
+
+				DB::table('historico_dietas')
+	    			->insert([
+						'id_paciente' 	=> $request->id_paciente,
+						'id_fonos'		=> $terapia_anterior->id_fonos,
+	    				'id_terapias'	=> $terapia_anterior->id,
+						'dieta' 		=> $dieta_antiga->dieta,
+						'liquido' 		=> $request->liquido,
+						'data'			=> $request->data_terapia
+					]);
+
+			}
+
+		}
 			
 		return redirect()->action('PacienteController@show', $request->id_paciente);
 		
@@ -493,6 +515,9 @@ class TerapiaController extends Controller
         
         // Excluir item da tabela de objetivos
         Terapia::destroy($id);
+        DB::table('historico_dietas')
+        	->where('id_terapias', $id)
+        	->delete();
         
         // Retorna resposta para AJAX
         return response()->json([

@@ -129,7 +129,7 @@
 																	<img class="user-img img-circle"  src="{{ URL::asset('dist/img/avatar/' . $usuario->foto) }}" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">{{ $paciente->nome }}</span>
-																		<span class="time block truncate txt-grey">{{ $paciente->diagnostico_1 }}</span>
+																		<span class="time block truncate txt-grey">{{ $paciente->antecedente_1 }}</span>
 																	</div>
 																	<div class="clearfix"></div>
 																</div>
@@ -169,7 +169,7 @@
 																	<img class="user-img img-circle"  src="{{ URL::asset('dist/img/avatar/' . $usuario->foto) }}" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">{{ $paciente->nome }}</span>
-																		<span class="time block truncate txt-grey">{{ $paciente->diagnostico_1 }}</span>
+																		<span class="time block truncate txt-grey">{{ $paciente->antecedente_1 }}</span>
 																	</div>
 																	<div class="clearfix"></div>
 																</div>
@@ -193,8 +193,10 @@
 										</div>
 									</div>
 								</div>
-								<div  id="earnings_8" class="tab-pane fade" role="tabpanel">
-									<!-- Row -->
+
+
+								<!-- <div  id="earnings_8" class="tab-pane fade" role="tabpanel">
+									
 									<div class="row">
 										<div class="col-lg-12">
 											<form id="example-advanced-form" action="#">
@@ -286,8 +288,10 @@
 										</div>
 									</div>
 								</div>
+
+
 								<div  id="settings_8" class="tab-pane fade" role="tabpanel">
-									<!-- Row -->
+									
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="">
@@ -363,7 +367,9 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
+
+								
 							</div>
 						</div>
 					</div>

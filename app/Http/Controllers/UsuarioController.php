@@ -118,7 +118,7 @@ class UsuarioController extends Controller
 			
 		$internacao = DB::table('fonos')
             ->join('pacientes', 'fonos.id_paciente', '=', 'pacientes.id')
-			->select('fonos.*', 'pacientes.nome', 'pacientes.diagnostico_1')
+			->select('fonos.*', 'pacientes.nome', 'pacientes.antecedente_1')
 			->where('id_responsavel', '=', $id)
 			->where('local', '=', 'Internação')
 			->orderBy('pacientes.nome', 'asc')
@@ -126,7 +126,7 @@ class UsuarioController extends Controller
 			
 		$domiciliar = DB::table('fonos')
             ->join('pacientes', 'fonos.id_paciente', '=', 'pacientes.id')
-			->select('fonos.*', 'pacientes.nome', 'pacientes.diagnostico_1')
+			->select('fonos.*', 'pacientes.nome', 'pacientes.antecedente_1')
 			->where('id_responsavel', '=', $id)
 			->where('local', '=', 'Domiciliar')
 			->orderBy('pacientes.nome', 'asc')
@@ -226,11 +226,11 @@ class UsuarioController extends Controller
 			->where('id_usuario', '=', $id)
 			->orderBy('data', 'desc')
 			->orderBy('id', 'desc')
-			->get();
+			->paginate(15);
 			
 		$internacao = DB::table('fonos')
             ->join('pacientes', 'fonos.id_paciente', '=', 'pacientes.id')
-			->select('fonos.*', 'pacientes.nome', 'pacientes.diagnostico_1')
+			->select('fonos.*', 'pacientes.nome', 'pacientes.antecedente_1')
 			->where('id_responsavel', '=', $id)
 			->where('local', '=', 'Internação')
 			->orderBy('pacientes.nome', 'asc')
@@ -238,7 +238,7 @@ class UsuarioController extends Controller
 			
 		$domiciliar = DB::table('fonos')
             ->join('pacientes', 'fonos.id_paciente', '=', 'pacientes.id')
-			->select('fonos.*', 'pacientes.nome', 'pacientes.diagnostico_1')
+			->select('fonos.*', 'pacientes.nome', 'pacientes.antecedente_1')
 			->where('id_responsavel', '=', $id)
 			->where('local', '=', 'Domiciliar')
 			->orderBy('pacientes.nome', 'asc')

@@ -67,7 +67,7 @@
 											'Doença pulmonar'			=> 'Doença pulmonar',
 											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
 											'Outros'					=> 'Outros'
-										], $paciente->diagnostico_1, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+										], $paciente->antecedente_1, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
 								<div class="form-group">
@@ -86,7 +86,7 @@
 											'Doença pulmonar'			=> 'Doença pulmonar',
 											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
 											'Outros'					=> 'Outros'
-										], $paciente->diagnostico_2, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+										], $paciente->antecedente_2, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 
 								<div class="form-group">
@@ -105,7 +105,7 @@
 											'Doença pulmonar'			=> 'Doença pulmonar',
 											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
 											'Outros'					=> 'Outros'
-										], $paciente->diagnostico_3, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+										], $paciente->antecedente_3, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
 							</div>

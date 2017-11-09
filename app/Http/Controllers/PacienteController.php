@@ -64,7 +64,7 @@ class PacienteController extends Controller
 			$this->validate($request, [
 				'nome'=>'required|min:2',
 				'sexo'=>'required',
-				'diagnostico_1'=>'required|min:2'
+				'antecedente_1'=>'required|min:2'
 			]);
 			
 			$id_paciente = DB::table('pacientes')->insertGetId([
@@ -217,7 +217,7 @@ class PacienteController extends Controller
 			$this->validate($request, [
 				'nome'=>'required|max:120',
 				'sexo'=>'required',
-				'diagnostico_1'=>'required|min:2'
+				'antecedente_1'=>'required|min:2'
 			]);
 			
 			DB::table('pacientes')
