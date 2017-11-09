@@ -32,6 +32,10 @@
 												{{ Form::checkbox('prescricao', '1') }}
 												{{ Form::label('prescricao', 'Houve prescrição médica') }}
 											</div>
+											<div class="checkbox checkbox-primary">
+												{{ Form::checkbox('paliativo', '1') }}
+												{{ Form::label('paliativo', 'Paciente em cuidados paliativos') }}
+											</div>
 										</div>
 
 										<div class="col-sm-6">
@@ -43,6 +47,102 @@
 
 									</div>
 									
+								</div>
+
+								<div class="form-group">
+									{{ Form::label('diagnostico_1', 'Diagnóstico 1') }}
+									{{ Form::select('diagnostico_1', [
+											'AVCi'									=> 'AVCi',
+											'AVCh'									=> 'AVCh',
+											'Câncer'								=> 'Câncer',
+											'Cirurgia de grande porte'				=> 'Cirurgia de grande porte',
+											'Delirium'								=> 'Delirium',
+											'Demência'								=> 'Demência',
+											'Depressão'								=> 'Depressão',
+											'Desidratação'							=> 'Desidratação',
+											'Doença cardiológica'					=> 'Doença cardiológica',
+											'Outras doenças cardiológias'			=> 'Outras doenças cardiológias',
+											'Doença pulmonar'						=> 'Doença pulmonar',
+											'Outras doenças pulmonares'				=> 'Outras doenças pulmonares',
+											'DPOC agudizado'						=> 'DPOC agudizado',
+											'Fibrilação Atrial'						=> 'Fibrilação Atrial',
+											'Fragilidade'							=> 'Fragilidade',
+											'Parkinson' 							=> 'Parkinson', 
+											'Hemorragia Digestiva Alta' 			=> 'Hemorragia Digestiva Alta',
+											'Hemorragia Digestiva Baixa'			=> 'Hemorragia Digestiva Baixa',
+											'Hemorragia Subaracnoidea'				=> 'Hemorragia Subaracnoidea',
+											'Idade avançada'   						=> 'Idade avançada',
+											'Insuficiência Cardíaca Congestiva'		=> 'Insuficiência Cardíaca Congestiva',
+											'ITU'									=> 'ITU',
+											'Sarcopenia'							=> 'Sarcopenia',
+											'TCE'									=> 'TCE',
+											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
+											'Outros'								=> 'Outros'
+										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+								</div>
+
+								<div class="form-group">
+									{{ Form::label('diagnostico_2', 'Diagnóstico 2') }}
+									{{ Form::select('diagnostico_2', [
+											'AVCi'									=> 'AVCi',
+											'AVCh'									=> 'AVCh',
+											'Câncer'								=> 'Câncer',
+											'Cirurgia de grande porte'				=> 'Cirurgia de grande porte',
+											'Delirium'								=> 'Delirium',
+											'Demência'								=> 'Demência',
+											'Depressão'								=> 'Depressão',
+											'Desidratação'							=> 'Desidratação',
+											'Doença cardiológica'					=> 'Doença cardiológica',
+											'Outras doenças cardiológias'			=> 'Outras doenças cardiológias',
+											'Doença pulmonar'						=> 'Doença pulmonar',
+											'Outras doenças pulmonares'				=> 'Outras doenças pulmonares',
+											'DPOC agudizado'						=> 'DPOC agudizado',
+											'Fibrilação Atrial'						=> 'Fibrilação Atrial',
+											'Fragilidade'							=> 'Fragilidade',
+											'Parkinson' 							=> 'Parkinson', 
+											'Hemorragia Digestiva Alta' 			=> 'Hemorragia Digestiva Alta',
+											'Hemorragia Digestiva Baixa'			=> 'Hemorragia Digestiva Baixa',
+											'Hemorragia Subaracnoidea'				=> 'Hemorragia Subaracnoidea',
+											'Idade avançada'   						=> 'Idade avançada',
+											'Insuficiência Cardíaca Congestiva'		=> 'Insuficiência Cardíaca Congestiva',
+											'ITU'									=> 'ITU',
+											'Sarcopenia'							=> 'Sarcopenia',
+											'TCE'									=> 'TCE',
+											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
+											'Outros'								=> 'Outros'
+										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+								</div>
+
+								<div class="form-group">
+									{{ Form::label('diagnostico_3', 'Diagnóstico 3') }}
+									{{ Form::select('diagnostico_3', [
+											'AVCi'									=> 'AVCi',
+											'AVCh'									=> 'AVCh',
+											'Câncer'								=> 'Câncer',
+											'Cirurgia de grande porte'				=> 'Cirurgia de grande porte',
+											'Delirium'								=> 'Delirium',
+											'Demência'								=> 'Demência',
+											'Depressão'								=> 'Depressão',
+											'Desidratação'							=> 'Desidratação',
+											'Doença cardiológica'					=> 'Doença cardiológica',
+											'Outras doenças cardiológias'			=> 'Outras doenças cardiológias',
+											'Doença pulmonar'						=> 'Doença pulmonar',
+											'Outras doenças pulmonares'				=> 'Outras doenças pulmonares',
+											'DPOC agudizado'						=> 'DPOC agudizado',
+											'Fibrilação Atrial'						=> 'Fibrilação Atrial',
+											'Fragilidade'							=> 'Fragilidade',
+											'Parkinson' 							=> 'Parkinson', 
+											'Hemorragia Digestiva Alta' 			=> 'Hemorragia Digestiva Alta',
+											'Hemorragia Digestiva Baixa'			=> 'Hemorragia Digestiva Baixa',
+											'Hemorragia Subaracnoidea'				=> 'Hemorragia Subaracnoidea',
+											'Idade avançada'   						=> 'Idade avançada',
+											'Insuficiência Cardíaca Congestiva'		=> 'Insuficiência Cardíaca Congestiva',
+											'ITU'									=> 'ITU',
+											'Sarcopenia'							=> 'Sarcopenia',
+											'TCE'									=> 'TCE',
+											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
+											'Outros'								=> 'Outros'
+										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 
 								<div class="form-group">

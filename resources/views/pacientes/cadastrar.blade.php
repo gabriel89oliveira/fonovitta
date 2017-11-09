@@ -54,8 +54,8 @@
 								</div>
 
 								<div class="form-group">
-									{{ Form::label('diagnostico_1', 'Diagnóstico 1') }}
-									{{ Form::select('diagnostico_1', [
+									{{ Form::label('antecedente_1', 'Antecedente 1') }}
+									{{ Form::select('antecedente_1', [
 											'Demência'					=> 'Demência',
 											'Parkinson' 				=> 'Parkinson', 
 											'AVCi'						=> 'AVCi',
@@ -73,8 +73,8 @@
 								</div>
 								
 								<div class="form-group">
-									{{ Form::label('diagnostico_2', 'Diagnóstico 2') }}
-									{{ Form::select('diagnostico_2', [
+									{{ Form::label('antecedente_2', 'Antecedente 2') }}
+									{{ Form::select('antecedente_2', [
 											'Demência'					=> 'Demência',
 											'Parkinson' 				=> 'Parkinson', 
 											'AVCi'						=> 'AVCi',
@@ -92,8 +92,8 @@
 								</div>
 
 								<div class="form-group">
-									{{ Form::label('diagnostico_3', 'Diagnóstico 3') }}
-									{{ Form::select('diagnostico_3', [
+									{{ Form::label('antecedente_3', 'Antecedente 3') }}
+									{{ Form::select('antecedente_3', [
 											'Demência'					=> 'Demência',
 											'Parkinson' 				=> 'Parkinson', 
 											'AVCi'						=> 'AVCi',

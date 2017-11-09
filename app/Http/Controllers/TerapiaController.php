@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use App\Terapia;
 
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;
@@ -90,6 +91,8 @@ class TerapiaController extends Controller
 				'conduta'=>'required'
 			]);
 			
+		$id_fonos = DB::table('fonos')->where('id_paciente', $request->id_paciente)->first();
+
 		// Dados adicionais da terapia
 		$adicional[1] = $request->input('adicional_1');
 		$adicional[2] = $request->input('adicional_2');
@@ -127,6 +130,7 @@ class TerapiaController extends Controller
 		$id_insert = DB::table('terapias')->insertGetId([
 			'id_paciente'          			=> $request->id_paciente,
 			'id_usuario'           			=> Auth::user()->id,
+			'id_fonos'						=> $id_fonos,
 			'equipe'               			=> 'fon',
 			'terapia'              			=> $request->terapia,
 			'terapia_2'            			=> $terapia_2,
@@ -481,12 +485,20 @@ class TerapiaController extends Controller
 
 
     /**
-     * Excluir uma terapia.
+     * Deletar uma terapia.
      *
      */
-    public function destroy($id)
+    public function deletar($id)
     {
-        //
+        
+        // Excluir item da tabela de objetivos
+        Terapia::destroy($id);
+        
+        // Retorna resposta para AJAX
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+        
     }
 
 	

@@ -71,6 +71,7 @@
 							</span>
 						</div>
 					</form>
+					
 				</div>
 				<div id="mobile_only_nav" class="mobile-only-nav pull-right">
 					<ul class="nav navbar-right top-nav pull-right">
@@ -952,7 +953,7 @@
 			<!-- /Right Sidebar Menu -->
 			
 			<!-- Right Setting Menu -->
-			<div class="setting-panel">
+			<!-- <div class="setting-panel">
 				<ul class="right-sidebar nicescroll-bar pa-0">
 					<li class="layout-switcher-wrap">
 						<ul>
@@ -1009,7 +1010,7 @@
 					</li>
 				</ul>
 			</div>
-			<button id="setting_panel_btn" class="btn btn-success btn-circle setting-panel-btn shadow-2dp"><i class="zmdi zmdi-settings"></i></button>
+			<button id="setting_panel_btn" class="btn btn-success btn-circle setting-panel-btn shadow-2dp"><i class="zmdi zmdi-settings"></i></button> -->
 			<!-- /Right Setting Menu -->
 			
 			<!-- Right Sidebar Backdrop -->

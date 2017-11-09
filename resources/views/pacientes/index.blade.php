@@ -42,9 +42,26 @@ Pacientes
 									
 										@foreach ($pacientes as $paciente)
 											<tr>
-												<td><a href=' {{ route('pacientes.show', ['id' => $paciente->id]) }} ' >{{ $paciente->nome }}</a></td>
+												<td>
+													@if($paciente->fon == 1)
+														<i class="fa fa-circle text-success"></i> &nbsp;
+													@else
+														<i class="fa fa-circle-o"></i> &nbsp;
+													@endif
+													<a href=' {{ route('pacientes.show', ['id' => $paciente->id]) }} ' >{{ $paciente->nome }}</a>
+												</td>
 												<td>{{ \Carbon\Carbon::parse($paciente->nascimento)->age }}</td>
-												<td>{{ $paciente->diagnostico_1 }}</td>
+												<td>
+													{{ $paciente->antecedente_1 }} 
+
+													@if($paciente->antecedente_2<>"")
+														{{ " / ".$paciente->antecedente_2 }}
+													@endif
+
+													@if($paciente->antecedente_3<>"")
+														{{ " / ".$paciente->antecedente_3 }}
+													@endif
+												</td>
 												<td>{{ $paciente->cuidador }}</td>
 												<td>{{ $paciente->nome_1 }}</td>
 												<td>{{ $paciente->telefone_1 }}</td>

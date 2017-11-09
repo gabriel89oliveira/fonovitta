@@ -84,37 +84,39 @@
 							<div class="panel-body">
 								<div class="form-wrap">
 									
-									<div class="form-group">
-										<p>Nome do responsável</p>
-										<h6> {{ $paciente->responsavel }} </h6>
-									</div>
-									
-									<div class="form-group">
-										<p>Grau de relação</p>
-										<h6> {{ $paciente->relacao }} </h6>
-									</div>
-									
-									<div class="form-group">
-										<p>Nome do cuidador</p>
-										<h6> {{ $paciente->cuidador }} </h6>
-									</div>
-									
+									@if(!empty($paciente->responsavel))
+										<div class="form-group">
+											<p>Nome do responsável</p>
+											<h6> {{ $paciente->responsavel }} </h6>
+										</div>
+									@endif
+
+									@if(!empty($paciente->relacao))
+										<div class="form-group">
+											<p>Grau de relação</p>
+											<h6> {{ $paciente->relacao }} </h6>
+										</div>
+									@endif
+
+									@if(!empty($paciente->cuidador))
+										<div class="form-group">
+											<p>Nome do cuidador</p>
+											<h6> {{ $paciente->cuidador }} </h6>
+										</div>
+									@endif
+
 									<div class="form-group">
 										<p>Diagnóstico</p>
 										<h6> 
-											{{ $paciente->diagnostico_1 }} 
-											
-											<?php
-											
-												if($paciente->diagnostico_2<>""){
-													echo " / ".$paciente->diagnostico_2;
-												}
-												
-												if($paciente->diagnostico_3<>""){
-													echo " / ".$paciente->diagnostico_3;
-												}
-											
-											?>
+											{{ $paciente->antecedente_1 }} 
+
+											@if($paciente->antecedente_2<>"")
+												{{ " / ".$paciente->antecedente_2 }}
+											@endif
+
+											@if($paciente->antecedente_3<>"")
+												{{ " / ".$paciente->antecedente_3 }}
+											@endif
 											
 										</h6>
 									</div>
@@ -268,66 +270,29 @@
 										
 										<div class="sl-item">
 											<a href="javascript:void(0)" data-toggle="modal" data-target="#historico-modal-{{ $k }}">
+												
 												<div class="sl-avatar avatar avatar-sm avatar-circle">
 													<img class="img-responsive img-circle" src="{{ URL::asset('dist/img/avatar/' . $terapia_i->foto) }}" alt="avatar"/>
 												</div>
+
 												<div class="sl-content">
+													
 													<p class="inline-block"><span class="capitalize-font txt-success mr-5 weight-500">{{ $terapia_i->name }}</span><span>{{ $terapia_i->terapia }}</span></p>
+
+													<span class="block txt-grey font-12 capitalize-font">
+
+														<!-- Deletar -->
+														<a href="#" onClick='confirmarDeletar("{{ $terapia_i->id }}");' class="pull-right mr-20 text-danger"><i class="ti ti-trash"></i></a>
+
+														<!-- Editar -->
+														<a href="{{ route('terapia.edit', ['id' => $terapia_i->id]) }}" class="pull-right mr-10 text-primary"><i class="ti ti-pencil"></i></a>
+
+													</span>
+
 													<span class="block txt-grey font-12 capitalize-font">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($terapia_i->created_at))->diffForHumans() }}</span>
+													
 												</div>
 											</a>
-										</div>
-										
-										<div id="historico-modal-{{ $k }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-														<h5 class="modal-title" id="myModalLabel">
-															{{ $terapia_i->terapia }} 
-															<small>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($terapia_i->created_at))->diffForHumans() }}</small>
-														</h5>
-													</div>
-													<div class="modal-body">
-														<p>{{ $terapia_i->terapia_2 }}</p>
-														<br>
-														@if(!empty($terapia_i->evolucao))
-															<h5>Evolução</h5>
-															<p>{{ $terapia_i->evolucao }}</p>
-															<br>
-														@endif
-														
-														<h6>
-															@if(!empty($terapia_i->aval_dieta))
-																Dieta Avaliada. 
-															@endif
-															@if(!empty($terapia_i->aval_liquido))
-																Líquido Avaliado.
-															@endif
-														</h6>
-														@if(!empty($terapia_i->aval_liquido) OR !empty($terapia_i->aval_dieta))
-															<br>
-														@endif
-														
-														@if(!empty($terapia_i->comentario))
-															<h5>Comentários</h5>
-															<p>{{ $terapia_i->comentario }}</p>
-															<br>
-														@endif
-														<h6>Conduta: {{ $terapia_i->conduta }}</h6>
-														
-													</div>
-													<div class="modal-footer">
-														<h6 class="pull-left"><small>Atendimento realizado por <b>{{ $terapia_i->name }}</b></small></h6>
-														<a href=" {{ route('terapia.edit', ['id' => $terapia_i->id]) }} ">
-															<button class="btn btn-primary btn-anim mr-30"><i class="fa fa-pencil"></i><span class="btn-text">Editar</span></button>
-														</a>
-														<button type="button" class="btn btn-primary btn-anim" data-dismiss="modal"><i class="fa fa-close"></i><span class="btn-text">Fechar</span></button>
-													</div>
-												</div>
-												<!-- /.modal-content -->
-											</div>
-											<!-- /.modal-dialog -->
 										</div>
 										
 									@endforeach
@@ -355,214 +320,26 @@
 			
 		<!-- /.Responsável -->
 		@include('pacientes.modal.responsavel')
+
+		<!-- /.Terapia -->
+		@include('pacientes.modal.terapia')
 	
+		<!-- /.Alta -->
+		@include('pacientes.js.alta')
+
 	@endif
 	
-	
-	<script type="text/javascript">
-		
-		
-		function confirmarAlta(id)
-		{
-			
-			swal({
-				title: 'Confirmar?',
-				text: 'Deseja dar alta fonoaudiologica para esse paciente? Você não poderá mais recuperá-lo!',
-				icon: 'warning',
-				buttons: true,
-				dangerMode: true,
-			})
-			.then((willDelete) => {
-				if(willDelete){
-					
-					$.ajaxSetup({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
+	<!-- /.Deletar -->
+	@include('pacientes.js.deletar')
 
-					$.ajax(
-					{
-						url: "{{ url('pacientes/alta') }}"+"/"+id,
-						type: 'delete',
-						dataType: "JSON",
-						data: {
-							"id": id
-						},
-						success: function ()
-						{
-							swal({
-								text: 'Feito! Paciente recebeu alta!',
-								icon: 'success',
-								button: false,
-								closeOnClickOutside: false,
-							});
-							
-							setTimeout(function () {
-								location.reload();
-							}, 800);
-							
-						},
-						error: function(xhr) {
-							console.log(xhr.responseText); // this line will save you tons of hours while debugging
-						}
-					});
-					
-				}
-			});
-		   
-		}
-		
-		function confirmarSuspensao(id)
-		{
-			
-			swal({
-				title: 'Confirmar?',
-				text: 'Deseja suspender o atendimento fonoaudiologico desse paciente? Você não poderá mais recuperá-lo!',
-				icon: 'warning',
-				buttons: true,
-				dangerMode: true,
-			})
-			.then((willDelete) => {
-				if(willDelete){
-					
-					$.ajaxSetup({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
-
-					$.ajax(
-					{
-						url: "{{ url('pacientes/suspensao') }}"+"/"+id,
-						type: 'delete',
-						dataType: "JSON",
-						data: {
-							"id": id
-						},
-						success: function ()
-						{
-							swal({
-								text: 'Feito! Paciente teve o atendimento suspendido!',
-								icon: 'success',
-								button: false,
-								closeOnClickOutside: false,
-							});
-							
-							setTimeout(function () {
-								location.reload();
-							}, 800);
-							
-						},
-						error: function(xhr) {
-							console.log(xhr.responseText); // this line will save you tons of hours while debugging
-						}
-					});
-					
-				}
-			});
-		   
-		}
-		
-		function confirmarObito(id)
-		{
-			
-			swal({
-				title: 'Confirmar?',
-				text: 'O paciente foi a óbito? Você não poderá mais recuperá-lo!',
-				icon: 'warning',
-				buttons: true,
-				dangerMode: true,
-			})
-			.then((willDelete) => {
-				if(willDelete){
-					
-					$.ajaxSetup({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
-
-					$.ajax(
-					{
-						url: "{{ url('pacientes/obito') }}"+"/"+id,
-						type: 'delete',
-						dataType: "JSON",
-						data: {
-							"id": id
-						},
-						success: function ()
-						{
-							swal({
-								text: 'Feito! Paciente teve o atendimento suspendido!',
-								icon: 'success',
-								button: false,
-								closeOnClickOutside: false,
-							});
-							
-							setTimeout(function () {
-								window.location.href = "{{URL::to('pacientes')}}";
-							}, 800);
-							
-						},
-						error: function(xhr) {
-							console.log(xhr.responseText); // this line will save you tons of hours while debugging
-						}
-					});
-					
-				}
-			});
-		   
-		}
-		
-	</script>
 	
 @endsection
 
 
 @section('scripts')
 
-	<!-- Init JavaScript -->
-	@if( $aniversario == 365 OR $aniversario == 0 )
-		
-		<script>
-			$(document).ready(function() {
-				"use strict";
-				
-				$.toast({
-					heading: 'Lembrete de aniversário',
-					text: 'É hoje o aniversário de {{ $paciente->nome }}!',
-					position: 'top-right',
-					loaderBg:'#469408',
-					icon: 'success',
-					hideAfter: 8000, 
-					stack: 6
-				});
-				
-			});
-		</script>
-		
-	@elseif($aniversario>0 && $aniversario<=10)
-		
-		<script>
-			$(document).ready(function() {
-				"use strict";
-				
-				$.toast({
-					heading: 'Lembrete de aniversário',
-					text: 'Falta(m) {{ $aniversario }} dia(s) para o aniversário de {{ $paciente->nome }}.',
-					position: 'top-right',
-					loaderBg:'#e69a2a',
-					icon: 'warning',
-					hideAfter: 8000, 
-					stack: 6
-				});
-				
-			});
-		</script>
-		
-	@endif
-	
+	<!-- /.Aniversario -->
+	@include('pacientes.js.aniversario')
 	
 @endsection
 

@@ -42,6 +42,7 @@ class AltaController extends Controller
 		$Historico = DB::table('historico_fonos')->insertGetId([
 			'id_paciente'      => $Paciente->id_paciente,
 			'id_responsavel'   => $Paciente->id_responsavel,
+			'id_fonos'		   => $Paciente->id,
 			'data_inicio'      => $Paciente->data_inicio,
 			'data_termino'     => Carbon::now(),
 			'alta'             => 'Alta Fonoaudiológica',
@@ -50,7 +51,10 @@ class AltaController extends Controller
 			'liquido_inicial'  => $Paciente->liquido_inicial,
 			'motivo_avaliacao' => $Paciente->motivo_avaliacao,
 			'comentario'       => $Paciente->comentario,
-			'local'	          => $Paciente->local,
+			'local'	           => $Paciente->local,
+			'diagnostico_1'	   => $Paciente->diagnostico_1,
+			'diagnostico_2'	   => $Paciente->diagnostico_2,
+			'diagnostico_3'	   => $Paciente->diagnostico_3,
 			'updated_by'       => Auth::user()->id
 		]);
 		
@@ -88,6 +92,7 @@ class AltaController extends Controller
 		$Historico = DB::table('historico_fonos')->insertGetId([
 			'id_paciente'      => $Paciente->id_paciente,
 			'id_responsavel'   => $Paciente->id_responsavel,
+			'id_fonos'		   => $Paciente->id,
 			'data_inicio'      => $Paciente->data_inicio,
 			'data_termino'     => Carbon::now(),
 			'alta'             => 'Suspensão do atendimento',
@@ -97,6 +102,9 @@ class AltaController extends Controller
 			'motivo_avaliacao' => $Paciente->motivo_avaliacao,
 			'comentario'       => $Paciente->comentario,
 			'local'	          => $Paciente->local,
+			'diagnostico_1'	   => $Paciente->diagnostico_1,
+			'diagnostico_2'	   => $Paciente->diagnostico_2,
+			'diagnostico_3'	   => $Paciente->diagnostico_3,
 			'updated_by'       => Auth::user()->id
 		]);
 		
@@ -134,6 +142,7 @@ class AltaController extends Controller
 		$Historico = DB::table('historico_fonos')->insertGetId([
 			'id_paciente'      => $Paciente->id_paciente,
 			'id_responsavel'   => $Paciente->id_responsavel,
+			'id_fonos'		   => $Paciente->id,
 			'data_inicio'      => $Paciente->data_inicio,
 			'data_termino'     => Carbon::now(),
 			'alta'             => 'Óbito',
@@ -142,7 +151,10 @@ class AltaController extends Controller
 			'liquido_inicial'  => $Paciente->liquido_inicial,
 			'motivo_avaliacao' => $Paciente->motivo_avaliacao,
 			'comentario'       => $Paciente->comentario,
-			'local'	          => $Paciente->local,
+			'local'	           => $Paciente->local,
+			'diagnostico_1'	   => $Paciente->diagnostico_1,
+			'diagnostico_2'	   => $Paciente->diagnostico_2,
+			'diagnostico_3'	   => $Paciente->diagnostico_3,
 			'updated_by'       => Auth::user()->id
 		]);
 		

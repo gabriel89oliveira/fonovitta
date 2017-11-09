@@ -25,12 +25,15 @@ Route::group(['middleware' => ['auth']], function() {
 	
 	
 	// Routes para funções do menu
-	Route::resource('terapia', 'TerapiaController');
 	Route::resource('avaliacao', 'AvaliacaoController');
 	Route::resource('frequencia', 'FrequenciaController');
 	Route::resource('responsavel', 'ResponsavelController');
 	
 	
+	// Routes para terapias
+	Route::delete('terapia/deletar/{id}', ['uses' => 'TerapiaController@deletar', 'as' => 'terapia.deletar']);
+	Route::resource('terapia', 'TerapiaController');
+
 	// Routes para altas
 	Route::delete('pacientes/alta/{id}', ['uses' => 'AltaController@alta', 'as' => 'pacientes.alta']);
 	Route::delete('pacientes/suspensao/{id}', ['uses' => 'AltaController@suspensao', 'as' => 'pacientes.suspensao']);

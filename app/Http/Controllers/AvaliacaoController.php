@@ -65,16 +65,19 @@ class AvaliacaoController extends Controller
 		if (Auth::user()->hasPermissionTo('Paciente_Avaliar')) {
 			
 			$this->validate($request, [
-				'id_paciente'=>'required|integer',
-				'dieta_inicial'=>'required|min:3',
-				'liquido_inicial'=>'required|min:3',
-				'motivo_avaliacao'=>'required|min:3',
-				'frequencia'=>'required',
-				'local'=>'required',
-				'terapia'=>'required|min:3',
-				'conduta'=>'required'
+				'id_paciente'		=> 'required|integer',
+				'dieta_inicial'		=> 'required|min:3',
+				'liquido_inicial'	=> 'required|min:3',
+				'motivo_avaliacao'	=> 'required|min:3',
+				'frequencia'		=> 'required',
+				'local'				=> 'required',
+				'terapia'			=> 'required|min:3',
+				'conduta'			=> 'required'
 			]);
 			
+			$paliativo	= !empty($request->input('paliativo')) 	? $request->input('paliativo') 	: 'Não';
+			$prescricao	= !empty($request->input('prescricao')) ? $request->input('prescricao') : 'Não';
+
 			// Dados adicionais da terapia
 			$adicional[1] = $request->input('adicional_1');
 			$adicional[2] = $request->input('adicional_2');
@@ -115,6 +118,10 @@ class AvaliacaoController extends Controller
 				'motivo_avaliacao'     => $request->motivo_avaliacao,
 				'comentario'           => $request->comentario,
 				'local'				   => $request->local,
+				'paliativo'			   => $paliativo,
+				'diagnostico_1'		   => $request->diagnostico_1,
+				'diagnostico_2'		   => $request->diagnostico_2,
+				'diagnostico_3'		   => $request->diagnostico_3,
 				'numero_atendimento'   => $request->numero_atendimento
 			]);
 			
@@ -131,6 +138,7 @@ class AvaliacaoController extends Controller
 			$id_insert = DB::table('terapias')->insertGetId([
 				'id_paciente'          => $request->id_paciente,
 				'id_usuario'           => Auth::user()->id,
+				'id_fonos'			   => $id_insert,
 				'equipe'               => 'fon',
 				'terapia'              => $request->terapia,
 				'terapia_2'            => $terapia_2,
@@ -138,7 +146,7 @@ class AvaliacaoController extends Controller
 				'comentario'           => $request->comentario,
 				'aval_dieta'           => $request->dieta,
 				'aval_liquido'         => $request->liquido,
-				'prescricao'		   => $request->prescricao,
+				'prescricao'		   => $prescricao,
 				'data'				   => date("Y-m-d")
 			]);
 				
