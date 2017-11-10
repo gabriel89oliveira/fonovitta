@@ -16,11 +16,20 @@
 				<div class="panel-heading">
 					<div class="pull-left">
 						<h4 class="panel-title txt-light">
+
+							<!-- Nome -->
 							{{ $paciente->nome }} 
-							@if($fono->paliativo == "Sim")
-								<span class="label label-warning ml-10">Cuidados Paliativos</span>
+
+							<!-- Cuidados paliativos -->
+							@if($paciente->fon != 0)
+								@if($fono->paliativo == "Sim")
+									<span class="label label-warning ml-10">Cuidados Paliativos</span>
+								@endif
 							@endif
-						<br><small class="txt-light">{{ $idade }} anos</small></h4>
+
+							<!-- Idade -->
+							<br><small class="txt-light">{{ $idade }} anos</small></h4>
+
 					</div>
 					<div class="pull-right">
 						<div class="dropdown">
