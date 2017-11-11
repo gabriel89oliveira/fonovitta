@@ -270,11 +270,12 @@ class PacienteController extends Controller
 			->join('fonos', 'pacientes.id', '=', 'fonos.id_paciente')
 			->select('pacientes.*')
 			->where('fonos.id_responsavel', '=', Auth::user()->id)
-			->orderBy('nome', 'desc')
+			->orderBy('nome', 'asc')
 			->paginate(15);
 
         return view('pacientes.index', compact('pacientes'))->with(["page" => "meus_pacientes"]);
 		
 	}
+
 	
 }

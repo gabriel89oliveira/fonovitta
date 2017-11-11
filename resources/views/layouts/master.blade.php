@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="{{ config('app.locale') }}">
 	
 <head>
@@ -63,14 +64,14 @@
 					<a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-search"></i></a>
 					<a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
 					
-					<form id="search_form" role="search" class="top-nav-search collapse pull-left">
+					{!! Form::open(array('action'=>'BuscaController@index', 'method'=>'GET', 'class' => 'top-nav-search collapse pull-left', 'role' => 'search')) !!}
 						<div class="input-group">
-							<input type="text" name="example-input1-group2" class="form-control" placeholder="Buscar">
+							<input type="text" name="busca" id="busca" class="form-control" placeholder="Buscar">
 							<span class="input-group-btn">
 							<button type="button" class="btn  btn-default"  data-target="#search_form" data-toggle="collapse" aria-label="Close" aria-expanded="true"><i class="zmdi zmdi-search"></i></button>
 							</span>
 						</div>
-					</form>
+					{!! Form::close() !!}
 					
 				</div>
 				<div id="mobile_only_nav" class="mobile-only-nav pull-right">
@@ -489,7 +490,14 @@
 							</a>
 						</li>
 
-
+						<li>
+							<a class="{{ $page == 'sugestao' ? 'active-page' : '' }}" href="{{ route('sugestao.tickets') }}">
+								<div class="pull-left">
+									<i class="zmdi zmdi-view-list-alt mr-20"></i><span class="right-nav-text">Ver Tickets</span>
+								</div>
+								<div class="clearfix"></div>
+							</a>
+						</li>
 
 					@can('Administrativo')
 						
@@ -498,30 +506,30 @@
 							<i class="zmdi zmdi-more"></i>
 						</li>
 						
-						<li>
-							<a href="{{ route('roles.index') }}">
-								<div class="pull-left">
-									<i class="zmdi zmdi-accounts-list mr-20"></i><span class="right-nav-text">Perfil de acesso</span>
-								</div>
-								<div class="clearfix"></div>
-							</a>
-						</li>
-						<li>
-							<a href="{{ route('permissions.index') }}">
-								<div class="pull-left">
-									<i class="zmdi zmdi-key mr-20"></i><span class="right-nav-text">Permissões</span>
-								</div>
-								<div class="clearfix"></div>
-							</a>
-						</li>
-						<li>
-							<a href="{{ route('users.index') }}">
-								<div class="pull-left">
-									<i class="zmdi zmdi-accounts mr-20"></i><span class="right-nav-text">Usuários</span>
-								</div>
-								<div class="clearfix"></div>
-							</a>
-						</li>
+							<li>
+								<a href="{{ route('roles.index') }}">
+									<div class="pull-left">
+										<i class="zmdi zmdi-accounts-list mr-20"></i><span class="right-nav-text">Perfil de acesso</span>
+									</div>
+									<div class="clearfix"></div>
+								</a>
+							</li>
+							<li>
+								<a href="{{ route('permissions.index') }}">
+									<div class="pull-left">
+										<i class="zmdi zmdi-key mr-20"></i><span class="right-nav-text">Permissões</span>
+									</div>
+									<div class="clearfix"></div>
+								</a>
+							</li>
+							<li>
+								<a href="{{ route('users.index') }}">
+									<div class="pull-left">
+										<i class="zmdi zmdi-accounts mr-20"></i><span class="right-nav-text">Usuários</span>
+									</div>
+									<div class="clearfix"></div>
+								</a>
+							</li>
 					
 					@endcan
 					

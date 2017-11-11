@@ -85,7 +85,7 @@
 												@forelse($terapias as $terapia)
 												
 												<div class="sl-item">
-													<a href="javascript:void(0)">
+													<a href=" {{ route('pacientes.show', ['id' => $terapia->id_paciente]) }} ">
 														<div class="sl-avatar avatar avatar-sm avatar-circle">
 															<img class="img-responsive img-circle" src="{{ URL::asset('dist/img/avatar/' . $usuario->foto) }}" alt="avatar"/>
 														</div>

@@ -23,7 +23,11 @@ Route::group(['middleware' => ['auth']], function() {
 	// Pagina inicial
 	Route::get('/home', 'HomeController@index');
 	
+
+	// Routes para busca
+	Route::get('busca', ['uses' => 'BuscaController@index', 'as' => 'busca.index']);
 	
+
 	// Routes para funções do menu
 	Route::resource('avaliacao', 'AvaliacaoController');
 	Route::resource('frequencia', 'FrequenciaController');

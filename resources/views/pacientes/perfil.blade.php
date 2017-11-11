@@ -327,6 +327,9 @@
 											</a>
 										</div>
 										
+										<!-- /.Terapia -->
+										@include('pacientes.modal.terapia')
+
 									@endforeach
 
 									@if($terapia)
@@ -352,10 +355,7 @@
 			
 		<!-- /.Responsável -->
 		@include('pacientes.modal.responsavel')
-
-		<!-- /.Terapia -->
-		@include('pacientes.modal.terapia')
-	
+		
 		<!-- /.Alta -->
 		@include('pacientes.js.alta')
 

@@ -68,8 +68,10 @@ class SugestaoController extends Controller
     public function tickets()
     {
         
-        // Retorna página para criar sugestao
-		return view('sugestoes/cadastrar')->with(["page" => "sugestao"]);
+        $tickets = DB::table('sugestoes')->orderBy('status', 'asc')->paginate(15);
+
+        // Retorna página para ver sugestao
+		return view('sugestoes/tickets', ['tickets' => $tickets])->with(["page" => "tickets"]);
 		
     }
 
