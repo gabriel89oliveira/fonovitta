@@ -79,15 +79,25 @@ Objetivos
 													<div class="btn-group mt-15 mr-10">
 														
 														<ul class="list-inline">
+															
+															@can('Objetivo_Concluir')
 															<li>
 																<a href="#" data-toggle="modal" data-target="#check-modal-{{ $k }}"><i class="fa fa-check txt-success"></i></a>
 															</li>
+															@endcan
+
+															@can('Objetivo_Editar')
 															<li>
 																<a href="#" data-toggle="modal" data-target="#editar-modal-{{ $k }}"><i class="fa fa-pencil txt-primary"></i></a>
 															</li>
+															@endcan
+
+															@can('Objetivo_Excluir')
 															<li>
 																<a href="#" onClick='confirmarDeletar("{{ $objetivo->id }}");'><i class="zmdi zmdi-delete txt-danger"></i></a>
 															</li>
+															@endcan
+															
 														</ul>
 														
 													</div>
