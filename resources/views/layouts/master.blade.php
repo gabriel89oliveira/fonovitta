@@ -396,6 +396,17 @@
 								<div class="clearfix"></div>
 							</a>
 						</li>
+
+						@role('Fonoaudiologia_Coordenacao')
+						<li>
+							<a class="{{ $page == 'estatisticas_pacientes' ? 'active-page' : '' }}" href="{{ route('pacientes.estatistica') }}">
+								<div class="pull-left">
+									<i class="zmdi zmdi-trending-up mr-20"></i><span class="right-nav-text">Estatísticas</span>
+								</div>
+								<div class="clearfix"></div>
+							</a>
+						</li>
+						@endrole
 					
 					
 					<li class="navigation-header">

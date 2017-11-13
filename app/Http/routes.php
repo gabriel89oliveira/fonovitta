@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth']], function() {
 	
 	
 	// Resources para pacientes
+	Route::get('pacientes/estatistica', 
+		['uses' => 'PacienteEstatisticaController@estatistica', 'as' => 'pacientes.estatistica']);
 	Route::get('pacientes/meus_pacientes', ['uses' => 'PacienteController@mine', 'as' => 'pacientes.mine']);
 	Route::resource('pacientes', 'PacienteController');
 	
