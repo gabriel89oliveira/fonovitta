@@ -147,8 +147,7 @@ class TerapiaController extends Controller
 				'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
 				'treino_anterior'				=> $request->treino_anterior,
 				'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
-				'data'				   			=> $request->data_terapia,
-				'prescricao'		   			=> $request->prescricao
+				'data'				   			=> $request->data_terapia
 			]);
 				
 				// Histórico
@@ -340,8 +339,7 @@ class TerapiaController extends Controller
 				'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
 				'treino_anterior'				=> $request->treino_anterior,
 				'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
-				'data'				   			=> $request->data_terapia,
-				'prescricao'		   			=> $request->prescricao,
+				'data'				   			=> $request->data_terapia
 			]);
 			
 			// Histórico
