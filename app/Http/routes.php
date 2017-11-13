@@ -17,12 +17,14 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/', function () {
 		$id_usuario = Auth::user()->id;
-		return redirect()->route('usuarios.show', ['id' => $id_usuario]);
+		return redirect()->route('usuarios.mine');
 	});
 
 	// Pagina inicial
 	Route::get('/home', 'HomeController@index');
 	
+	// Pagina de logs
+	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 	// Routes para busca
 	Route::get('busca', ['uses' => 'BuscaController@index', 'as' => 'busca.index']);
