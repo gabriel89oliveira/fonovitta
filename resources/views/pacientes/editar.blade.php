@@ -54,18 +54,21 @@
 								<div class="form-group">
 									{{ Form::label('antecedente_1', 'Antecedente 1') }}
 									{{ Form::select('antecedente_1', [
-											'Demência'					=> 'Demência',
-											'Parkinson' 				=> 'Parkinson', 
 											'AVCi'						=> 'AVCi',
 											'AVCh'						=> 'AVCh',
-											'Idade avançada'   			=> 'Idade avançada',
-											'Depressão'					=> 'Depressão',
 											'Câncer'					=> 'Câncer',
-											'ITU'						=> 'ITU',
+											'Cirrose'					=> 'Cirrose',
+											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
 											'Delirium'					=> 'Delirium',
+											'Demência'					=> 'Demência',
+											'Depressão'					=> 'Depressão',
 											'Doença cardiológica'		=> 'Doença cardiológica',
 											'Doença pulmonar'			=> 'Doença pulmonar',
-											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
+											'Hapatopatia'				=> 'Hapatopatia', 
+											'Idade avançada'   			=> 'Idade avançada',
+											'Insuficiência renal'		=> 'Insuficiência renal',
+											'ITU'						=> 'ITU',
+											'Parkinson' 				=> 'Parkinson', 
 											'Outros'					=> 'Outros'
 										], $paciente->antecedente_1, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
@@ -73,18 +76,21 @@
 								<div class="form-group">
 									{{ Form::label('antecedente_2', 'Antecedente 2') }}
 									{{ Form::select('antecedente_2', [
-											'Demência'					=> 'Demência',
-											'Parkinson' 				=> 'Parkinson', 
 											'AVCi'						=> 'AVCi',
 											'AVCh'						=> 'AVCh',
-											'Idade avançada'   			=> 'Idade avançada',
-											'Depressão'					=> 'Depressão',
 											'Câncer'					=> 'Câncer',
-											'ITU'						=> 'ITU',
+											'Cirrose'					=> 'Cirrose',
+											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
 											'Delirium'					=> 'Delirium',
+											'Demência'					=> 'Demência',
+											'Depressão'					=> 'Depressão',
 											'Doença cardiológica'		=> 'Doença cardiológica',
 											'Doença pulmonar'			=> 'Doença pulmonar',
-											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
+											'Hapatopatia'				=> 'Hapatopatia', 
+											'Idade avançada'   			=> 'Idade avançada',
+											'Insuficiência renal'		=> 'Insuficiência renal',
+											'ITU'						=> 'ITU',
+											'Parkinson' 				=> 'Parkinson', 
 											'Outros'					=> 'Outros'
 										], $paciente->antecedente_2, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
@@ -92,18 +98,21 @@
 								<div class="form-group">
 									{{ Form::label('antecedente_3', 'Antecedente 3') }}
 									{{ Form::select('antecedente_3', [
-											'Demência'					=> 'Demência',
-											'Parkinson' 				=> 'Parkinson', 
 											'AVCi'						=> 'AVCi',
 											'AVCh'						=> 'AVCh',
-											'Idade avançada'   			=> 'Idade avançada',
-											'Depressão'					=> 'Depressão',
 											'Câncer'					=> 'Câncer',
-											'ITU'						=> 'ITU',
+											'Cirrose'					=> 'Cirrose',
+											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
 											'Delirium'					=> 'Delirium',
+											'Demência'					=> 'Demência',
+											'Depressão'					=> 'Depressão',
 											'Doença cardiológica'		=> 'Doença cardiológica',
 											'Doença pulmonar'			=> 'Doença pulmonar',
-											'Cirurgia de grande porte'	=> 'Cirurgia de grande porte',
+											'Hapatopatia'				=> 'Hapatopatia', 
+											'Idade avançada'   			=> 'Idade avançada',
+											'Insuficiência renal'		=> 'Insuficiência renal',
+											'ITU'						=> 'ITU',
+											'Parkinson' 				=> 'Parkinson', 
 											'Outros'					=> 'Outros'
 										], $paciente->antecedente_3, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
