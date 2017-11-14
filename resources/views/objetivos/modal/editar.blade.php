@@ -5,7 +5,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h5 class="modal-title">Alterar objetivo de {{ $objetivo->id ." - ". $objetivo->usuario_nome }}</h5>
+					<h5 class="modal-title">Alterar objetivo de {{ $objetivo->paciente_nome ." - ". $objetivo->usuario_nome }}</h5>
 				</div>
 				<div class="modal-body">
 					

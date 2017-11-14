@@ -14,6 +14,8 @@ use App\Usuario;
 use App\Fono;
 use Auth;
 use DB;
+use URL;
+use Redirect;
 use Carbon\Carbon;
 
 //Importing laravel-permission models
@@ -76,10 +78,14 @@ class ObjetivoController extends Controller
 			->paginate(10);
 
 
+		// Lista de usuarios
 		$usuarios = DB::table('usuarios')->pluck('nome', 'id');
 
+		// Pagina visitada
+		$pagina = ($request->mo == true) ? "meus_objetivos" : "todos_objetivos";
+
         // Retorna página de objetivos
-        return view('objetivos.index', compact('objetivos'))->with(["page" => "todos_objetivos", "usuarios" => $usuarios]);
+        return view('objetivos.index', compact('objetivos'))->with(["page" => $pagina, "usuarios" => $usuarios]);
 
     }
 
@@ -250,7 +256,8 @@ class ObjetivoController extends Controller
 			->orderBy('objetivos.id', 'desc')
 			->paginate(10);
 
-        return view('objetivos.index', compact('objetivos'))->with(["page" => "meus_objetivos"]);
+		$url = URL::route('objetivos.index', array('usuario'=>$id,'mo'=>true));
+		return Redirect::to($url);
 		
     }
 	
