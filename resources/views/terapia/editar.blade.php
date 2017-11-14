@@ -96,7 +96,8 @@
 													'Exercício para motricidade'        => 'Exercício para motricidade',
 													'Exercício para linguagem'          => 'Exercício para linguagem', 
 													'Acompanhamento de refeição'        => 'Acompanhamento de refeição',
-													'Orientação'                        => 'Orientação'
+													'Orientação'                        => 'Orientação',
+													'Gerenciamento'						=> 'Gerenciamento'
 												], $terapia->terapia, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 										</div>
 									</div>
@@ -189,6 +190,15 @@
 												@else
 													{{ Form::checkbox('adicional_8', 'Orientação') }}
 													{{ Form::label('adicional_8', 'Orientação') }}
+												@endif
+											</div>
+											<div class="checkbox checkbox-primary">
+												@if(strpos($terapia->terapia_2, 'Gerenciamento') !== false)
+													{{ Form::checkbox('adicional_9', 'Gerenciamento', true) }}
+													{{ Form::label('adicional_9', 'Gerenciamento') }}
+												@else
+													{{ Form::checkbox('adicional_9', 'Gerenciamento') }}
+													{{ Form::label('adicional_9', 'Gerenciamento') }}
 												@endif
 											</div>
 										</div>

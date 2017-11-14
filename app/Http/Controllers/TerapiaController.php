@@ -105,6 +105,7 @@ class TerapiaController extends Controller
 			$adicional[6] = $request->input('adicional_6');
 			$adicional[7] = $request->input('adicional_7');
 			$adicional[8] = $request->input('adicional_8');
+			$adicional[9] = $request->input('adicional_9');
 			
 			$terapia_2 = null;
 			
@@ -303,6 +304,7 @@ class TerapiaController extends Controller
 		$adicional[6] = $request->input('adicional_6');
 		$adicional[7] = $request->input('adicional_7');
 		$adicional[8] = $request->input('adicional_8');
+		$adicional[9] = $request->input('adicional_9');
 		
 		$terapia_2 = null;
 		

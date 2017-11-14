@@ -89,7 +89,8 @@
 													'Exercício para motricidade'        => 'Exercício para motricidade',
 													'Exercício para linguagem'          => 'Exercício para linguagem', 
 													'Acompanhamento de refeição'        => 'Acompanhamento de refeição',
-													'Orientação'                        => 'Orientação'
+													'Orientação'                        => 'Orientação',
+													'Gerenciamento'						=> 'Gerenciamento'
 												], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 										</div>
 									</div>
@@ -125,13 +126,13 @@
 												{{ Form::checkbox('adicional_4', 'Exercício para voz') }}
 												{{ Form::label('adicional_4', 'Exercício para voz') }}
 											</div>
-										</div>
-										
-										<div class="col-sm-6">
 											<div class="checkbox checkbox-primary">
 												{{ Form::checkbox('adicional_5', 'Exercício para motricidade') }}
 												{{ Form::label('adicional_5', 'Exercício para motricidade') }}
 											</div>
+										</div>
+										
+										<div class="col-sm-6">
 											<div class="checkbox checkbox-primary">
 												{{ Form::checkbox('adicional_6', 'Exercício para linguagem') }}
 												{{ Form::label('adicional_6', 'Exercício para linguagem') }}
@@ -143,6 +144,10 @@
 											<div class="checkbox checkbox-primary">
 												{{ Form::checkbox('adicional_8', 'Orientação') }}
 												{{ Form::label('adicional_8', 'Orientação') }}
+											</div>
+											<div class="checkbox checkbox-primary">
+												{{ Form::checkbox('adicional_9', 'Gerenciamento') }}
+												{{ Form::label('adicional_9', 'Gerenciamento') }}
 											</div>
 										</div>
 									</div>
