@@ -153,9 +153,6 @@
 													{{ Form::label('adicional_4', 'Exercício para voz') }}
 												@endif
 											</div>
-										</div>
-										
-										<div class="col-sm-6">
 											<div class="checkbox checkbox-primary">
 												@if(strpos($terapia->terapia_2, 'Exercício para motricidade') !== false)
 													{{ Form::checkbox('adicional_5', 'Exercício para motricidade', true) }}
@@ -165,6 +162,9 @@
 													{{ Form::label('adicional_5', 'Exercício para motricidade') }}
 												@endif
 											</div>
+										</div>
+										
+										<div class="col-sm-6">
 											<div class="checkbox checkbox-primary">
 												@if(strpos($terapia->terapia_2, 'Exercício para linguagem') !== false)
 													{{ Form::checkbox('adicional_6', 'Exercício para linguagem', true) }}

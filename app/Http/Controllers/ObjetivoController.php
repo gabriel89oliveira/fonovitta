@@ -31,20 +31,55 @@ class ObjetivoController extends Controller
      * Listar todos objetivos.
      *
      */
-    public function index()
+    public function index(Request $request)
     {
         
-        // Listar todos objetivos
+
+    	// Listar todos objetivos
 		$objetivos = DB::table('objetivos')
             ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
 			->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
+			->join('fonos', 'objetivos.id_paciente', '=', 'fonos.id_paciente');
+
+
+    	// Caso exista um usuario definido
+		$objetivos = ($request->usuario) ? $objetivos->where('objetivos.id_usuario', $request->usuario) : $objetivos ;
+
+		// Caso exista um local definido
+		$objetivos = ($request->local) ? $objetivos->where('fonos.local', $request->local) : $objetivos ;
+
+		// Datas para prazos
+		$hoje 	 = Carbon::today()->addDays(1)->toDateString();
+		$expDate = Carbon::today()->addDays(10)->toDateString();
+
+		// Caso exista um prazo definido
+		if($request->status == 'Atrasado'){
+
+			$objetivos 	= $objetivos->whereDate('objetivos.prazo', '<', $hoje );
+
+		}elseif($request->status == 'Proximo'){
+
+			$objetivos 	= $objetivos->whereBetween('objetivos.prazo', [$hoje, $expDate] );
+
+		}elseif($request->status == 'No prazo'){
+
+			$objetivos 	= $objetivos->whereDate('objetivos.prazo', '>=', $expDate );
+
+		}
+
+
+		// Listar todos objetivos
+		$objetivos = $objetivos
 			->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
 			->orderBy('objetivos.prazo', 'asc')
 			->orderBy('objetivos.id', 'desc')
 			->paginate(10);
 
+
+		$usuarios = DB::table('usuarios')->pluck('nome', 'id');
+
         // Retorna página de objetivos
-        return view('objetivos.index', compact('objetivos'))->with(["page" => "todos_objetivos"]);
+        return view('objetivos.index', compact('objetivos'))->with(["page" => "todos_objetivos", "usuarios" => $usuarios]);
 
     }
 
