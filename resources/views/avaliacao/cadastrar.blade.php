@@ -54,6 +54,7 @@
 									{{ Form::select('diagnostico_1', [
 											'AVCi'									=> 'AVCi',
 											'AVCh'									=> 'AVCh',
+											'Broncoaspiração'						=> 'Broncoaspiração',
 											'Câncer'								=> 'Câncer',
 											'Cirurgia de grande porte'				=> 'Cirurgia de grande porte',
 											'Delirium'								=> 'Delirium',
@@ -67,16 +68,18 @@
 											'DPOC agudizado'						=> 'DPOC agudizado',
 											'Fibrilação Atrial'						=> 'Fibrilação Atrial',
 											'Fragilidade'							=> 'Fragilidade',
-											'Parkinson' 							=> 'Parkinson', 
 											'Hemorragia Digestiva Alta' 			=> 'Hemorragia Digestiva Alta',
 											'Hemorragia Digestiva Baixa'			=> 'Hemorragia Digestiva Baixa',
 											'Hemorragia Subaracnoidea'				=> 'Hemorragia Subaracnoidea',
 											'Idade avançada'   						=> 'Idade avançada',
 											'Insuficiência Cardíaca Congestiva'		=> 'Insuficiência Cardíaca Congestiva',
+											'Insuficiência renal aguda'				=> 'Insuficiência Renal Aguda',
 											'ITU'									=> 'ITU',
+											'Náuseas'								=> 'Náuseas',
+											'Parkinson' 							=> 'Parkinson', 
+											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
 											'TCE'									=> 'TCE',
-											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Outros'								=> 'Outros'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
@@ -86,6 +89,7 @@
 									{{ Form::select('diagnostico_2', [
 											'AVCi'									=> 'AVCi',
 											'AVCh'									=> 'AVCh',
+											'Broncoaspiração'						=> 'Broncoaspiração',
 											'Câncer'								=> 'Câncer',
 											'Cirurgia de grande porte'				=> 'Cirurgia de grande porte',
 											'Delirium'								=> 'Delirium',
@@ -99,16 +103,18 @@
 											'DPOC agudizado'						=> 'DPOC agudizado',
 											'Fibrilação Atrial'						=> 'Fibrilação Atrial',
 											'Fragilidade'							=> 'Fragilidade',
-											'Parkinson' 							=> 'Parkinson', 
 											'Hemorragia Digestiva Alta' 			=> 'Hemorragia Digestiva Alta',
 											'Hemorragia Digestiva Baixa'			=> 'Hemorragia Digestiva Baixa',
 											'Hemorragia Subaracnoidea'				=> 'Hemorragia Subaracnoidea',
 											'Idade avançada'   						=> 'Idade avançada',
 											'Insuficiência Cardíaca Congestiva'		=> 'Insuficiência Cardíaca Congestiva',
+											'Insuficiência renal aguda'				=> 'Insuficiência Renal Aguda',
 											'ITU'									=> 'ITU',
+											'Náuseas'								=> 'Náuseas',
+											'Parkinson' 							=> 'Parkinson', 
+											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
 											'TCE'									=> 'TCE',
-											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Outros'								=> 'Outros'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
@@ -118,6 +124,7 @@
 									{{ Form::select('diagnostico_3', [
 											'AVCi'									=> 'AVCi',
 											'AVCh'									=> 'AVCh',
+											'Broncoaspiração'						=> 'Broncoaspiração',
 											'Câncer'								=> 'Câncer',
 											'Cirurgia de grande porte'				=> 'Cirurgia de grande porte',
 											'Delirium'								=> 'Delirium',
@@ -131,16 +138,18 @@
 											'DPOC agudizado'						=> 'DPOC agudizado',
 											'Fibrilação Atrial'						=> 'Fibrilação Atrial',
 											'Fragilidade'							=> 'Fragilidade',
-											'Parkinson' 							=> 'Parkinson', 
 											'Hemorragia Digestiva Alta' 			=> 'Hemorragia Digestiva Alta',
 											'Hemorragia Digestiva Baixa'			=> 'Hemorragia Digestiva Baixa',
 											'Hemorragia Subaracnoidea'				=> 'Hemorragia Subaracnoidea',
 											'Idade avançada'   						=> 'Idade avançada',
 											'Insuficiência Cardíaca Congestiva'		=> 'Insuficiência Cardíaca Congestiva',
+											'Insuficiência renal aguda'				=> 'Insuficiência Renal Aguda',
 											'ITU'									=> 'ITU',
+											'Náuseas'								=> 'Náuseas',
+											'Parkinson' 							=> 'Parkinson', 
+											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
 											'TCE'									=> 'TCE',
-											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Outros'								=> 'Outros'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
