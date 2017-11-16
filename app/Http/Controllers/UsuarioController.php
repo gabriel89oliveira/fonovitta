@@ -90,7 +90,7 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         
 		$usuario = DB::table('usuarios')->where('id', $id)->first();
@@ -132,7 +132,11 @@ class UsuarioController extends Controller
 			->orderBy('pacientes.nome', 'asc')
 			->get();
 		
-		return view('usuarios/perfil', ['usuario' => $usuario, 'idade' => $idade, 'aniversario' => $aniversario, 'terapias' => $terapias, 'internacao' => $internacao, 'domiciliar' => $domiciliar])->with(["page" => "todos_usuarios"]);
+
+		// Pagina visitada
+		$pagina = ($request->mo == true) ? "meu_perfil" : "todos_usuarios";
+
+		return view('usuarios/perfil', ['usuario' => $usuario, 'idade' => $idade, 'aniversario' => $aniversario, 'terapias' => $terapias, 'internacao' => $internacao, 'domiciliar' => $domiciliar])->with(["page" => $pagina]);
 		
     }
 
@@ -194,60 +198,6 @@ class UsuarioController extends Controller
         //
     }
 	
-	/**
-     * Conclude the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function mine()
-    {
-		//
-		$id = Auth::user()->id;
-		
-        $usuario = DB::table('usuarios')->where('id', $id)->first();
-		$idade = Carbon::parse($usuario->nascimento)->age;
-		
-		// Aniversário
-		$ano = date('Y', strtotime($usuario->nascimento));
-		$mes = date('m', strtotime($usuario->nascimento));
-		$dia = date('d', strtotime($usuario->nascimento));
-
-		$aniversario = date('Y-m-d', mktime(0,0,0,$mes,$dia,$ano+$idade+1));
-		$hoje = date('Y-m-d', mktime(0,0,0,date('m'),date('d'),date('Y') ) );
-
-		$diff=date_diff(date_create($hoje), date_create($aniversario));
-		$aniversario = $diff->format("%a");
-		
-		
-		$terapias = DB::table('terapias')
-            ->join('pacientes', 'terapias.id_paciente', '=', 'pacientes.id')
-			->select('terapias.*', 'pacientes.nome')
-			->where('id_usuario', '=', $id)
-			->orderBy('data', 'desc')
-			->orderBy('id', 'desc')
-			->paginate(15);
-			
-		$internacao = DB::table('fonos')
-            ->join('pacientes', 'fonos.id_paciente', '=', 'pacientes.id')
-			->select('fonos.*', 'pacientes.nome', 'pacientes.antecedente_1')
-			->where('id_responsavel', '=', $id)
-			->where('local', '=', 'Internação')
-			->orderBy('pacientes.nome', 'asc')
-			->get();
-			
-		$domiciliar = DB::table('fonos')
-            ->join('pacientes', 'fonos.id_paciente', '=', 'pacientes.id')
-			->select('fonos.*', 'pacientes.nome', 'pacientes.antecedente_1')
-			->where('id_responsavel', '=', $id)
-			->where('local', '=', 'Domiciliar')
-			->orderBy('pacientes.nome', 'asc')
-			->get();
-		
-		return view('usuarios/perfil', ['usuario' => $usuario, 'idade' => $idade, 'aniversario' => $aniversario, 'terapias' => $terapias, 'internacao' => $internacao, 'domiciliar' => $domiciliar])->with(["page" => "meu_perfil"]);
-		
-    }
-	
 	
 	/**
      * Update the specified resource in storage.
@@ -296,7 +246,7 @@ class UsuarioController extends Controller
 		DB::table('usuarios')
             ->where('id', $id)
             ->update([
-				'foto'      => $photoName,
+				'foto'      	=> $photoName,
 				'updated_by'    => Auth::user()->id
 			]);
 		

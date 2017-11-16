@@ -46,7 +46,7 @@
 										<tbody>
 										
 											@foreach ($tickets as $ticket)
-												<tr>
+												<tr style="cursor: pointer;", onclick="window.location='{{ route('sugestao.mostrar_ticket', ['id' => $ticket->id]) }}';">
 													<td>{{ $ticket->id }}</td>
 													<td>
 														{{ $ticket->tipo }} 

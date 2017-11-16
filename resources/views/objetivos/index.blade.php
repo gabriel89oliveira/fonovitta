@@ -27,10 +27,15 @@ Objetivos
 								{{ Form::select('local', ['Domiciliar' => 'Domiciliar', 'Internação' => 'Internação'], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 							</div>
 
-							<div class="form-group mr-15">
-								{{ Form::label('usuario', 'Usuário') }}
-								{{ Form::select('usuario', $usuarios, null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
-							</div>
+							@if($page == 'meus_objetivos')
+								{{ Form::hidden('usuario', Auth::user()->id) }}
+								{{ Form::hidden('mo', 'true') }}
+							@else
+								<div class="form-group mr-15">
+									{{ Form::label('usuario', 'Usuário') }}
+									{{ Form::select('usuario', $usuarios, null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+								</div>
+							@endif
 
 							<div class="form-group mr-15">
 								{{ Form::submit('Filtrar', ['class' => 'btn btn-primary btn-anim pull-right']) }}

@@ -16,69 +16,106 @@ Route::auth();
 Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/', function () {
+
 		$id_usuario = Auth::user()->id;
-		return redirect()->route('usuarios.mine');
+		$url = URL::route('usuarios.show', array('usuarios'=>$id_usuario,'mo'=>true));
+
+		return Redirect::to($url);
+
 	});
 
-	// Pagina inicial
-	Route::get('/home', 'HomeController@index');
-	
-	// Pagina de logs
-	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
-	// Routes para busca
-	Route::get('busca', ['uses' => 'BuscaController@index', 'as' => 'busca.index']);
+	/**
+	 * Routes para paginas diversas
+	 *
+	 */
 	
+		// Pagina de logs
+		Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
-	// Routes para funções do menu
-	Route::resource('avaliacao', 'AvaliacaoController');
-	Route::resource('frequencia', 'FrequenciaController');
-	Route::resource('responsavel', 'ResponsavelController');
-	
-	
-	// Routes para terapias
-	Route::delete('terapia/deletar/{id}', ['uses' => 'TerapiaController@deletar', 'as' => 'terapia.deletar']);
-	Route::resource('terapia', 'TerapiaController');
-
-	// Routes para altas
-	Route::delete('pacientes/alta/{id}', ['uses' => 'AltaController@alta', 'as' => 'pacientes.alta']);
-	Route::delete('pacientes/suspensao/{id}', ['uses' => 'AltaController@suspensao', 'as' => 'pacientes.suspensao']);
-	Route::delete('pacientes/obito/{id}', ['uses' => 'AltaController@obito', 'as' => 'pacientes.obito']);
-	
-	
-	// Resources para pacientes
-	Route::get('pacientes/estatistica', 
-		['uses' => 'PacienteEstatisticaController@estatistica', 'as' => 'pacientes.estatistica']);
-	Route::get('pacientes/meus_pacientes', ['uses' => 'PacienteController@mine', 'as' => 'pacientes.mine']);
-	Route::resource('pacientes', 'PacienteController');
-	
-	
-	// Resources para usuarios
-	Route::get('usuarios/meu_perfil', ['uses' => 'UsuarioController@mine', 'as' => 'usuarios.mine']);
-	Route::put('usuarios/senha/{id}', ['uses' => 'UsuarioController@password', 'as' => 'usuarios.password']);
-	Route::put('usuarios/foto/{id}', ['uses' => 'UsuarioController@foto', 'as' => 'usuarios.foto']);
-	Route::resource('usuarios', 'UsuarioController');
-	
-	
-	// Resources para objetivos
-	Route::delete('objetivos/deletar/{id}', ['uses' => 'ObjetivoController@deletar', 'as' => 'objetivos.deletar']);
-	Route::put('objetivos/conclude/{id}', ['uses' => 'ObjetivoController@conclude', 'as' => 'objetivos.conclude']);
-	Route::get('objetivos/meus_objetivos/{id}', ['uses' => 'ObjetivoController@mine', 'as' => 'objetivos.mine']);
-	Route::get('objetivos/estatistica', ['uses' => 'ObjetivoEstatisticaController@estatistica', 'as' => 'objetivos.estatistica']);
-	Route::resource('objetivos', 'ObjetivoController');
+		// Pagina de busca
+		Route::get('busca', ['uses' => 'BuscaController@index', 'as' => 'busca.index']);
 	
 
-	// Resources para sugestoes
-	Route::get('sugestoes/cadastrar', ['uses' => 'SugestaoController@create', 'as' => 'sugestao.create']);
-	Route::get('sugestoes/meus_tickets', ['uses' => 'SugestaoController@meus', 'as' => 'sugestao.meus']);
-	Route::get('sugestoes/tickets', ['uses' => 'SugestaoController@tickets', 'as' => 'sugestao.tickets']);
-	Route::post('sugestoes/store', ['uses' => 'SugestaoController@store', 'as' => 'objetivos.store']);
+	/**
+	 * Routes para pagina pacientes
+	 *
+	 */
+		
+		// Extras
+		Route::get('pacientes/estatistica', 
+			['uses' => 'PacienteEstatisticaController@estatistica', 'as' => 'pacientes.estatistica']);
+		Route::get('pacientes/meus_pacientes', ['uses' => 'PacienteController@mine', 'as' => 'pacientes.mine']);
+		// Resources para pacientes
+		Route::resource('pacientes', 'PacienteController');
+
+		// Resources para avaliação
+		Route::resource('avaliacao', 'AvaliacaoController');
+		// Resources para frequencia
+		Route::resource('frequencia', 'FrequenciaController');
+		// Resources para responsavel
+		Route::resource('responsavel', 'ResponsavelController');
+	
+		// Extras
+		Route::delete('terapia/deletar/{id}', ['uses' => 'TerapiaController@deletar', 'as' => 'terapia.deletar']);
+		// Routes para terapias
+		Route::resource('terapia', 'TerapiaController');
+
+		// Resources para altas
+		Route::delete('pacientes/alta/{id}', ['uses' => 'AltaController@alta', 'as' => 'pacientes.alta']);
+		Route::delete('pacientes/suspensao/{id}', ['uses' => 'AltaController@suspensao', 'as' => 'pacientes.suspensao']);
+		Route::delete('pacientes/obito/{id}', ['uses' => 'AltaController@obito', 'as' => 'pacientes.obito']);
+	
+	
+	/**
+	 * Routes para pagina usuarios
+	 *
+	 */
+
+		// Extras
+		Route::get('usuarios/meu_perfil', ['uses' => 'UsuarioController@mine', 'as' => 'usuarios.mine']);
+		Route::put('usuarios/senha/{id}', ['uses' => 'UsuarioController@password', 'as' => 'usuarios.password']);
+		Route::put('usuarios/foto/{id}', ['uses' => 'UsuarioController@foto', 'as' => 'usuarios.foto']);
+		// Resources para usuarios
+		Route::resource('usuarios', 'UsuarioController');
+	
+	
+	/**
+	 * Routes para pagina objetivos
+	 *
+	 */
+
+		// Extras
+		Route::delete('objetivos/deletar/{id}', ['uses' => 'ObjetivoController@deletar', 'as' => 'objetivos.deletar']);
+		Route::put('objetivos/conclude/{id}', ['uses' => 'ObjetivoController@conclude', 'as' => 'objetivos.conclude']);
+		Route::get('objetivos/estatistica', ['uses' => 'ObjetivoEstatisticaController@estatistica', 'as' => 'objetivos.estatistica']);
+		// Resources para objetivos
+		Route::resource('objetivos', 'ObjetivoController');
+		
+
+	/**
+	 * Routes para pagina de sugestões
+	 *
+	 */
+
+		// Resources para sugestoes
+		Route::get('sugestoes/cadastrar', ['uses' => 'SugestaoController@create', 'as' => 'sugestao.create']);
+		Route::get('sugestoes/meus_tickets', ['uses' => 'SugestaoController@meus', 'as' => 'sugestao.meus']);
+		Route::get('sugestoes/tickets', ['uses' => 'SugestaoController@tickets', 'as' => 'sugestao.tickets']);
+		Route::get('sugestoes/mostrar_ticket/{id}', ['uses' => 'SugestaoController@mostrar_ticket', 'as' => 'sugestao.mostrar_ticket']);
+		Route::post('sugestoes/store', ['uses' => 'SugestaoController@store', 'as' => 'sugestao.store']);
+		Route::post('sugestoes/comentar', ['uses' => 'SugestaoController@comentar', 'as' => 'sugestao.comentar']);
 
 	
-	// Controle de permissões
-	Route::resource('users', 'UserController');
-	Route::resource('roles', 'RoleController');
-	Route::resource('permissions', 'PermissionController');
+	/**
+	 * Routes para controle de acessos
+	 *
+	 */
+
+		// Resources para controle de permissões
+		Route::resource('users', 'UserController');
+		Route::resource('roles', 'RoleController');
+		Route::resource('permissions', 'PermissionController');
 
 
 });

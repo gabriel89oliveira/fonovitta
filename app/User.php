@@ -14,6 +14,36 @@ class User extends Authenticatable
     {   
         $this->attributes['password'] = bcrypt($password);
     }
+
+
+    /**
+     * Dados adicionais nas sessions.
+     *
+     * @var array
+     */
+    public function getFotoAttribute(){
+        
+        $id = $this->id;
+        $usuarios = Usuario::find($id);
+        
+        return $this->foto = $usuarios->foto;//'1509266372.png';
+        
+    }
+    
+    public function getEquipeAttribute(){
+        
+        return $this->equipe = 'fono';
+        
+    }
+
+    public function getNotificacoesAttribute(){
+
+        $id = $this->id;
+        $notificacoes = DB::table('notificacao')->where('id_usuario', $id)->where('status', 'Novo')->get();
+
+        return $notificacoes;
+
+    }
     
     /**
      * The attributes that are mass assignable.

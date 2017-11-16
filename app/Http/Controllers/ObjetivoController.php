@@ -244,22 +244,22 @@ class ObjetivoController extends Controller
      * Mostrar meus objetivos.
      *
      */
-    public function mine($id)
-    {
+  //   public function mine($id)
+  //   {
         
-		$objetivos = DB::table('objetivos')
-            ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
-			->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
-			->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
-			->where('objetivos.id_usuario', '=', $id)
-			->orderBy('objetivos.prazo', 'asc')
-			->orderBy('objetivos.id', 'desc')
-			->paginate(10);
+		// $objetivos = DB::table('objetivos')
+  //           ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
+		// 	->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
+		// 	->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
+		// 	->where('objetivos.id_usuario', '=', $id)
+		// 	->orderBy('objetivos.prazo', 'asc')
+		// 	->orderBy('objetivos.id', 'desc')
+		// 	->paginate(10);
 
-		$url = URL::route('objetivos.index', array('usuario'=>$id,'mo'=>true));
-		return Redirect::to($url);
+		// $url = URL::route('objetivos.index', array('usuario'=>$id,'mo'=>true));
+		// return Redirect::to($url);
 		
-    }
+  //   }
 	
 	
 }

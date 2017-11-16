@@ -27,14 +27,14 @@ class SugestaoController extends Controller
 
 
     /**
-     * Cadastrar novo objetivo.
+     * Cadastrar nova Sugestão.
      *
      */
     public function store(Request $request)
     {
 		
 		// Cadastra nova sugestao
-		$objetivo = DB::table('sugestoes')->insertGetId([
+		$sugestao = DB::table('sugestoes')->insertGetId([
 			'id_usuario'    => Auth::user()->id,
 			'tipo'      	=> $request->tipo,
 			'comentario' 	=> $request->comentario,
@@ -43,7 +43,7 @@ class SugestaoController extends Controller
 		]);
 		
         // Retorna página de objetivos
-		return redirect()->action('UsuarioController@mine');
+		return redirect()->action('SugestaoController@tickets');
 		
     }
 
@@ -73,6 +73,86 @@ class SugestaoController extends Controller
         // Retorna página para ver sugestao
 		return view('sugestoes/tickets', ['tickets' => $tickets])->with(["page" => "tickets"]);
 		
+    }
+
+
+    /**
+     * Mostrar tickets especifico.
+     *
+     */
+    public function mostrar_ticket($id)
+    {
+        
+        // Buscar dados do ticket
+        $ticket = DB::table('sugestoes')
+                        ->join('usuarios', 'sugestoes.id_usuario', '=', 'usuarios.id')
+                        ->where('sugestoes.id', $id)
+                        ->select('sugestoes.*', 'usuarios.id as usuario_id', 'usuarios.nome as nome')
+                        ->first();
+
+        // Buscar historico de comentarios do ticket
+        $comentarios = DB::table('sugestoes_chat')
+                        ->join('usuarios', 'sugestoes_chat.id_usuario', '=', 'usuarios.id')
+                        ->where('sugestoes_chat.id_sugestao', $id)
+                        ->orderBy('sugestoes_chat.id', 'desc')
+                        ->select('sugestoes_chat.*', 'usuarios.id as usuario_id', 'usuarios.nome as nome')
+                        ->get();
+
+        // Limpar notificações
+        $notificacao = DB::table('notificacao')
+                        ->where('id_usuario', Auth::user()->id)
+                        ->where('nome_tabela', 'sugestoes')
+                        ->where('id_tabela', $id)
+                        ->update(['status' => 'visualizado']);
+
+        // Retorna página para ver sugestao
+        return view('sugestoes/mostrar_ticket', ['ticket' => $ticket, 'comentarios' => $comentarios])->with(["page" => "tickets"]);
+        
+    }
+
+
+    /**
+     * Cadastrar novo comentario.
+     *
+     */
+    public function comentar(Request $request)
+    {
+        
+        // Cadastra nova sugestao
+        $comentario = DB::table('sugestoes_chat')->insertGetId([
+            'id_sugestao'   => $request->id_ticket,
+            'id_usuario'    => Auth::user()->id,
+            'comentario'    => $request->comentario,
+            'updated_by'    => Auth::user()->id
+        ]);
+
+        
+        // Cadastra nova notificação
+        if(Auth::user()->id == '2'){
+
+            // Se o usuario for o Administrador, cria notificação para dono do ticket
+            $notificacao = DB::table('notificacao')->insertGetId([
+                'id_tabela'   => $request->id_ticket,
+                'nome_tabela' => 'sugestoes',
+                'status'      => 'Novo',
+                'id_usuario'  => $request->id_usuario
+            ]);
+
+        }else{
+
+            // Se o usuario for o dono do ticket, cria notificação para administrador
+            $notificacao = DB::table('notificacao')->insertGetId([
+                'id_tabela'   => $request->id_ticket,
+                'nome_tabela' => 'sugestoes',
+                'status'      => 'Novo',
+                'id_usuario'  => '2'
+            ]);
+
+        }
+
+        // Retorna página de objetivos
+        return redirect()->action('SugestaoController@tickets');
+        
     }
 
 

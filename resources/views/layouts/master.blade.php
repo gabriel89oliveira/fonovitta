@@ -16,8 +16,8 @@
 		<title>{{ config('app.name', 'Laravel') }}</title>
 		
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="favicon.ico">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="{{ URL::asset('favicon.ico') }}">
+		<link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon">
 		
 		<!-- Custom CSS -->
 		<link href="{{ URL::asset('dist/css/style.css') }}" rel="stylesheet" type="text/css">
@@ -49,7 +49,7 @@
 					
 					<div class="nav-header pull-left">
 						<div class="logo-wrap">
-							<a href="{{ route('usuarios.mine') }}">
+							<a href="{{ route('usuarios.show', array('usuarios'=>Auth::user()->id,'mo'=>true)) }}">
 								<img class="brand-img" src="{{ URL::asset('dist/img/logo.png') }}" alt="brand"/>
 								<span class="brand-text">Fonovitta</span>
 							</a>
@@ -223,90 +223,66 @@
 									</ul>
 								</li>	
 							</ul>
-						</li>
+						</li> -->
+
+						@inject('notificacoes', 'App\Notificacoes')
+
 						<li class="dropdown alert-drp">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="zmdi zmdi-notifications top-nav-icon"></i><span class="top-nav-icon-badge">5</span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="zmdi zmdi-notifications top-nav-icon"></i>
+								@if( $notificacoes->getQntNotificacoes() > 0 )
+									<span class="top-nav-icon-badge">
+											{{ $notificacoes->getQntNotificacoes() }}
+									</span>
+								@endif
+							</a>
 							<ul  class="dropdown-menu alert-dropdown" data-dropdown-in="bounceIn" data-dropdown-out="bounceOut">
 								<li>
 									<div class="notification-box-head-wrap">
-										<span class="notification-box-head pull-left inline-block">notifications</span>
-										<a class="txt-danger pull-right clear-notifications inline-block" href="javascript:void(0)"> clear all </a>
+										<span class="notification-box-head pull-left inline-block">notificações</span>
 										<div class="clearfix"></div>
 										<hr class="light-grey-hr ma-0"/>
 									</div>
 								</li>
 								<li>
 									<div class="streamline message-nicescroll-bar">
-										<div class="sl-item">
-											<a href="javascript:void(0)">
-												<div class="icon bg-green">
-													<i class="zmdi zmdi-flag"></i>
-												</div>
+										
+										
+										@forelse($notificacoes->getNotificacoes() as $notificacao)
+
+										
+											<div class="sl-item">
+												<a href="{{ route('sugestao.mostrar_ticket', ['id' => $notificacao->id_tabela]) }}">
+													<div class="icon bg-green">
+														<i class="zmdi zmdi-flag"></i>
+													</div>
+													<div class="sl-content">
+														<span class="inline-block capitalize-font  pull-left truncate head-notifications">
+															Novo comentário
+														</span>
+														<span class="inline-block font-11  pull-right notifications-time">
+															{{ \Carbon\Carbon::createFromTimeStamp(strtotime($notificacao->updated_at))->diffForHumans() }}
+														</span>
+														<div class="clearfix"></div>
+														<p class="truncate">Your customer subscribed for the basic plan. The customer will pay $25 per month.</p>
+													</div>
+												</a>	
+											</div>
+											<hr class="light-grey-hr ma-0"/>
+
+										@empty
+
+											<div class="sl-item">
 												<div class="sl-content">
 													<span class="inline-block capitalize-font  pull-left truncate head-notifications">
-													New subscription created</span>
-													<span class="inline-block font-11  pull-right notifications-time">2pm</span>
+														Nenhuma notificação
+													</span>
 													<div class="clearfix"></div>
-													<p class="truncate">Your customer subscribed for the basic plan. The customer will pay $25 per month.</p>
 												</div>
-											</a>	
-										</div>
-										<hr class="light-grey-hr ma-0"/>
-										<div class="sl-item">
-											<a href="javascript:void(0)">
-												<div class="icon bg-yellow">
-													<i class="zmdi zmdi-trending-down"></i>
-												</div>
-												<div class="sl-content">
-													<span class="inline-block capitalize-font  pull-left truncate head-notifications txt-warning">Server #2 not responding</span>
-													<span class="inline-block font-11 pull-right notifications-time">1pm</span>
-													<div class="clearfix"></div>
-													<p class="truncate">Some technical error occurred needs to be resolved.</p>
-												</div>
-											</a>	
-										</div>
-										<hr class="light-grey-hr ma-0"/>
-										<div class="sl-item">
-											<a href="javascript:void(0)">
-												<div class="icon bg-blue">
-													<i class="zmdi zmdi-email"></i>
-												</div>
-												<div class="sl-content">
-													<span class="inline-block capitalize-font  pull-left truncate head-notifications">2 new messages</span>
-													<span class="inline-block font-11  pull-right notifications-time">4pm</span>
-													<div class="clearfix"></div>
-													<p class="truncate"> The last payment for your G Suite Basic subscription failed.</p>
-												</div>
-											</a>	
-										</div>
-										<hr class="light-grey-hr ma-0"/>
-										<div class="sl-item">
-											<a href="javascript:void(0)">
-												<div class="sl-avatar">
-													<img class="img-responsive" src="dist/img/avatar.jpg" alt="avatar"/>
-												</div>
-												<div class="sl-content">
-													<span class="inline-block capitalize-font  pull-left truncate head-notifications">Sandy Doe</span>
-													<span class="inline-block font-11  pull-right notifications-time">1pm</span>
-													<div class="clearfix"></div>
-													<p class="truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
-												</div>
-											</a>	
-										</div>
-										<hr class="light-grey-hr ma-0"/>
-										<div class="sl-item">
-											<a href="javascript:void(0)">
-												<div class="icon bg-red">
-													<i class="zmdi zmdi-storage"></i>
-												</div>
-												<div class="sl-content">
-													<span class="inline-block capitalize-font  pull-left truncate head-notifications txt-danger">99% server space occupied.</span>
-													<span class="inline-block font-11  pull-right notifications-time">1pm</span>
-													<div class="clearfix"></div>
-													<p class="truncate">consectetur, adipisci velit.</p>
-												</div>
-											</a>	
-										</div>
+											</div>
+
+										@endforelse
+
 									</div>
 								</li>
 								<li>
@@ -317,10 +293,10 @@
 									</div>
 								</li>
 							</ul>
-						</li> -->
+						</li>
 
 						<li class="dropdown auth-drp">
-							<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="{{ URL::asset('dist/img/avatar/'.Auth::user()->foto) }}" alt="{{ Auth::user()->name }}" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
+							<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="{{ URL::asset('dist/img/avatar/' . Auth::user()->foto) }}" alt="{{ Auth::user()->name }}" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
 							<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
 								
 								<!-- <li>
@@ -351,6 +327,10 @@
 									</ul>	
 								</li>
 								<li class="divider"></li> -->
+
+								<li>
+									<a href="{{ route('usuarios.show', array('usuarios'=>Auth::user()->id,'mo'=>true)) }}"><i class="zmdi zmdi-account"></i><span>Perfil</span></a>
+								</li>
 
 								<li>
 									<a href="{{ action('Auth\AuthController@logout') }}"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
@@ -415,7 +395,7 @@
 					</li>
 						
 						<li>
-							<a class="{{ $page == 'meus_objetivos' ? 'active-page' : '' }}" href="{{ route('objetivos.mine', ['id' => Auth::user()->id]) }}">
+							<a class="{{ $page == 'meus_objetivos' ? 'active-page' : '' }}" href="{{ route('objetivos.index', array('usuarios'=>Auth::user()->id,'mo'=>true)) }}">
 								<div class="pull-left">
 									<i class="zmdi zmdi-assignment-o mr-20"></i><span class="right-nav-text">Meus Objetivos</span>
 								</div>
@@ -459,7 +439,7 @@
 					</li>
 						
 						<li>
-							<a class="{{ $page == 'meu_perfil' ? 'active-page' : '' }}" href="{{ route('usuarios.mine') }}">
+							<a class="{{ $page == 'meu_perfil' ? 'active-page' : '' }}" href="{{ route('usuarios.show', array('usuarios'=>Auth::user()->id,'mo'=>true)) }}">
 								<div class="pull-left">
 									<i class="zmdi zmdi-account mr-20"></i><span class="right-nav-text">Meu Perfil</span>
 								</div>
