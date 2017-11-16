@@ -55,7 +55,7 @@
 													<td>
 														@if($ticket->status == "aberto")
 															<i class="fa fa-circle-o"></i> &nbsp;
-														@elseif($ticket->status == "em andamento")
+														@elseif($ticket->status == "Em andamento")
 															<i class="fa fa-circle text-warning"></i> &nbsp;
 														@else
 															<i class="fa fa-circle text-success"></i> &nbsp;
@@ -67,8 +67,8 @@
 													<td>
 														@if($ticket->status == "aberto")
 															<i class="fa fa-flag-checkered"></i> &nbsp;
-														@elseif($ticket->status == "em andamento")
-															<i class="fa fa-check text-success"></i> &nbsp;
+														@elseif($ticket->status == "Em andamento")
+															<i class="fa fa-check text-warning"></i> &nbsp;
 														@else
 															<i class="fa fa-check-square-o text-success"></i> &nbsp;
 														@endif

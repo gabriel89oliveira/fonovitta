@@ -99,6 +99,8 @@ Route::group(['middleware' => ['auth']], function() {
 	 */
 
 		// Resources para sugestoes
+		Route::delete('sugestoes/iniciar/{id}', ['uses' => 'SugestaoController@iniciar', 'as' => 'sugestao.iniciar']);
+		Route::delete('sugestoes/finalizar/{id}', ['uses' => 'SugestaoController@finalizar', 'as' => 'sugestao.finalizar']);
 		Route::get('sugestoes/cadastrar', ['uses' => 'SugestaoController@create', 'as' => 'sugestao.create']);
 		Route::get('sugestoes/meus_tickets', ['uses' => 'SugestaoController@meus', 'as' => 'sugestao.meus']);
 		Route::get('sugestoes/tickets', ['uses' => 'SugestaoController@tickets', 'as' => 'sugestao.tickets']);

@@ -22,9 +22,13 @@
 							
 							
 							@if($ticket->status == "aberto")
-								<button class="btn btn-default pull-right ml-10"> {{ $ticket->status }} </button>
-							@elseif($ticket->status == "em andamento")
-								<button class="btn btn-warning pull-right ml-10"> {{ $ticket->status }} </button>
+								<button onClick='confirmarIniciar("{{ $ticket->id }}");' class="btn btn-default pull-right ml-10">
+									{{ $ticket->status }}
+								</button>
+							@elseif($ticket->status == "Em andamento")
+								<button onClick='confirmarFinalizar("{{ $ticket->id }}");' class="btn btn-warning pull-right ml-10"> 
+									{{ $ticket->status }} 
+								</button>
 							@else
 								<button class="btn btn-success pull-right ml-10"> {{ $ticket->status }} </button>
 							@endif
@@ -131,4 +135,6 @@
 		
 	</div>
 	
+	@include('sugestoes.js.iniciar')
+
 @endsection

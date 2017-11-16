@@ -135,7 +135,9 @@ class SugestaoController extends Controller
                 'id_tabela'   => $request->id_ticket,
                 'nome_tabela' => 'sugestoes',
                 'status'      => 'Novo',
-                'id_usuario'  => $request->id_usuario
+                'id_usuario'  => $request->id_usuario,
+                'assunto'     => 'Resposta de ticket',
+                'texto'       => $request->comentario
             ]);
 
         }else{
@@ -145,13 +147,65 @@ class SugestaoController extends Controller
                 'id_tabela'   => $request->id_ticket,
                 'nome_tabela' => 'sugestoes',
                 'status'      => 'Novo',
-                'id_usuario'  => '2'
+                'id_usuario'  => '2',
+                'assunto'     => 'Resposta de ticket',
+                'texto'       => $request->comentario
             ]);
 
         }
 
         // Retorna página de objetivos
-        return redirect()->action('SugestaoController@tickets');
+        // return redirect()->action('SugestaoController@tickets');
+        return route('sugestao.mostrar_ticket', ['id' => $request->id_ticket]);
+        
+    }
+
+
+    /**
+     * Iniciar um ticket.
+     *
+     */
+    public function iniciar($id)
+    {
+        
+        // Inicia ticket da tabela de sugestões
+        DB::table('sugestoes')->where('id', $id)->update(['status' => 'Em andamento']);
+        
+        // Retorna resposta para AJAX
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+        
+    }
+
+    /**
+     * Finalizar um ticket.
+     *
+     */
+    public function finalizar($id)
+    {
+        
+        // Finaliza ticket da tabela de sugestões
+        DB::table('sugestoes')->where('id', $id)->update(['status' => 'Finalizado']);
+
+        // Recupera id do usuario que abriu o ticket
+        $ticket = DB::table('sugestoes')->where('id', $id)->first();
+
+        // Notifica conclusão para usuário que abriu o ticket.
+        $notificacao = DB::table('notificacao')->insertGetId([
+            'id_tabela'   => $id,
+            'nome_tabela' => 'sugestoes',
+            'status'      => 'Novo',
+            'id_usuario'  => $ticket->id_usuario,
+            'assunto'     => 'Ticket finalizado',
+            'texto'       => 'Seu ticket foi finalizado com sucesso!'
+        ]);
+        
+
+        // Retorna resposta para AJAX
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
         
     }
 

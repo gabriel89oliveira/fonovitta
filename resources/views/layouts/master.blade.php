@@ -258,13 +258,13 @@
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font  pull-left truncate head-notifications">
-															Novo comentário
+															{{ $notificacao->assunto }}
 														</span>
 														<span class="inline-block font-11  pull-right notifications-time">
 															{{ \Carbon\Carbon::createFromTimeStamp(strtotime($notificacao->updated_at))->diffForHumans() }}
 														</span>
 														<div class="clearfix"></div>
-														<p class="truncate">Your customer subscribed for the basic plan. The customer will pay $25 per month.</p>
+														<p class="truncate">{{ $notificacao->texto }}</p>
 													</div>
 												</a>	
 											</div>
@@ -287,8 +287,6 @@
 								</li>
 								<li>
 									<div class="notification-box-bottom-wrap">
-										<hr class="light-grey-hr ma-0"/>
-										<a class="block text-center read-all" href="javascript:void(0)"> read all </a>
 										<div class="clearfix"></div>
 									</div>
 								</li>
