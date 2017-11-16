@@ -71,6 +71,10 @@ class ComposerStaticInit6d8516109d3c3b7b06e3aa40d4bbdf83
         array (
             'Khill\\Lavacharts\\' => 17,
         ),
+        'J' => 
+        array (
+            'Jenssegers\\Date\\' => 16,
+        ),
         'I' => 
         array (
             'Illuminate\\' => 11,
@@ -208,6 +212,10 @@ class ComposerStaticInit6d8516109d3c3b7b06e3aa40d4bbdf83
         array (
             0 => __DIR__ . '/..' . '/khill/lavacharts/src',
         ),
+        'Jenssegers\\Date\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jenssegers/date/src',
+        ),
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
@@ -326,6 +334,7 @@ class ComposerStaticInit6d8516109d3c3b7b06e3aa40d4bbdf83
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Request' => __DIR__ . '/../..' . '/app/Http/Requests/Request.php',
         'App\\Jobs\\Job' => __DIR__ . '/../..' . '/app/Jobs/Job.php',
+        'App\\Notificacoes' => __DIR__ . '/../..' . '/app/Notificacoes.php',
         'App\\Objetivo' => __DIR__ . '/../..' . '/app/Objetivo.php',
         'App\\Paciente' => __DIR__ . '/../..' . '/app/Paciente.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -1455,6 +1464,8 @@ class ComposerStaticInit6d8516109d3c3b7b06e3aa40d4bbdf83
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'Jenssegers\\Date\\Date' => __DIR__ . '/..' . '/jenssegers/date/src/Date.php',
+        'Jenssegers\\Date\\DateServiceProvider' => __DIR__ . '/..' . '/jenssegers/date/src/DateServiceProvider.php',
         'Khill\\Lavacharts\\Charts\\AreaChart' => __DIR__ . '/..' . '/khill/lavacharts/src/Charts/AreaChart.php',
         'Khill\\Lavacharts\\Charts\\BarChart' => __DIR__ . '/..' . '/khill/lavacharts/src/Charts/BarChart.php',
         'Khill\\Lavacharts\\Charts\\CalendarChart' => __DIR__ . '/..' . '/khill/lavacharts/src/Charts/CalendarChart.php',

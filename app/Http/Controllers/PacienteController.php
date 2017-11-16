@@ -12,6 +12,7 @@ use App\Usuario;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;

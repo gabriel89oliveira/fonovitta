@@ -253,6 +253,7 @@
 											'Evolução de consistência' 	  	=> 'Evolução de consistência', 
 											'Regressão de consistência' 	=> 'Regressão de consistência', 
 											'Uso de espessante' 	        => 'Uso de espessante', 
+											'Manter SNE'					=> 'Manter SNE',
 											'Gerenciamento' 	            => 'Gerenciamento'
 										], $terapia->conduta, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>

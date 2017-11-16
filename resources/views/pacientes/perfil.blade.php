@@ -321,7 +321,9 @@
 
 													</span>
 
-													<span class="block txt-grey font-12 capitalize-font">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($terapia_i->created_at))->diffForHumans() }}</span>
+													<span class="block txt-grey font-12 capitalize-font">
+														{{ Date::createFromTimeStamp(strtotime($terapia_i->created_at))->format('l, j F Y') }}
+													</span>
 													
 												</div>
 											</a>

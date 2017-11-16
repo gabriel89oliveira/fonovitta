@@ -136,5 +136,6 @@
 	</div>
 	
 	@include('sugestoes.js.iniciar')
+	@include('sugestoes.js.finalizar')
 
 @endsection

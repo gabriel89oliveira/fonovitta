@@ -10,7 +10,8 @@
         "spatie/laravel-permission": "^1.4",
         "laravelcollective/html": "^5.2",
         "khill/lavacharts" : "3.0.*",
-        "rap2hpoutre/laravel-log-viewer": "^0.10.4"
+        "rap2hpoutre/laravel-log-viewer": "^0.10.4",
+        "jenssegers/date": "^3.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

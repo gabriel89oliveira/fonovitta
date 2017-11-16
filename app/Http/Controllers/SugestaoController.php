@@ -155,9 +155,10 @@ class SugestaoController extends Controller
         }
 
         // Retorna página de objetivos
-        // return redirect()->action('SugestaoController@tickets');
-        return route('sugestao.mostrar_ticket', ['id' => $request->id_ticket]);
-        
+        return redirect()->action(
+            'SugestaoController@mostrar_ticket', ['id' => $request->id_ticket]
+        );
+
     }
 
 
