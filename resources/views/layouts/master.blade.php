@@ -395,7 +395,7 @@
 					</li>
 						
 						<li>
-							<a class="{{ $page == 'meus_objetivos' ? 'active-page' : '' }}" href="{{ route('objetivos.index', array('usuarios'=>Auth::user()->id,'mo'=>true)) }}">
+							<a class="{{ $page == 'meus_objetivos' ? 'active-page' : '' }}" href="{{ route('objetivos.index', array('usuario'=>Auth::user()->id,'mo'=>true)) }}">
 								<div class="pull-left">
 									<i class="zmdi zmdi-assignment-o mr-20"></i><span class="right-nav-text">Meus Objetivos</span>
 								</div>
