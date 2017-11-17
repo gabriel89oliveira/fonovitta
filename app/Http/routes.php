@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 		// Resources para altas
 		Route::delete('pacientes/alta/{id}', ['uses' => 'AltaController@alta', 'as' => 'pacientes.alta']);
+		Route::delete('pacientes/altahospitalar/{id}', ['uses' => 'AltaController@altahospitalar', 'as' => 'pacientes.altahospitalar']);
 		Route::delete('pacientes/suspensao/{id}', ['uses' => 'AltaController@suspensao', 'as' => 'pacientes.suspensao']);
 		Route::delete('pacientes/obito/{id}', ['uses' => 'AltaController@obito', 'as' => 'pacientes.obito']);
 	

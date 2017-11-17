@@ -77,6 +77,7 @@
 											'ITU'									=> 'ITU',
 											'Náuseas'								=> 'Náuseas',
 											'Parkinson' 							=> 'Parkinson', 
+											'Pneumonia'								=> 'Pneumonia',
 											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
 											'TCE'									=> 'TCE',
@@ -111,7 +112,8 @@
 											'Insuficiência renal aguda'				=> 'Insuficiência Renal Aguda',
 											'ITU'									=> 'ITU',
 											'Náuseas'								=> 'Náuseas',
-											'Parkinson' 							=> 'Parkinson', 
+											'Parkinson' 							=> 'Parkinson',
+											'Pneumonia'								=> 'Pneumonia', 
 											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
 											'TCE'									=> 'TCE',
@@ -147,6 +149,7 @@
 											'ITU'									=> 'ITU',
 											'Náuseas'								=> 'Náuseas',
 											'Parkinson' 							=> 'Parkinson', 
+											'Pneumonia'								=> 'Pneumonia',
 											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
 											'TCE'									=> 'TCE',
@@ -163,7 +166,8 @@
 											'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
 											'Branda'                => 'Branda', 
 											'Geral'                 => 'Geral', 
-											'Suspenso'              => 'Suspenso'
+											'Suspenso'              => 'Suspenso',
+											'Jejum'					=> 'Jejum'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
@@ -174,7 +178,8 @@
 											'Líquido néctar' 	=> 'Líquido néctar',
 											'Líquido mel'     	=> 'Líquido mel',
 											'Líquido pudim'   	=> 'Líquido pudim',
-											'Suspenso'         	=> 'Suspenso'
+											'Suspenso'         	=> 'Suspenso',
+											'Jejum'				=> 'Jejum'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
@@ -310,7 +315,8 @@
 											'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
 											'Branda'                => 'Branda', 
 											'Geral'                 => 'Geral', 
-											'Suspenso'              => 'Suspenso'
+											'Suspenso'              => 'Suspenso',
+											'Jejum'					=> 'Jejum'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
@@ -321,7 +327,8 @@
 											'Líquido néctar' 	=> 'Líquido néctar',
 											'Líquido mel'     	=> 'Líquido mel',
 											'Líquido pudim'   	=> 'Líquido pudim',
-											'Suspenso'         	=> 'Suspenso'
+											'Suspenso'         	=> 'Suspenso',
+											'Jejum'				=> 'Jejum'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 									

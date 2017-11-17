@@ -71,6 +71,7 @@
 									<li class="divider"></li>
 									
 									<li><a href="#" onClick='confirmarAlta("{{ $paciente->id }}");'>Alta fonoaudiológica</a></li>
+									<li><a href="#" onClick='confirmarAltaHospitalar("{{ $paciente->id }}");'>Alta hospitalar</a></li>
 									<li><a href="#" onClick='confirmarSuspensao("{{ $paciente->id }}");'>Suspensão do atendimento</a></li>
 									<li><a href="#" onClick='confirmarObito("{{ $paciente->id }}");'>Óbito</a></li>
 								@endif
@@ -322,7 +323,7 @@
 													</span>
 
 													<span class="block txt-grey font-12 capitalize-font">
-														{{ Date::createFromTimeStamp(strtotime($terapia_i->created_at))->format('l, j F Y') }}
+														{{ Date::createFromTimeStamp(strtotime($terapia_i->data))->format('l, j F Y') }}
 													</span>
 													
 												</div>

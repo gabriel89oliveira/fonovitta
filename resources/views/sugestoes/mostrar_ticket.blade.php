@@ -22,11 +22,11 @@
 							
 							
 							@if($ticket->status == "aberto")
-								<button onClick='confirmarIniciar("{{ $ticket->id }}");' class="btn btn-default pull-right ml-10">
+								<button @role('Admin') onClick='confirmarIniciar("{{ $ticket->id }}");' @endrole class="btn btn-default pull-right ml-10">
 									{{ $ticket->status }}
 								</button>
 							@elseif($ticket->status == "Em andamento")
-								<button onClick='confirmarFinalizar("{{ $ticket->id }}");' class="btn btn-warning pull-right ml-10"> 
+								<button @role('Admin') onClick='confirmarFinalizar("{{ $ticket->id }}");' @endrole class="btn btn-warning pull-right ml-10"> 
 									{{ $ticket->status }} 
 								</button>
 							@else

@@ -75,6 +75,56 @@ class AltaController extends Controller
 		
 	}
 
+
+	/**
+     * Alta hospitalar.
+     *
+     */
+	public function altahospitalar($id)
+	{
+		
+		// Busca dados de atendimento de fono
+		$Paciente = DB::table('fonos')
+			->where('id_paciente', '=', $id)
+			->first();
+		
+		// Salva dados no historico de atendimentos de fono
+		$Historico = DB::table('historico_fonos')->insertGetId([
+			'id_paciente'      => $Paciente->id_paciente,
+			'id_responsavel'   => $Paciente->id_responsavel,
+			'id_fonos'		   => $Paciente->id,
+			'data_inicio'      => $Paciente->data_inicio,
+			'data_termino'     => Carbon::now(),
+			'alta'             => 'Alta hospitalar',
+			'frequencia'       => $Paciente->frequencia,
+			'dieta_inicial'    => $Paciente->dieta_inicial,
+			'liquido_inicial'  => $Paciente->liquido_inicial,
+			'motivo_avaliacao' => $Paciente->motivo_avaliacao,
+			'comentario'       => $Paciente->comentario,
+			'local'	          => $Paciente->local,
+			'diagnostico_1'	   => $Paciente->diagnostico_1,
+			'diagnostico_2'	   => $Paciente->diagnostico_2,
+			'diagnostico_3'	   => $Paciente->diagnostico_3,
+			'updated_by'       => Auth::user()->id
+		]);
+		
+		// Remove atendimento de fono para paciente
+		DB::table('pacientes')
+			->where('id', '=', $id)
+			->update(['fon' => 0]);
+		
+		// Exclui paciente dos atendimentos de fono
+		DB::table('fonos')
+			->where('id_paciente', '=', $id)
+			->delete();
+		
+		// Retorna resposta para AJAX
+		return response()->json([
+			'success' => 'Record has been deleted successfully!'
+		]);
+		
+	}
+
 	
 	/**
      * Suspensão do atendimento.

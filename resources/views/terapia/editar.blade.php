@@ -268,7 +268,8 @@
 											'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
 											'Branda'                => 'Branda', 
 											'Geral'                 => 'Geral', 
-											'Suspenso'              => 'Suspenso'
+											'Suspenso'              => 'Suspenso',
+											'Jejum'					=> 'Jejum'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 									
@@ -280,7 +281,8 @@
 											'Líquido néctar' 	=> 'Líquido néctar',
 											'Líquido mel'     	=> 'Líquido mel',
 											'Líquido pudim'   	=> 'Líquido pudim',
-											'Suspenso'         	=> 'Suspenso'
+											'Suspenso'         	=> 'Suspenso',
+											'Jejum'				=> 'Jejum'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
