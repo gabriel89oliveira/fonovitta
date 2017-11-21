@@ -68,7 +68,10 @@ class SugestaoController extends Controller
     public function tickets()
     {
         
-        $tickets = DB::table('sugestoes')->orderBy('status', 'asc')->paginate(15);
+        $tickets = DB::table('sugestoes')
+                    ->orderBy('status', 'asc')
+                    ->orderBy('id', 'asc')
+                    ->paginate(10);
 
         // Retorna página para ver sugestao
 		return view('sugestoes/tickets', ['tickets' => $tickets])->with(["page" => "tickets"]);
