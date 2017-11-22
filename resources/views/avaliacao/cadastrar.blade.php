@@ -28,13 +28,26 @@
 									<div class="row">
 										
 										<div class="col-sm-6">
-											<div class="checkbox checkbox-primary">
-												{{ Form::checkbox('prescricao', 'Sim') }}
-												{{ Form::label('prescricao', 'Houve prescrição médica') }}
+											<div class="form-group">
+												{{ Form::label('prescricao', 'Houve prescrição médica?') }}
+												{{ Form::select('prescricao', [
+														'Sim' 				=> 'Sim', 
+														'Não' 				=> 'Não'
+													], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 											</div>
-											<div class="checkbox checkbox-primary">
-												{{ Form::checkbox('paliativo', 'Sim') }}
-												{{ Form::label('paliativo', 'Paciente em cuidados paliativos') }}
+										</div>
+
+										<div class="col-sm-6">
+											<div class="form-group">
+												{{ Form::label('equipe_prescricao', 'Qual equipe (não) prescreveu?') }}
+												{{ Form::select('equipe_prescricao', [
+														'Clínica médica' 	=> 'Clínica médica', 
+														'UTI' 				=> 'UTI', 
+														'UCO' 	    		=> 'UCO',
+														'Nefrologia' 		=> 'Nefrologia',
+														'Neurologia' 		=> 'Neurologia',
+														'Pronto-Socorro' 	=> 'Pronto-Socorro'
+													], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 											</div>
 										</div>
 
@@ -42,6 +55,13 @@
 											<div class="form-group">
 												{{ Form::label('numero_atendimento', 'Número do atendimento') }}
 												{{ Form::text('numero_atendimento', null, ['class' => 'form-control']) }}
+											</div>
+										</div>
+										
+										<div class="col-sm-6 mt-15">
+											<div class="checkbox checkbox-primary">
+												{{ Form::checkbox('paliativo', 'Sim') }}
+												{{ Form::label('paliativo', 'Paciente em cuidados paliativos') }}
 											</div>
 										</div>
 

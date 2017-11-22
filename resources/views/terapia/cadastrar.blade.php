@@ -67,10 +67,26 @@
 								<div class="form-group">
 									
 									<div class="row">
-										<div class="col-sm-6">
-											<div class="checkbox checkbox-primary">
-												{{ Form::checkbox('prescricao', 'Sim') }}
-												{{ Form::label('prescricao', 'Houve prescrição médica') }}
+										<div class="col-sm-4">
+											<div class="form-group">
+												{{ Form::label('prescricao', 'Houve prescrição médica?') }}
+												{{ Form::select('prescricao', [
+														'Sim' 				=> 'Sim', 
+														'Não' 				=> 'Não'
+													], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+											</div>
+										</div>
+										<div class="col-sm-8">
+											<div class="form-group">
+												{{ Form::label('equipe_prescricao', 'Qual equipe (não) prescreveu?') }}
+												{{ Form::select('equipe_prescricao', [
+														'Clínica médica' 	=> 'Clínica médica', 
+														'UTI' 				=> 'UTI', 
+														'UCO' 	    		=> 'UCO',
+														'Nefrologia' 		=> 'Nefrologia',
+														'Neurologia' 		=> 'Neurologia',
+														'Pronto-Socorro' 	=> 'Pronto-Socorro'
+													], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 											</div>
 										</div>
 									</div>
@@ -256,8 +272,27 @@
 		{!! Form::close() !!}
 		
 	</div>
-	
+
 @endsection
 
 
+@section('scripts')
 
+	<script>
+	    
+		$('#prescricao').on('change', function (e) {
+
+		    if(this.value == 'Não'){
+	        	$('#equipe_prescricao').show();
+	    		$('label[for=equipe_prescricao], input#equipe_prescricao').show();
+	    	}else{
+	    		$('#equipe_prescricao').hide();
+	    		$('label[for=equipe_prescricao], input#equipe_prescricao').hide();
+	    	}
+
+		});
+
+
+	</script>
+
+@endsection

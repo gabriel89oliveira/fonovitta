@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function() {
 		Route::resource('avaliacao', 'AvaliacaoController');
 		// Resources para frequencia
 		Route::resource('frequencia', 'FrequenciaController');
+		// Resources para riscos
+		Route::resource('riscos', 'RiscosController');
 		// Resources para responsavel
 		Route::resource('responsavel', 'ResponsavelController');
 	

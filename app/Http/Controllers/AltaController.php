@@ -68,6 +68,11 @@ class AltaController extends Controller
 			->where('id_paciente', '=', $id)
 			->delete();
 
+		// Exclui objetivo para paciente
+		DB::table('objetivos')
+			->where('id_paciente', '=', $id)
+			->delete();
+
 		// Retorna resposta para AJAX
 		return response()->json([
 			'success' => 'Record has been deleted successfully!'
@@ -118,6 +123,11 @@ class AltaController extends Controller
 			->where('id_paciente', '=', $id)
 			->delete();
 		
+		// Exclui objetivo para paciente
+		DB::table('objetivos')
+			->where('id_paciente', '=', $id)
+			->delete();
+
 		// Retorna resposta para AJAX
 		return response()->json([
 			'success' => 'Record has been deleted successfully!'
@@ -168,6 +178,11 @@ class AltaController extends Controller
 			->where('id_paciente', '=', $id)
 			->delete();
 		
+		// Exclui objetivo para paciente
+		DB::table('objetivos')
+			->where('id_paciente', '=', $id)
+			->delete();
+
 		// Retorna resposta para AJAX
 		return response()->json([
 			'success' => 'Record has been deleted successfully!'
@@ -221,6 +236,11 @@ class AltaController extends Controller
 			->where('id_paciente', '=', $id)
 			->delete();
 		
+		// Exclui objetivo para paciente
+		DB::table('objetivos')
+			->where('id_paciente', '=', $id)
+			->delete();
+			
 		// Retorna resposta para AJAX
 		return response()->json([
 			'success' => 'Record has been deleted successfully!'

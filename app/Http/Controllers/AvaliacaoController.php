@@ -75,8 +75,7 @@ class AvaliacaoController extends Controller
 				'conduta'			=> 'required'
 			]);
 			
-			$paliativo	= !empty($request->input('paliativo')) 	? $request->input('paliativo') 	: 'Não';
-			$prescricao	= !empty($request->input('prescricao')) ? $request->input('prescricao') : 'Não';
+			$paliativo	= !empty($request->input('paliativo')) 	? $request->input('paliativo') 	: 'N';
 
 			// Dados adicionais da terapia
 			$adicional[1] = $request->input('adicional_1');
@@ -146,8 +145,16 @@ class AvaliacaoController extends Controller
 				'comentario'           => $request->comentario,
 				'aval_dieta'           => $request->dieta,
 				'aval_liquido'         => $request->liquido,
-				'prescricao'		   => $prescricao,
+				'prescricao'		   => $request->prescricao,
 				'data'				   => date("Y-m-d")
+			]);
+
+			// Cadastra prescrição
+			DB::table('prescricao')->insert([
+				'id_terapia'  => $id_insert,
+				'prescricao'  => $request->prescricao,
+				'equipe'	  => $request->equipe_prescricao,
+				'updated_by'  => Auth::user()->id
 			]);
 				
 				// Histórico

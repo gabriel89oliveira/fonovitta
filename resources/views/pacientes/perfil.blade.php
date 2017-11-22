@@ -355,6 +355,9 @@
 
 		<!-- /.Frequencia -->
 		@include('pacientes.modal.frequencia')
+
+		<!-- /.Risco -->
+		@include('pacientes.modal.risco')
 			
 		<!-- /.Responsável -->
 		@include('pacientes.modal.responsavel')

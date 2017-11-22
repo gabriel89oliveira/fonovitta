@@ -125,7 +125,6 @@ class TerapiaController extends Controller
 			
 			$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 'Sim';
 			$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 'Sim';
-			$prescricao		  = !empty($request->input('prescricao')) 		? $request->input('prescricao') 	: 'Não';
 			
 			
 			/* ----- INSERIR OS DADOS NAS TABELAS ----- */
@@ -143,7 +142,7 @@ class TerapiaController extends Controller
 				'comentario'           			=> $request->comentario,
 				'aval_dieta'           			=> $acomp_refeicao,
 				'aval_liquido'         			=> $acomp_liquido,
-				'prescricao'					=> $prescricao,
+				'prescricao'					=> $request->prescricao,
 				'dieta_anterior'				=> $request->dieta_anterior,
 				'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
 				'treino_anterior'				=> $request->treino_anterior,
@@ -151,6 +150,14 @@ class TerapiaController extends Controller
 				'data'				   			=> $request->data_terapia
 			]);
 				
+			// Cadastra prescrição
+			DB::table('prescricao')->insert([
+				'id_terapia'  => $id_insert,
+				'prescricao'  => $request->prescricao,
+				'equipe'	  => $request->equipe_prescricao,
+				'updated_by'  => Auth::user()->id
+			]);
+
 				// Histórico
 				DB::table('historicos')->insert([
 					'tabela'         => 'terapia',
@@ -240,7 +247,8 @@ class TerapiaController extends Controller
 		$terapia = DB::table('terapias')->where('id', $id)->first();
 		$paciente = DB::table('pacientes')->where('id', $terapia->id_paciente)->first();
 		$historico_dietas = DB::table('historico_dietas')->where('id_terapias', $terapia->id)->orderBy('id', 'desc')->first();
-		
+		$prescricao = DB::table('prescricao')->where('id_terapia', $terapia->id)->first();
+
 		
 		// Acesso para editar todos pacientes
 		if (!Auth::user()->hasPermissionTo('Terapia_Editar_Todos')){
@@ -268,7 +276,7 @@ class TerapiaController extends Controller
 			
 		}
 
-		return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente, 'historico_dietas' => $historico_dietas])->with(["page" => ""]);
+		return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente, 'prescricao' => $prescricao, 'historico_dietas' => $historico_dietas])->with(["page" => ""]);
 		
     }
 
@@ -324,7 +332,6 @@ class TerapiaController extends Controller
 		
 		$acomp_liquido    = !empty($request->input('acomp_liquido')) 	? $request->input('acomp_liquido') 	: 'Sim';
 		$acomp_refeicao   = !empty($request->input('acomp_refeicao')) 	? $request->input('acomp_refeicao') : 'Sim';
-		$prescricao		  = !empty($request->input('prescricao')) 		? $request->input('prescricao') 	: 'Não';
 		
 		DB::table('terapias')
             ->where('id', $id)
@@ -336,7 +343,7 @@ class TerapiaController extends Controller
 				'comentario'           			=> $request->comentario,
 				'aval_dieta'           			=> $acomp_refeicao,
 				'aval_liquido'         			=> $acomp_liquido,
-				'prescricao'					=> $prescricao,
+				'prescricao'					=> $request->prescricao,
 				'dieta_anterior'				=> $request->dieta_anterior,
 				'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
 				'treino_anterior'				=> $request->treino_anterior,
@@ -344,6 +351,15 @@ class TerapiaController extends Controller
 				'data'				   			=> $request->data_terapia
 			]);
 			
+		// Atualiza prescrição
+		DB::table('prescricao')
+			->where('id_terapia', $id)
+			->update([
+			'prescricao'  => $request->prescricao,
+			'equipe'	  => $request->equipe_prescricao,
+			'updated_by'  => Auth::user()->id
+			]);
+
 			// Histórico
 			DB::table('historicos')->insert([
 				'tabela'         => 'terapia',
@@ -515,9 +531,15 @@ class TerapiaController extends Controller
         
         // Excluir item da tabela de objetivos
         Terapia::destroy($id);
+
         DB::table('historico_dietas')
         	->where('id_terapias', $id)
         	->delete();
+
+        DB::table('prescricao')
+        	->where('id_terapia', $id)
+        	->delete();
+
         
         // Retorna resposta para AJAX
         return response()->json([

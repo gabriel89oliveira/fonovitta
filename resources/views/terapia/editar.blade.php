@@ -68,21 +68,54 @@
 								<div class="form-group">
 									
 									<div class="row">
-										
-										<div class="col-sm-6">
-											<div class="checkbox checkbox-primary">
-												@if(strpos($terapia->prescricao, 'Sim') !== false)
-													{{ Form::checkbox('prescricao', 'Sim', true) }}
-													{{ Form::label('prescricao', 'Houve prescrição médica') }}
+										<div class="col-sm-4">
+											<div class="form-group">
+
+												{{ Form::label('prescricao', 'Houve prescrição médica?') }}
+
+												@if(!empty($prescricao->prescricao))
+													{{ Form::select('prescricao', [
+															'Sim' 				=> 'Sim', 
+															'Não' 				=> 'Não'
+														], $prescricao->prescricao, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 												@else
-													{{ Form::checkbox('prescricao', 'Sim') }}
-													{{ Form::label('prescricao', 'Houve prescrição médica') }}
+													{{ Form::select('prescricao', [
+															'Sim' 				=> 'Sim', 
+															'Não' 				=> 'Não'
+														], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+												@endif
+
+											</div>
+										</div>
+										<div class="col-sm-8">
+											<div class="form-group">
+												{{ Form::label('equipe_prescricao', 'Qual equipe (não) prescreveu?') }}
+
+												@if(!empty($prescricao->equipe))
+													{{ Form::select('equipe_prescricao', [
+															'Clínica médica' 	=> 'Clínica médica', 
+															'UTI' 				=> 'UTI', 
+															'UCO' 	    		=> 'UCO',
+															'Nefrologia' 		=> 'Nefrologia',
+															'Neurologia' 		=> 'Neurologia',
+															'Pronto-Socorro' 	=> 'Pronto-Socorro'
+														], $prescricao->equipe, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+												@else
+													{{ Form::select('equipe_prescricao', [
+															'Clínica médica' 	=> 'Clínica médica', 
+															'UTI' 				=> 'UTI', 
+															'UCO' 	    		=> 'UCO',
+															'Nefrologia' 		=> 'Nefrologia',
+															'Neurologia' 		=> 'Neurologia',
+															'Pronto-Socorro' 	=> 'Pronto-Socorro'
+														], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 												@endif
 											</div>
 										</div>
 									</div>
 									
 								</div>
+								
 
 								<div class="row">
 									<div class="col-sm-8">
@@ -260,30 +293,60 @@
 								
 								<div class="form-group">
 									{{ Form::label('dieta', 'Consistência da dieta') }}
-									{{ Form::select('dieta', [
-											'Mantida' 	            => 'Mantida', 
-											'Líquida'				=> 'Líquida',
-											'Pastosa heterogênea'   => 'Pastosa heterogênea', 
-											'Pastosa homogênea'     => 'Pastosa homogênea (papa ou leve batida)', 
-											'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
-											'Branda'                => 'Branda', 
-											'Geral'                 => 'Geral', 
-											'Suspenso'              => 'Suspenso',
-											'Jejum'					=> 'Jejum'
-										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+
+									@if(!empty($historico_dietas->dieta))
+										{{ Form::select('dieta', [
+												'Mantida' 	            => 'Mantida', 
+												'Líquida'				=> 'Líquida',
+												'Pastosa heterogênea'   => 'Pastosa heterogênea', 
+												'Pastosa homogênea'     => 'Pastosa homogênea (papa ou leve batida)', 
+												'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
+												'Branda'                => 'Branda', 
+												'Geral'                 => 'Geral', 
+												'Suspenso'              => 'Suspenso',
+												'Jejum'					=> 'Jejum'
+											], $historico_dietas->dieta, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									@else
+										{{ Form::select('dieta', [
+												'Mantida' 	            => 'Mantida', 
+												'Líquida'				=> 'Líquida',
+												'Pastosa heterogênea'   => 'Pastosa heterogênea', 
+												'Pastosa homogênea'     => 'Pastosa homogênea (papa ou leve batida)', 
+												'Pastosa (semissólida)' => 'Pastosa (semissólida)', 
+												'Branda'                => 'Branda', 
+												'Geral'                 => 'Geral', 
+												'Suspenso'              => 'Suspenso',
+												'Jejum'					=> 'Jejum'
+											], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									@endif
+
 								</div>
 									
 								<div class="form-group">
 									{{ Form::label('liquido', 'Consistência de líquidos') }}
-									{{ Form::select('liquido', [
-											'Mantida' 	        => 'Mantida', 
-											'Líquido fino'    	=> 'Líquido fino', 
-											'Líquido néctar' 	=> 'Líquido néctar',
-											'Líquido mel'     	=> 'Líquido mel',
-											'Líquido pudim'   	=> 'Líquido pudim',
-											'Suspenso'         	=> 'Suspenso',
-											'Jejum'				=> 'Jejum'
-										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+
+									@if(!empty($historico_dietas->liquido))
+										{{ Form::select('liquido', [
+												'Mantida' 	        => 'Mantida', 
+												'Líquido fino'    	=> 'Líquido fino', 
+												'Líquido néctar' 	=> 'Líquido néctar',
+												'Líquido mel'     	=> 'Líquido mel',
+												'Líquido pudim'   	=> 'Líquido pudim',
+												'Suspenso'         	=> 'Suspenso',
+												'Jejum'				=> 'Jejum'
+											], $historico_dietas->liquido, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									@else
+										{{ Form::select('liquido', [
+												'Mantida' 	        => 'Mantida', 
+												'Líquido fino'    	=> 'Líquido fino', 
+												'Líquido néctar' 	=> 'Líquido néctar',
+												'Líquido mel'     	=> 'Líquido mel',
+												'Líquido pudim'   	=> 'Líquido pudim',
+												'Suspenso'         	=> 'Suspenso',
+												'Jejum'				=> 'Jejum'
+											], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									@endif
+
 								</div>
 								
 								<div class="form-group">
