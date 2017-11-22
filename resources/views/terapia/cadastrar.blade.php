@@ -278,7 +278,7 @@
 
 @section('scripts')
 
-	<script>
+<!-- 	<script>
 	    
 		$('#prescricao').on('change', function (e) {
 
@@ -293,6 +293,6 @@
 		});
 
 
-	</script>
+	</script> -->
 
 @endsection
