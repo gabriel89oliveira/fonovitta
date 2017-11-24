@@ -168,18 +168,29 @@ class PacienteEstatisticaController extends Controller
 			 * Busca atendimentos
 			 *
 			 */
-			$qnt_terapia = DB::table('terapias')
-					->whereRaw('extract(month from created_at) = ?', [$periodo_mes])
-					->whereRaw('extract(year from created_at) = ?', [$periodo_ano]);
+			$qnt_terapia_1 = DB::table('terapias')
+					->join('fonos', 'terapias.id_fonos', '=', 'fonos.id')
+					->whereRaw('extract(month from terapias.created_at) = ?', [$periodo_mes])
+					->whereRaw('extract(year from terapias.created_at) = ?', [$periodo_ano]);
+
+			$qnt_terapia_2 = DB::table('terapias')
+					->join('historico_fonos', 'terapias.id_fonos', '=', 'historico_fonos.id_fonos')
+					->where('terapias.id_fonos', '!=', '0')
+					->whereRaw('extract(month from terapias.created_at) = ?', [$periodo_mes])
+					->whereRaw('extract(year from terapias.created_at) = ?', [$periodo_ano]);
 
 				// Caso exista um tipo definido
-				// $qnt_terapia = ($request->tipo) ? $qnt_terapia->where('local', $request->tipo) : $qnt_terapia ;
+				$qnt_terapia_1 = ($request->tipo) ? $qnt_terapia_1->where('fonos.local', $request->tipo) : $qnt_terapia_1 ;
+				$qnt_terapia_2 = ($request->tipo) ? $qnt_terapia_2->where('historico_fonos.local', $request->tipo) : $qnt_terapia_2 ;
 
 				// Caso exista um usuario definido
-				$qnt_terapia = ($request->usuario) ? $qnt_terapia->where('id_usuario', $request->usuario) : $qnt_terapia ;
+				$qnt_terapia_1 = ($request->usuario) ? $qnt_terapia_1->where('terapias.id_usuario', $request->usuario) : $qnt_terapia_1 ;
+				$qnt_terapia_2 = ($request->usuario) ? $qnt_terapia_2->where('terapias.id_usuario', $request->usuario) : $qnt_terapia_2 ;
 				
 				// Contar
-				$total = $qnt_terapia->count();
+				$total_1 = $qnt_terapia_1->count();
+				$total_2 = $qnt_terapia_2->count();
+				$total = $total_1 + $total_2;
 
 			$tabela_atendimentos->addRow([
 		      $periodo_ano . '-' . $periodo_mes, $total

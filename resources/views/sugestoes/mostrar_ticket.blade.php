@@ -89,7 +89,7 @@
 													</div>
 													<div class="timeline-body">
 														<h4 class="mb-5"> {{ $comentario->nome }} </h4>
-														<p> {{ $comentario->comentario }} </p>
+														<p> {!! nl2br(e($comentario->comentario)) !!} </p>
 													</div>
 												</div>
 											</li>
@@ -108,7 +108,7 @@
 													</div>
 													<div class="timeline-body">
 														<h4 class="mb-5"> {{ $comentario->nome }} </h4>
-														<p> {{ $comentario->comentario }} </p>
+														<p> {!! nl2br(e($comentario->comentario)) !!} </p>
 													</div>
 												</div>
 											</li>

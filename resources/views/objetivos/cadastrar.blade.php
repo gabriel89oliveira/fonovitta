@@ -36,7 +36,14 @@
 											'Iniciar treino via oral' 				=> 'Iniciar treino via oral',
 											'Liberar treino via oral' 				=> 'Liberar treino via oral',
 											'Liberar dieta' 						=> 'Liberar dieta',
-											'Alta fonoaudiologica' 					=> 'Alta fonoaudiologica'
+											'Alta fonoaudiologica' 					=> 'Alta fonoaudiologica',
+											'Iniciar treino VO com pastoso'			=> 'Iniciar treino VO com pastoso',
+											'Iniciar treino VO com semissólido'		=> 'Iniciar treino VO com semissólido',
+											'Liberar treino VO com pastoso'			=> 'Liberar treino VO com pastoso',
+											'Liberar treino VO com semissólido'		=> 'Liberar treino VO com semissólido',
+											'Manter VO por prazer'					=> 'Manter VO por prazer',
+											'Diminuição de espessante'				=> 'Diminuição de espessante',
+											'Retirada de espessante'				=> 'Retirada de espessante'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 								
