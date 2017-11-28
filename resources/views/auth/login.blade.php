@@ -28,7 +28,6 @@
 
 			<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
 				<label for="password" class="control-label mb-10">Senha</label>
-				<a class="txt-primary block mb-10 pull-right font-12" href="{{ url('/password/reset') }}">Esqueceu a senha?</a>
 				<input id="password" type="password" class="form-control" name="password">
 					
 					@if ($errors->has('password'))
@@ -40,6 +39,7 @@
 			</div>
 			
 			<div class="form-group">
+				<a class="txt-primary block mb-10 pull-right font-12" href="{{ url('/password/reset') }}">Esqueceu a senha?</a>
 				<div class="checkbox checkbox-primary pr-10 pull-left">
 					<input type="checkbox" name="remember">
 					<label for="checkbox"> Manter logado</label>

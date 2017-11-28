@@ -94,20 +94,22 @@
 												@if(!empty($prescricao->equipe))
 													{{ Form::select('equipe_prescricao', [
 															'Clínica médica' 	=> 'Clínica médica', 
-															'UTI' 				=> 'UTI', 
-															'UCO' 	    		=> 'UCO',
 															'Nefrologia' 		=> 'Nefrologia',
 															'Neurologia' 		=> 'Neurologia',
-															'Pronto-Socorro' 	=> 'Pronto-Socorro'
+															'Oncologia'			=> 'Oncologia',
+															'Pronto-Socorro' 	=> 'Pronto-Socorro',
+															'UCO' 	    		=> 'UCO',
+															'UTI' 				=> 'UTI'
 														], $prescricao->equipe, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 												@else
 													{{ Form::select('equipe_prescricao', [
 															'Clínica médica' 	=> 'Clínica médica', 
-															'UTI' 				=> 'UTI', 
-															'UCO' 	    		=> 'UCO',
 															'Nefrologia' 		=> 'Nefrologia',
 															'Neurologia' 		=> 'Neurologia',
-															'Pronto-Socorro' 	=> 'Pronto-Socorro'
+															'Oncologia'			=> 'Oncologia',
+															'Pronto-Socorro' 	=> 'Pronto-Socorro',
+															'UCO' 	    		=> 'UCO',
+															'UTI' 				=> 'UTI'
 														], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 												@endif
 											</div>

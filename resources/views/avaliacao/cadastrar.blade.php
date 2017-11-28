@@ -42,11 +42,12 @@
 												{{ Form::label('equipe_prescricao', 'Qual equipe (não) prescreveu?') }}
 												{{ Form::select('equipe_prescricao', [
 														'Clínica médica' 	=> 'Clínica médica', 
-														'UTI' 				=> 'UTI', 
-														'UCO' 	    		=> 'UCO',
 														'Nefrologia' 		=> 'Nefrologia',
 														'Neurologia' 		=> 'Neurologia',
-														'Pronto-Socorro' 	=> 'Pronto-Socorro'
+														'Oncologia'			=> 'Oncologia',
+														'Pronto-Socorro' 	=> 'Pronto-Socorro',
+														'UCO' 	    		=> 'UCO',
+														'UTI' 				=> 'UTI'
 													], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 											</div>
 										</div>

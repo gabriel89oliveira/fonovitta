@@ -47,8 +47,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-						<span class="inline-block pr-10">Não possui uma conta?</span>
-						<a class="inline-block btn btn-primary btn-rounded btn-outline" href="{{ url('/register') }}">Cadastrar</a>
+						<!-- <span class="inline-block pr-10">Não possui uma conta?</span> -->
+						<!-- <a class="inline-block btn btn-primary btn-rounded btn-outline" href="{{ url('/register') }}">Cadastrar</a> -->
 						<a class="inline-block btn btn-default btn-rounded btn-outline ml-15 mr-25" href="{{ url('/login') }}">Login</a>
                     @else
                        
@@ -81,7 +81,7 @@
 								<div class="col-xs-10 col-xs-offset-1 text-center">
 									
 									@if (Auth::guest())
-										<a class="inline-block " href="{{ url('/register') }}">Cadastrar</a>
+										<!-- <a class="inline-block " href="{{ url('/register') }}">Cadastrar</a> -->
 										<a class="inline-block ml-15 mr-25" href="{{ url('/login') }}">Login</a>
 				                    @else
 				                       

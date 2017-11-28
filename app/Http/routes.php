@@ -12,10 +12,16 @@
 */
 
 
+Route::get('/home', function() {
+	return view('home');
+});
+
+Route::get('/', ['uses' => 'SiteController@index', 'as' => 'site.index']);
+
 Route::auth();
 Route::group(['middleware' => ['auth']], function() {
 
-	Route::get('/', function () {
+	Route::get('/restrito', function () {
 
 		$id_usuario = Auth::user()->id;
 		$url = URL::route('usuarios.show', array('usuarios'=>$id_usuario,'mo'=>true));
