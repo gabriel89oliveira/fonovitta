@@ -133,10 +133,25 @@ class UsuarioController extends Controller
 			->get();
 		
 
+        // Aniversario dos pacientes
+        if($request->mo == true){
+
+            $aniversario_pacientes = DB::table('pacientes')
+                ->join('fonos', 'pacientes.id', '=', 'fonos.id_paciente')
+                ->whereRaw('extract(month from pacientes.nascimento) = ?', [date('n')])
+                ->whereRaw('extract(day from pacientes.nascimento) >= ?', [date('d')])
+                ->where('fonos.id_responsavel', $id)
+                ->get();
+
+        }else{
+            $aniversario_pacientes = [];
+        }
+
+
 		// Pagina visitada
 		$pagina = ($request->mo == true) ? "meu_perfil" : "todos_usuarios";
 
-		return view('usuarios/perfil', ['usuario' => $usuario, 'idade' => $idade, 'aniversario' => $aniversario, 'terapias' => $terapias, 'internacao' => $internacao, 'domiciliar' => $domiciliar])->with(["page" => $pagina]);
+		return view('usuarios/perfil', ['usuario' => $usuario, 'idade' => $idade, 'aniversario' => $aniversario, 'terapias' => $terapias, 'internacao' => $internacao, 'domiciliar' => $domiciliar, 'aniversario_pacientes' => $aniversario_pacientes])->with(["page" => $pagina]);
 		
     }
 

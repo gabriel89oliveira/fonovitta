@@ -76,7 +76,7 @@
 							</ul>
 							
 							<div class="tab-content" id="myTabContent_8">
-							
+								
 								<div id="atividades_tab_" class="tab-pane fade active in" role="tabpanel">
 									<div class="col-md-12">
 										<div class="pt-20">
@@ -194,181 +194,6 @@
 									</div>
 								</div>
 
-
-								<!-- <div  id="earnings_8" class="tab-pane fade" role="tabpanel">
-									
-									<div class="row">
-										<div class="col-lg-12">
-											<form id="example-advanced-form" action="#">
-												<div class="table-wrap">
-													<div class="table-responsive">
-														<table class="table table-striped display product-overview" id="datable_1">
-															<thead>
-																<tr>
-																	<th>Date</th>
-																	<th>Item Sales Colunt</th>
-																	<th>Earnings</th>
-																</tr>
-															</thead>
-															<tfoot>
-																<tr>
-																	<th colspan="2">total:</th>
-																	<th></th>
-																</tr>
-															</tfoot>
-															<tbody>
-																<tr>
-																	<td>monday, 12</td>
-																	<td>
-																	 3
-																	</td>
-																	<td>$400</td>
-																</tr>
-																<tr>
-																	<td>tuesday, 13</td>
-																	<td>
-																	 2
-																	</td>
-																	<td>$400</td>
-																</tr>
-																<tr>
-																	<td>wednesday, 14</td>
-																	<td>
-																	 3
-																	</td>
-																	<td>$420</td>
-																</tr>
-																<tr>
-																	<td>thursday, 15</td>
-																	<td>
-																	 5
-																	</td>
-																	<td>$500</td>
-																</tr>
-																<tr>
-																	<td>friday, 15</td>
-																	<td>
-																	 3
-																	</td>
-																	<td>$400</td>
-																</tr>
-																<tr>
-																	<td>saturday, 16</td>
-																	<td>
-																	 3
-																	</td>
-																	<td>$400</td>
-																</tr>
-																<tr>
-																	<td>sunday, 17</td>
-																	<td>
-																	 3
-																	</td>
-																	<td>$400</td>
-																</tr>
-																<tr>
-																	<td>monday, 18</td>
-																	<td>
-																	 3
-																	</td>
-																	<td>$500</td>
-																</tr>
-																<tr>
-																	<td>tuesday, 19</td>
-																	<td>
-																	 3
-																	</td>
-																	<td>$400</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-
-
-								<div  id="settings_8" class="tab-pane fade" role="tabpanel">
-									
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="">
-												<div class="panel-wrapper collapse in">
-													<div class="panel-body pa-0">
-														<div class="col-sm-12 col-xs-12">
-															<div class="form-wrap">
-																<form action="#">
-																	<div class="form-body overflow-hide">
-																		<div class="form-group">
-																			<label class="control-label mb-10" for="exampleInputuname_01">Name</label>
-																			<div class="input-group">
-																				<div class="input-group-addon"><i class="icon-user"></i></div>
-																				<input type="text" class="form-control" id="exampleInputuname_01" placeholder="willard bryant">
-																			</div>
-																		</div>
-																		<div class="form-group">
-																			<label class="control-label mb-10" for="exampleInputEmail_01">Email address</label>
-																			<div class="input-group">
-																				<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																				<input type="email" class="form-control" id="exampleInputEmail_01" placeholder="xyz@gmail.com">
-																			</div>
-																		</div>
-																		<div class="form-group">
-																			<label class="control-label mb-10" for="exampleInputContact_01">Contact number</label>
-																			<div class="input-group">
-																				<div class="input-group-addon"><i class="icon-phone"></i></div>
-																				<input type="email" class="form-control" id="exampleInputContact_01" placeholder="+102 9388333">
-																			</div>
-																		</div>
-																		<div class="form-group">
-																			<label class="control-label mb-10" for="exampleInputpwd_01">Password</label>
-																			<div class="input-group">
-																				<div class="input-group-addon"><i class="icon-lock"></i></div>
-																				<input type="password" class="form-control" id="exampleInputpwd_01" placeholder="Enter pwd" value="password">
-																			</div>
-																		</div>
-																		<div class="form-group">
-																			<label class="control-label mb-10">Gender</label>
-																			<div>
-																				<div class="radio">
-																					<input type="radio" name="radio1" id="radio_01" value="option1" checked="">
-																					<label for="radio_01">
-																					M
-																					</label>
-																				</div>
-																				<div class="radio">
-																					<input type="radio" name="radio1" id="radio_02" value="option2">
-																					<label for="radio_02">
-																					F
-																					</label>
-																				</div>
-																			</div>
-																		</div>
-																		<div class="form-group">
-																			<label class="control-label mb-10">Country</label>
-																			<select class="form-control" data-placeholder="Choose a Category" tabindex="1">
-																				<option value="Category 1">USA</option>
-																				<option value="Category 2">Austrailia</option>
-																				<option value="Category 3">India</option>
-																				<option value="Category 4">UK</option>
-																			</select>
-																		</div>
-																	</div>
-																	<div class="form-actions mt-10">			
-																		<button type="submit" class="btn btn-success mr-10 mb-30">Update profile</button>
-																	</div>				
-																</form>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> -->
-
 								
 							</div>
 						</div>
@@ -384,49 +209,9 @@
 
 
 @section('scripts')
-
-	<!-- Init JavaScript -->
-	@if( $aniversario == 0 )
-		
-		<script>
-			$(document).ready(function() {
-				"use strict";
-				
-				$.toast({
-					heading: 'Lembrete de aniversário',
-					text: 'É hoje o aniversário de {{ $usuario->nome }}!',
-					position: 'top-right',
-					loaderBg:'#469408',
-					icon: 'success',
-					hideAfter: 8000, 
-					stack: 6
-				});
-				
-			});
-		</script>
-		
-	@elseif($aniversario>=0 && $aniversario<=10)
-		
-		<script>
-			$(document).ready(function() {
-				"use strict";
-				
-				$.toast({
-					heading: 'Lembrete de aniversário',
-					text: 'Falta(m) {{ $aniversario+1 }} dia(s) para o aniversário de {{ $usuario->nome }}.',
-					position: 'top-right',
-					loaderBg:'#e69a2a',
-					icon: 'warning',
-					hideAfter: 8000, 
-					stack: 6
-				});
-				
-			});
-		</script>
-		
-	@endif
-		
-
+	
+	<!-- /.Aniversario -->
+	@include('usuarios.js.aniversario')
 
 @endsection
 
