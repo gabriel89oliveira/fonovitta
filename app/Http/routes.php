@@ -12,9 +12,7 @@
 */
 
 
-Route::get('/home', function() {
-	return view('home');
-});
+Route::get('/home', ['uses' => 'SiteController@index', 'as' => 'site.index']);
 
 Route::get('/', ['uses' => 'SiteController@index', 'as' => 'site.index']);
 
@@ -57,6 +55,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 		// Resources para avaliação
 		Route::resource('avaliacao', 'AvaliacaoController');
+		// Resources para SNE
+		Route::put('create', 'SNEController@create');
+		Route::put('edit', 'SNEController@edit');
 		// Resources para frequencia
 		Route::resource('frequencia', 'FrequenciaController');
 		// Resources para riscos

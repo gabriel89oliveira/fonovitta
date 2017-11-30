@@ -25,6 +25,11 @@
 								@if($fono->paliativo == "Sim")
 									<span class="label label-warning ml-10">Cuidados Paliativos</span>
 								@endif
+								@if($sne)
+									@if($sne->tipo == "passagem")
+										<span class="label label-warning ml-10">Paciente com SNE</span>
+									@endif
+								@endif
 							@endif
 
 							<!-- Idade -->
@@ -64,6 +69,19 @@
 										<li><a href=" {{ route('terapia.create', ['id' => $paciente->id]) }} ">Nova Terapia</a></li>
 									@endcan
 									
+									@if($sne)
+										@if($sne->tipo == "passagem")
+											<!-- Paciente com SNE -->
+											<li><a href="#" data-toggle="modal" data-target="#retirada-SNE-modal">Retirada de SNE</a></li>
+										@else
+											<!-- Paciente com historico de SNE porém sem SNE -->
+											<li><a href="#" data-toggle="modal" data-target="#passagen-SNE-modal">Passagem de SNE</a></li>
+										@endif
+									@else
+										<!-- Paciente sem historico de SNE -->
+										<li><a href="#" data-toggle="modal" data-target="#passagen-SNE-modal">Passagem de SNE</a></li>
+									@endif
+
 									<li><a href="#" data-toggle="modal" data-target="#frequencia-modal">Frequência do Atendimento</a></li>
 									<li><a href="#" data-toggle="modal" data-target="#riscos-modal">Gerenciar Riscos</a></li>
 									<li><a href="#" data-toggle="modal" data-target="#responsavel-modal">Alterar Responsável</a></li>
@@ -352,6 +370,9 @@
 	
 	<!-- MODAL PARA MENU -->
 	@if($paciente->fon == 1)
+
+		<!-- /.SNE -->
+		@include('pacientes.modal.sne')
 
 		<!-- /.Frequencia -->
 		@include('pacientes.modal.frequencia')

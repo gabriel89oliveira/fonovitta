@@ -145,7 +145,15 @@ class PacienteController extends Controller
 			->where('id_paciente', $paciente->id)
 			->orderBy('id', 'desc')->first();
 
-		return view('pacientes/perfil', ['paciente' => $paciente, 'idade' => $idade, 'aniversario' => $aniversario, 'terapia' => $terapia, 'fono' => $fono, 'equipe' => $equipe, 'dieta' => $dieta])->with(["page" => ""]);
+		if($fono){
+			$sne = DB::table('sne')->where('id_fonos', $fono->id)->orderby('id', 'desc')->first();
+		}else{
+			$sne = ['tipo' => null];
+		}
+
+		$historico_sne = DB::table('sne')->where('id_paciente', $id)->orderby('id', 'desc')->get();
+
+		return view('pacientes/perfil', ['paciente' => $paciente, 'idade' => $idade, 'aniversario' => $aniversario, 'terapia' => $terapia, 'fono' => $fono, 'equipe' => $equipe, 'dieta' => $dieta, 'sne' => $sne, 'historico_sne' => $historico_sne])->with(["page" => ""]);
 		
     }
 	
