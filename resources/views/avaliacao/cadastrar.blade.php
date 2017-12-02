@@ -64,6 +64,10 @@
 												{{ Form::checkbox('paliativo', 'Sim') }}
 												{{ Form::label('paliativo', 'Paciente em cuidados paliativos') }}
 											</div>
+											<!-- <div class="checkbox checkbox-primary">
+												{{ Form::checkbox('SNE', 'passagem') }}
+												{{ Form::label('SNE', 'Paciente com SNE') }}
+											</div> -->
 										</div>
 
 									</div>
