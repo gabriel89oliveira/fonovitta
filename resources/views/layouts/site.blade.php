@@ -76,19 +76,13 @@
 		
 			<!-- Preloader -->
 			<div id="preloader">
-				<div id="status">&nbsp;</div>
-
-
+				
 				<div class="preloader-wrap">
-				  <div class="percentage" id="precent"></div>
-				  <div class="loader">
-				    <div class="trackbar">
-				      <div class="loadbar"></div>
-				    </div>
-				  </div>
+					<!-- Animação -->
+					<div id="status">&nbsp;</div>
+					<!-- Mensagens -->
+				  	<div class="percentage" id="precent"></div>
 				</div>
-
-
 
 			</div>
 			<!-- //Preloader -->

@@ -191,12 +191,7 @@
 
 		// Loadbar Animation
 		$(".loadbar").animate({
-		  width: width + "%"
-		}, time);
-
-		// Loadbar Glow Animation
-		$(".glow").animate({
-		  width: width + "%"
+		  // width: width + "%"
 		}, time);
 
 		// Percentage Increment Animation
@@ -215,12 +210,21 @@
 		      obj = $(id);
 		    
 		    var timer = setInterval(function() {
+		        
 		        current += increment;
-		        $(obj).text(current + "%");
-		      //obj.innerHTML = current;
+		        
+		        if(current <= 50){
+		        	$(obj).text("Carregando");
+		        }else{
+		        	$(obj).text("Mais alguns instantes");
+		        }
+		        
+		      	//obj.innerHTML = current;
 		        if (current == end) {
 		            clearInterval(timer);
+		            $(obj).text("Finalizando");
 		        }
+
 		    }, stepTime);
 		}
 
