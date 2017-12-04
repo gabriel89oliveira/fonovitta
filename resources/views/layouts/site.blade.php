@@ -11,6 +11,7 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->   
 		<meta name="description" content="Clarity is a Bootstrap-based, Responsive HTML5 Template">
 		<meta name="author" content="bootstrapwizard.info">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 					
 		<!-- Font Awesome CSS -->
 		<link href="{{ URL::asset('clarity/css/font-awesome/font-awesome.min.css') }}" rel="stylesheet">
@@ -439,37 +440,59 @@
 				
 					<div class="row wow fadeInUp">
 					<!--  Working Contact Form With Validation -->					
-					
+						
 						<div class="col-md-8 col-md-offset-2">
-							<form  name="sentMessage" id="contactForm" novalidate>
+
+							    @foreach($errors->all() as $error)
+							        <div class="alert bg-blue alert-dismissable">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<i class="fa fa-alert pull-left"></i>
+										<p class="pull-left">
+											{{ $error }}
+										</p>
+										<div class="clearfix"></div>
+									</div>
+							    @endforeach
+							
+							{!! Form::open(array('class' => 'form', 'id' => 'form_contato')) !!}
 									
-									<div class="control-group form-group">
-										<div class="controls">
-											<label>Nome</label>
-											<input type="text" class="form-control dark" id="name"  required data-validation-required-message="Please enter your name.">
-											<p class="help-block"></p>
-										</div>
-									</div>
-									<div class="control-group form-group">
-										<div class="controls">
-											<label>Email</label>
-											<input type="email" class="form-control dark" id="email"  required data-validation-required-message="Please enter your email address.">
-											<p class="help-block"></p>
-										</div>
-									</div>
-								
 								<div class="control-group form-group">
 									<div class="controls">
-										<label>Mensagem</label>
-										<textarea class="form-control dark" rows="7" id="message"  required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+										<!-- <label>Nome</label> -->
+										<!-- <input type="text" class="form-control dark" id="name"  required data-validation-required-message="Please enter your name."> -->
+										{!! Form::label('Nome') !!}
+									    {!! Form::text('name', null, ['required', 'class'=>'form-control dark']) !!}
 										<p class="help-block"></p>
 									</div>
 								</div>
-								<div id="success"></div>
-								<div class="pull-right">
-								<button type="submit" class="btn btn-theme btn-lg">Enviar</button>
+								<div class="control-group form-group">
+									<div class="controls">
+										<!-- <label>Email</label> -->
+										<!-- <input type="email" class="form-control dark" id="email"  required data-validation-required-message="Please enter your email address."> -->
+										{!! Form::label('Email') !!}
+										{!! Form::text('email', null, ['required', 'class'=>'form-control dark']) !!}
+										<p class="help-block"></p>
+									</div>
 								</div>
-							</form>
+								
+								<div class="control-group form-group">
+									<div class="controls">
+										<!-- <label>Mensagem</label>
+										<textarea class="form-control dark" rows="7" id="message"  required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea> -->
+										{!! Form::label('Mensagem') !!}
+    									{!! Form::textarea('message', null, ['required', 'class'=>'form-control dark', 'rows'=>'7', 'maxlength'=>'999',  'style'=>'resize:none']) !!}
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+								<div id="success"></div>
+
+								<div class="pull-right">
+									<button type="submit" class="btn btn-theme btn-lg">Enviar</button>
+								</div>
+
+							{!! Form::close() !!}
+
 							<div class="clearfix"></div>
 						</div>
 					
@@ -572,81 +595,37 @@
 						<div class="col-md-6">
 							<ul class="list-inline pull-right">
 								<li><a href="http://www.facebook.com/fonovittafonoaudiologia" target="_blank" class="icon-holder small circle"><i class="fa fa-facebook"></i></a></li>
-								<!-- <li><a href="#" class="icon-holder small circle"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#" class="icon-holder small circle"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#" class="icon-holder small circle"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#" class="icon-holder small circle"><i class="fa fa-youtube-play"></i></a></li> -->
 							</ul>
 						</div>	
 					</div><!-- ./row -->
 				</div><!-- ./container -->
 			</div>
 			<!-- ./footer-sub -->
+
+
+			<!-- Modal -->
+			<div id="myModal" class="modal fade" role="dialog">
+			  	<div class="modal-dialog modal-sm">
+
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				        	<h4 class="modal-title">Sucesso!</h4>
+				      	</div>
+				      	<div class="modal-body">
+				        	<p>Obrigado pelo seu contato! <br> Enviaremos uma resposta em breve.</p>
+				     	</div>
+				    </div>
+
+			  	</div>
+			</div>
 						
 				
 		</div>
 		<!-- //wrapper -->
 		
-						
-		<!-- Styles Switcher  please remove this in production-->
-		
-		<!-- <div id="style-switcher">
-			<h2>Style Switcher <a href="#"></a></h2>
-			
-			<div><h3>Predefined Colors</h3>
-				<ul class="colors" id="color1">
-					<li><a href="#" class="green" title="Green"></a></li>
-					<li><a href="#" class="blue" title="Blue"></a></li>
-					<li><a href="#" class="orange" title="Orange"></a></li>
-					<li><a href="#" class="red" title="Red"></a></li>
-					<li><a href="#" class="purple" title="Red"></a></li>
-					<li><a href="#" class="aqua" title="Aqua"></a></li>
-					<li><a href="#" class="brown" title="Brown"></a></li>
-					<li><a href="#" class="dark-blue" title="Dark-Blue"></a></li>
-					<li><a href="#" class="light-green" title="Light-Green"></a></li>
-					<li><a href="#" class="dark-red" title="Dark-Red"></a></li>
-					<li><a href="#" class="teal" title="Teal"></a></li>
-					<li><a href="#" class="dark-purple" title="Dark-Purple"></a></li>
-				</ul>
 
-				
-			<h3>Layout Style</h3>
-			<div class="layout-style">
-				<select id="layout-switcher">
-					<option value="wide">Wide</option>
-					<option value="boxed">Boxed</option>					
-				</select>
-			</div>
-			
-			<h3>Background Image</h3>
-				 <ul class="colors bg" id="bg">
-					<li><a href="#" class="image-v1"></a></li>
-					<li><a href="#" class="image-v2"></a></li>
-					<li><a href="#" class="image-v3"></a></li>
-				</ul>
-				
-			<h3>Background Color</h3>
-				<ul class="colors bgsolid" id="bgsolid">
-					<li><a href="#" class="green-bg" title="Green"></a></li>
-					<li><a href="#" class="blue-bg" title="Blue"></a></li>
-					<li><a href="#" class="orange-bg" title="Orange"></a></li>
-					<li><a href="#" class="red-bg" title="Red"></a></li>
-					<li><a href="#" class="purple-bg" title="Red"></a></li>
-					<li><a href="#" class="aqua-bg" title="Aqua"></a></li>
-					<li><a href="#" class="brown-bg" title="Brown"></a></li>
-					<li><a href="#" class="dark-blue-bg" title="Dark-Blue"></a></li>
-					<li><a href="#" class="light-green-bg" title="Light-Green"></a></li>
-					<li><a href="#" class="dark-red-bg" title="Dark-Red"></a></li>
-					<li><a href="#" class="teal-bg" title="Teal"></a></li>
-					<li><a href="#" class="dark-purple-bg" title="Dark-Purple"></a></li>
-
-				</ul></div>
-			
-		</div> -->
-		<!-- ./Styles Switcher -->	
-		
-		
-					
 		<!-- jquery -->
 		<script src="{{ URL::asset('clarity/js/jquery-1.11.3.min.js') }}"></script>	
 		<script src="{{ URL::asset('clarity/js/bootstrap.min.js') }}"></script>
@@ -700,6 +679,50 @@
 		
 		<!-- main -->		
 		<script src="{{ URL::asset('clarity/js/main.js') }}"></script>
+
+
+		<script type="text/javascript">
+			
+			$("document").ready(function(){
+				$("#form_contato").submit(function(e){
+
+
+					e.preventDefault();
+					var nome = $("input[name=name]").val();
+					var mensagem = $("textarea[name=message]").val();
+					var email = $("input[name=email]").val();
+
+					var dataString = 'name='+nome+'&email='+email+'&message='+mensagem;
+					
+
+					/* AJAX OBJETIVO */
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+
+
+					$.ajax(
+					{
+						url: "{{ url('/contato') }}",
+						type: 'POST',
+						dataType: "JSON",
+						data: dataString,
+						success: function ()
+						{
+							$("#myModal").modal();
+						},
+						error: function(xhr) {
+							console.log(xhr.responseText); // this line will save you tons of hours while debugging
+						}
+					});
+					/* [fim] AJAX OBJETIVO */
+
+				});
+			});
+
+		</script>
 		
 			
 	</body>

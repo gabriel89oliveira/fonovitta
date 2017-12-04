@@ -12,10 +12,17 @@
 */
 
 
+// Index
 Route::get('/home', ['uses' => 'SiteController@index', 'as' => 'site.index']);
-
 Route::get('/', ['uses' => 'SiteController@index', 'as' => 'site.index']);
 
+// Contato
+Route::post('/contato', ['as' => 'contato', 'uses' => 'ContatoController@store']);
+Route::get('/email', function(){
+	return view('email');
+});
+
+// Area restrita
 Route::auth();
 Route::group(['middleware' => ['auth']], function() {
 
