@@ -39,12 +39,12 @@
 				<div class="content">
 					{{ $usuario->nome }} <br>
 					<small>{{ $usuario->cargo }}</small>
-					<ul class="list-inline">
+					<!-- <ul class="list-inline">
 						<li><a href="#" class="icon-holder facebook medium circle"><i class="fa fa-facebook"></i></a></li>
 						<li><a href="#" class="icon-holder twitter medium circle"><i class="fa fa-twitter"></i></a></li>
 						<li><a href="#" class="icon-holder skype medium circle"><i class="fa fa-skype"></i></a></li>
 						<li><a href="#" class="icon-holder linkedin medium circle"><i class="fa fa-linkedin"></i></a></li>
-					</ul>
+					</ul> -->
 				</div>								
 			</div>
 		</div>
