@@ -26,7 +26,7 @@ class ContatoController extends Controller
 	    });
 
     	return response()->json([
-            'success' => 'Obrigado pela mensagem!'
+            'success' => 'Obrigado pela mensagem!', 'error' => 'teste'
         ]);
 
     }

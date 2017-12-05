@@ -458,8 +458,6 @@
 									
 								<div class="control-group form-group">
 									<div class="controls">
-										<!-- <label>Nome</label> -->
-										<!-- <input type="text" class="form-control dark" id="name"  required data-validation-required-message="Please enter your name."> -->
 										{!! Form::label('Nome') !!}
 									    {!! Form::text('name', null, ['required', 'class'=>'form-control dark']) !!}
 										<p class="help-block"></p>
@@ -467,8 +465,6 @@
 								</div>
 								<div class="control-group form-group">
 									<div class="controls">
-										<!-- <label>Email</label> -->
-										<!-- <input type="email" class="form-control dark" id="email"  required data-validation-required-message="Please enter your email address."> -->
 										{!! Form::label('Email') !!}
 										{!! Form::text('email', null, ['required', 'class'=>'form-control dark']) !!}
 										<p class="help-block"></p>
@@ -477,8 +473,6 @@
 								
 								<div class="control-group form-group">
 									<div class="controls">
-										<!-- <label>Mensagem</label>
-										<textarea class="form-control dark" rows="7" id="message"  required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea> -->
 										{!! Form::label('Mensagem') !!}
     									{!! Form::textarea('message', null, ['required', 'class'=>'form-control dark', 'rows'=>'7', 'maxlength'=>'999',  'style'=>'resize:none']) !!}
 										<p class="help-block"></p>
@@ -603,8 +597,9 @@
 			<!-- ./footer-sub -->
 
 
-			<!-- Modal -->
-			<div id="myModal" class="modal fade" role="dialog">
+			<!-- MODAL -->
+			<!-- Sucesso -->
+			<div id="ModalSucesso" class="modal fade" role="dialog">
 			  	<div class="modal-dialog modal-sm">
 
 				    <!-- Modal content-->
@@ -620,6 +615,25 @@
 
 			  	</div>
 			</div>
+
+			<!-- Erro -->
+			<div id="ModalErro" class="modal fade" role="dialog">
+			  	<div class="modal-dialog modal-sm">
+
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				        	<h4 class="modal-title">Ops!</h4>
+				      	</div>
+				      	<div id="ModalErroTexto" class="modal-body">
+				        	<p>Alguma coisa deu errado! <br> Favor verificar seus dados novamente.</p>
+				     	</div>
+				    </div>
+
+			  	</div>
+			</div>
+			<!-- [fim] MODAL -->
 						
 				
 		</div>
@@ -711,10 +725,13 @@
 						data: dataString,
 						success: function ()
 						{
-							$("#myModal").modal();
+							$("#ModalSucesso").modal();
 						},
-						error: function(xhr) {
-							console.log(xhr.responseText); // this line will save you tons of hours while debugging
+						error: function(xhr, status, error) {
+
+							// $("#ModalErroTexto").html(error);
+							$("#ModalErro").modal();
+							// console.log(xhr.responseText); // this line will save you tons of hours while debugging
 						}
 					});
 					/* [fim] AJAX OBJETIVO */
