@@ -182,7 +182,20 @@ class AvaliacaoController extends Controller
 					'id_usuario'     => Auth::user()->id
 				]);
 
+
+			// Cadastra SNE
+			if(!empty($request->input('SNE'))){
+
+				$sne = DB::table('sne')->insertGetId([
+		    		'id_fonos' 		=> Auth::user()->id,
+		    		'id_paciente' 	=> $request->id_paciente,
+		    		'data' 			=> $request->data_sne,
+		    		'tipo'			=> $request->input('SNE')
+		    	]);
 			
+			}
+
+
 			// Atualiza atendimento de fono na tabela 'pacientes'
 			DB::table('pacientes')
 				->where('id', $request->id_paciente)

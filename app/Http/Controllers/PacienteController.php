@@ -146,7 +146,7 @@ class PacienteController extends Controller
 			->orderBy('id', 'desc')->first();
 
 		if($fono){
-			$sne = DB::table('sne')->where('id_fonos', $fono->id)->orderby('id', 'desc')->first();
+			$sne = DB::table('sne')->where('id_paciente', $id)->orderby('id', 'desc')->first();
 		}else{
 			$sne = ['tipo' => null];
 		}

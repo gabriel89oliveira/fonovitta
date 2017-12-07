@@ -52,22 +52,38 @@
 											</div>
 										</div>
 
-										<div class="col-sm-6">
-											<div class="form-group">
-												{{ Form::label('numero_atendimento', 'Número do atendimento') }}
-												{{ Form::text('numero_atendimento', null, ['class' => 'form-control']) }}
+										<div class="col-sm-12">
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														{{ Form::label('numero_atendimento', 'Número do atendimento') }}
+														{{ Form::text('numero_atendimento', null, ['class' => 'form-control']) }}
+													</div>
+												</div>
+												
+												<div class="col-sm-6 mt-20">
+													<div class="checkbox checkbox-primary">
+														{{ Form::checkbox('paliativo', 'Sim') }}
+														{{ Form::label('paliativo', 'Paciente em cuidados paliativos') }}
+													</div>
+												</div>
 											</div>
-										</div>
-										
-										<div class="col-sm-6 mt-15">
-											<div class="checkbox checkbox-primary">
-												{{ Form::checkbox('paliativo', 'Sim') }}
-												{{ Form::label('paliativo', 'Paciente em cuidados paliativos') }}
+											<div class="row">
+												<div class="col-sm-6 mt-20">
+													<div class="checkbox checkbox-primary">
+														{{ Form::checkbox('SNE', 'passagem') }}
+														{{ Form::label('SNE', 'Paciente com SNE') }}
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														{{ Form::label('data_sne', 'Data de passagem da SNE') }}
+														{{ Form::date('data_sne', null, ['class' => 'form-control']) }}
+													</div>
+												</div>
 											</div>
-											<!-- <div class="checkbox checkbox-primary">
-												{{ Form::checkbox('SNE', 'passagem') }}
-												{{ Form::label('SNE', 'Paciente com SNE') }}
-											</div> -->
+
 										</div>
 
 									</div>
