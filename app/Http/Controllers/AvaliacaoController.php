@@ -47,9 +47,12 @@ class AvaliacaoController extends Controller
         
         // Busca dados do paciente
 		$paciente = DB::table('pacientes')->where('id', $request->id)->first();
+
+		// Busca usuários
+		$usuarios = DB::table('usuarios')->pluck('nome', 'id');
 		
 		// Encaminha para view
-		return view('avaliacao/cadastrar', ['paciente' => $paciente])->with(["page" => ""]);
+		return view('avaliacao/cadastrar', ['paciente' => $paciente])->with(["page" => "", "usuarios" => $usuarios]);
 
     }
 
@@ -109,7 +112,7 @@ class AvaliacaoController extends Controller
 			// Inserir dados na tabela 'fon'
 			$id_insert = DB::table('fonos')->insertGetId([
 				'id_paciente'          => $request->id_paciente, 
-				'id_responsavel'	   => Auth::user()->id,
+				'id_responsavel'	   => $request->usuario,
 				'data_inicio'          => date("Y-m-d H:i:s"),
 				'frequencia'           => $request->frequencia,
 				'dieta_inicial'        => $request->dieta_inicial,
@@ -136,7 +139,7 @@ class AvaliacaoController extends Controller
 			// Inserir nova terapia
 			$id_insert = DB::table('terapias')->insertGetId([
 				'id_paciente'          => $request->id_paciente,
-				'id_usuario'           => Auth::user()->id,
+				'id_usuario'           => $request->usuario,
 				'id_fonos'			   => $id_insert,
 				'equipe'               => 'fon',
 				'terapia'              => $request->terapia,
@@ -148,6 +151,17 @@ class AvaliacaoController extends Controller
 				'prescricao'		   => $request->prescricao,
 				'data'				   => date("Y-m-d")
 			]);
+			
+				// Cadastra a qualidade da terapia
+				if($request->qualidade == true){
+
+					DB::table('qualidade_terapia')->insert([
+						'id_terapia' 	=> $id_insert,
+						'qualidade'		=> $request->qualidade_evolucao,
+						'falhas'		=> $request->falhas_evolucao
+					]);
+
+				}
 
 			// Cadastra prescrição
 			DB::table('prescricao')->insert([
@@ -187,7 +201,7 @@ class AvaliacaoController extends Controller
 			if(!empty($request->input('SNE'))){
 
 				$sne = DB::table('sne')->insertGetId([
-		    		'id_fonos' 		=> Auth::user()->id,
+		    		'id_fonos' 		=> $request->usuario,
 		    		'id_paciente' 	=> $request->id_paciente,
 		    		'data' 			=> $request->data_sne,
 		    		'tipo'			=> $request->input('SNE')
@@ -208,6 +222,8 @@ class AvaliacaoController extends Controller
 					'acao'           => 'atualizar',
 					'id_usuario'     => Auth::user()->id
 				]);
+
+
 				
 			
 			/* ----- ENCAMINHA PARA NOVA PÁGINA ----- */

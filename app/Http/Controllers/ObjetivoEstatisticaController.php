@@ -70,7 +70,10 @@ class ObjetivoEstatisticaController extends Controller
 		$tempo_90 = 100 * $tempo_90 / $num_objetivos;
 		$tempo_mais = 100 * $tempo_mais / $num_objetivos;
 		
-       return view('objetivos/estatistica', ['usuario' => $usuario, 'qnt' => $i, 'estimado' => $tempo_planejado, 'real' => $tempo_real, 'tempo_30' => $tempo_30, 'tempo_90' => $tempo_90, 'tempo_mais' => $tempo_mais, 'page' => 'estatisticas_objetivos']);
+
+		$usuarios = DB::table('usuarios')->pluck('nome', 'id');
+
+       	return view('objetivos/estatistica', ['usuario' => $usuario, 'qnt' => $i, 'estimado' => $tempo_planejado, 'real' => $tempo_real, 'tempo_30' => $tempo_30, 'tempo_90' => $tempo_90, 'tempo_mais' => $tempo_mais, 'page' => 'estatisticas_objetivos', 'usuarios' => $usuarios]);
 		
     }
 	

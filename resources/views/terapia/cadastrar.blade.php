@@ -255,6 +255,42 @@
 									{{ Form::label('comentario', 'Comentários') }}
 									{{ Form::textarea('comentario', null, ['class' => 'form-control', 'rows' => '5']) }}
 								</div>
+
+								@role('Fonoaudiologia_Coordenacao')
+
+									<hr class="light-grey-hr col-sm-10 col-sm-offset-1 mt-30 mb-30">
+
+									<div class="form-group mr-15">
+										{{ Form::label('usuario', 'Associar à') }}
+										{{ Form::select('usuario', $usuarios, Auth::user()->id, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									</div>
+
+									<div class="form-group">
+										{{ Form::label('qualidade_evolucao', 'Qualidade da evolução') }}
+										{{ Form::select('qualidade_evolucao', [
+												'Bom'   => 'Bom', 
+												'Ruim'	=> 'Ruim'
+											], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									</div>
+
+									<div class="form-group">
+										{{ Form::label('falhas_evolucao', 'Principal problema na evolução') }}
+										{{ Form::select('falhas_evolucao', [
+												'Erro de digitação'		=> 'Erro de digitação',
+												'Falta de informação'   => 'Falta de informação',
+												'Informação errada'		=> 'Informação errada',
+												'Nenhum'				=> 'Nenhum'
+											], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									</div>
+
+									{{ Form::hidden('qualidade', 'true') }}
+
+								@else
+
+									{{ Form::hidden('usuario', Auth::user()->id) }}
+									{{ Form::hidden('qualidade', 'false') }}
+									
+								@endrole
 									
 
 								<div class="form-group">

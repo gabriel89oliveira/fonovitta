@@ -87,7 +87,11 @@
 									<li><a href="#" data-toggle="modal" data-target="#responsavel-modal">Alterar Responsável</a></li>
 									
 									<li class="divider"></li>
-									
+
+									<li><a href=" {{ route('broncoaspiracao.create', ['id' => $paciente->id]) }} ">Novo evento de Broncoaspiração</a></li>
+
+									<li class="divider"></li>
+
 									<li><a href="#" onClick='confirmarAlta("{{ $paciente->id }}");'>Alta fonoaudiológica</a></li>
 									<li><a href="#" onClick='confirmarAltaHospitalar("{{ $paciente->id }}");'>Alta hospitalar</a></li>
 									<li><a href="#" onClick='confirmarSuspensao("{{ $paciente->id }}");'>Suspensão do atendimento</a></li>

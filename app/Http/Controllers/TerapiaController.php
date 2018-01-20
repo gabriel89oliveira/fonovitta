@@ -45,10 +45,13 @@ class TerapiaController extends Controller
 		
 		// Dados do paciente
 		$paciente = DB::table('pacientes')->where('id', $request->id)->first();
+
+		// Busca usuários
+		$usuarios = DB::table('usuarios')->pluck('nome', 'id');
 		
 		// Acesso para editar todos pacientes
 		if (Auth::user()->hasPermissionTo('Terapia_Todos')){
-			return view('terapia/cadastrar', ['paciente' => $paciente])->with(['page' => '']);
+			return view('terapia/cadastrar', ['paciente' => $paciente])->with(['page' => '', "usuarios" => $usuarios]);
 		}else{
 			
 			// Verifica se o paciente esta sendo atendido pela equipe
@@ -56,14 +59,14 @@ class TerapiaController extends Controller
 				
 				// Aceso para editar pacientes da minha equipe
 				if(Auth::user()->hasPermissionTo('Terapia_Equipe')){
-					return view('terapia/cadastrar', ['paciente' => $paciente])->with(['page' => '']);
+					return view('terapia/cadastrar', ['paciente' => $paciente])->with(['page' => '', "usuarios" => $usuarios]);
 				}else{
 					
 					$equipe = DB::table(Auth::user()->equipe.'s')->where('id_paciente', $request->id)->first();
 					
 					// Acesso para editar pacientes que o usuario atende
 					if(Auth::user()->hasPermissionTo('Terapia_Meu') AND $equipe->id_responsavel == Auth::user()->id){
-						return view('terapia/cadastrar', ['paciente' => $paciente])->with(['page' => 'meus_pacientes']);
+						return view('terapia/cadastrar', ['paciente' => $paciente])->with(['page' => 'meus_pacientes', "usuarios" => $usuarios]);
 					}else{
 						abort('401');
 					}
@@ -132,7 +135,7 @@ class TerapiaController extends Controller
 			// Inserir nova terapia
 			$id_insert = DB::table('terapias')->insertGetId([
 				'id_paciente'          			=> $request->id_paciente,
-				'id_usuario'           			=> Auth::user()->id,
+				'id_usuario'           			=> $request->usuario,
 				'id_fonos'						=> $id_fonos->id,
 				'equipe'               			=> 'fon',
 				'terapia'              			=> $request->terapia,
@@ -149,13 +152,23 @@ class TerapiaController extends Controller
 				'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
 				'data'				   			=> $request->data_terapia
 			]);
+
+				// Cadastra a qualidade da terapia
+				if($request->qualidade == true){
+
+					DB::table('qualidade_terapia')->insert([
+						'id_terapia' 	=> $id_insert,
+						'qualidade'		=> $request->qualidade_evolucao,
+						'falhas'		=> $request->falhas_evolucao
+					]);
+
+				}
 				
 			// Cadastra prescrição
 			DB::table('prescricao')->insert([
 				'id_terapia'  => $id_insert,
 				'prescricao'  => $request->prescricao,
-				'equipe'	  => $request->equipe_prescricao,
-				'updated_by'  => Auth::user()->id
+				'equipe'	  => $request->equipe_prescricao
 			]);
 
 				// Histórico
@@ -249,6 +262,12 @@ class TerapiaController extends Controller
 		$historico_dietas = DB::table('historico_dietas')->where('id_terapias', $terapia->id)->orderBy('id', 'desc')->first();
 		$prescricao = DB::table('prescricao')->where('id_terapia', $terapia->id)->first();
 
+		// Busca usuários
+		$usuarios = DB::table('usuarios')->pluck('nome', 'id');
+
+		// Busca qualidade da evolução
+		$qualidade = DB::table('qualidade_terapia')->where('id_terapia', $terapia->id)->first();
+
 		
 		// Acesso para editar todos pacientes
 		if (!Auth::user()->hasPermissionTo('Terapia_Editar_Todos')){
@@ -276,7 +295,7 @@ class TerapiaController extends Controller
 			
 		}
 
-		return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente, 'prescricao' => $prescricao, 'historico_dietas' => $historico_dietas])->with(["page" => ""]);
+		return view('terapia/editar', ['terapia' => $terapia, 'paciente' => $paciente, 'prescricao' => $prescricao, 'historico_dietas' => $historico_dietas])->with(["page" => "", "usuarios" => $usuarios, "qualidade" => $qualidade]);
 		
     }
 
@@ -348,24 +367,37 @@ class TerapiaController extends Controller
 				'comentario_dieta_anterior'		=> $request->comentario_dieta_anterior,
 				'treino_anterior'				=> $request->treino_anterior,
 				'comentario_treino_anterior'	=> $request->comentario_treino_anterior,
-				'data'				   			=> $request->data_terapia
+				'data'				   			=> $request->data_terapia,
+				'id_usuario'					=> $request->usuario
 			]);
+
+			// Cadastra a qualidade da terapia
+			if($request->qualidade == true){
+
+				DB::table('qualidade_terapia')
+					->where('id_terapia', $id)
+					->update([
+						'qualidade'		=> $request->qualidade_evolucao,
+						'falhas'		=> $request->falhas_evolucao
+					]);
+
+			}
 			
 		// Atualiza prescrição
 		DB::table('prescricao')
 			->where('id_terapia', $id)
 			->update([
-			'prescricao'  => $request->prescricao,
-			'equipe'	  => $request->equipe_prescricao,
-			'updated_by'  => Auth::user()->id
+				'prescricao'  	=> $request->prescricao,
+				'equipe'	  	=> $request->equipe_prescricao,
+				'updated_by'	=> Auth::user()->id
 			]);
 
 			// Histórico
 			DB::table('historicos')->insert([
-				'tabela'         => 'terapia',
-				'id_linha'       => $id,
-				'acao'           => 'atualizar',
-				'id_usuario'     => Auth::user()->id
+				'tabela'        => 'terapia',
+				'id_linha'      => $id,
+				'acao'          => 'atualizar',
+				'id_usuario'	=> Auth::user()->id
 			]);
 
 
@@ -415,7 +447,8 @@ class TerapiaController extends Controller
 						->where('id', $dietas->id)
 	        			->update([
 	        				'data'	=> $request->data_terapia,
-							'dieta' => $request->dieta
+							'dieta' => $request->dieta,
+							'updated_by' => Auth::user()->id
 						]);
 
 				}else{
@@ -429,7 +462,8 @@ class TerapiaController extends Controller
 						->where('id', $dietas->id)
 	        			->update([
 	        				'data'	=> $request->data_terapia,
-							'dieta' => $dieta_antiga->dieta
+							'dieta' => $dieta_antiga->dieta,
+							'updated_by' => Auth::user()->id
 						]);
 
 				}
@@ -447,7 +481,8 @@ class TerapiaController extends Controller
 						->where('id', $dietas->id)
 	        			->update([
 	        				'data'	=> $request->data_terapia,
-							'liquido' => $request->liquido
+							'liquido' => $request->liquido,
+							'updated_by' => Auth::user()->id
 						]);
 
 				}else{
@@ -461,7 +496,8 @@ class TerapiaController extends Controller
 						->where('id', $dietas->id)
 	        			->update([
 	        				'data'	=> $request->data_terapia,
-							'liquido' => $dieta_antiga->liquido
+							'liquido' => $dieta_antiga->liquido,
+							'updated_by' => Auth::user()->id
 						]);
 
 				}

@@ -198,6 +198,8 @@
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
 
+								<hr class="light-grey-hr col-sm-8 col-sm-offset-2 mt-30 mb-30">
+								
 								<div class="form-group">
 									{{ Form::label('dieta_inicial', 'Consistência da dieta atual') }}
 									{{ Form::select('dieta_inicial', [
@@ -372,13 +374,49 @@
 											'Jejum'				=> 'Jejum'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
-									
+
+								@role('Fonoaudiologia_Coordenacao')
+
+									<hr class="light-grey-hr col-sm-8 col-sm-offset-2 mt-30 mb-30">
+
+									<div class="form-group mr-15">
+										{{ Form::label('usuario', 'Associar à') }}
+										{{ Form::select('usuario', $usuarios, Auth::user()->id, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									</div>
+
+									<div class="form-group">
+										{{ Form::label('qualidade_evolucao', 'Qualidade da evolução') }}
+										{{ Form::select('qualidade_evolucao', [
+												'Bom'   => 'Bom', 
+												'Ruim'	=> 'Ruim'
+											], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									</div>
+
+									<div class="form-group">
+										{{ Form::label('falhas_evolucao', 'Principal problema na evolução') }}
+										{{ Form::select('falhas_evolucao', [
+												'Erro de digitação'		=> 'Erro de digitação',
+												'Falta de informação'   => 'Falta de informação',
+												'Informação errada'		=> 'Informação errada',
+												'Nenhum'				=> 'Nenhum'
+											], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
+									</div>
+
+									{{ Form::hidden('qualidade', 'true') }}
+
+								@else
+
+									{{ Form::hidden('usuario', Auth::user()->id) }}
+									{{ Form::hidden('qualidade', 'false') }}
+
+								@endrole
+
 								<div class="form-group">
 									{{ Form::hidden('id_paciente', $paciente->id) }}
 									{{ Form::submit('Cadastrar', ['class' => 'btn btn-primary btn-anim pull-right']) }}
 									<a class="pull-right btn btn-default mr-30" href=" {{ route('pacientes.show', ['id' => $paciente->id]) }} "> Cancelar </a>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>

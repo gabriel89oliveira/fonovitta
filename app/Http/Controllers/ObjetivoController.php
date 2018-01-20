@@ -120,16 +120,16 @@ class ObjetivoController extends Controller
         
 		// Buscar dados do responsável
 		$responsavel = DB::table('fonos')
-			->select('id_responsavel')
 			->where('id_paciente', '=', $request->id_paciente)
 			->where('data_termino', '<', 'data_inicio')
 			->first();
 		
 		// Cadastra novo objetivo
 		$objetivo = DB::table('objetivos')->insertGetId([
-			'data'			=> Carbon::now(),
+			'data'			=> $request->data,
 			'id_paciente'   => $request->id_paciente, 
 			'id_usuario'    => $responsavel->id_responsavel,
+			'id_fonos'    	=> $responsavel->id,
 			'objetivo'      => $request->objetivo,
 			'progresso' 	=> 0,
 			'status' 		=> 'ativo',
@@ -225,6 +225,7 @@ class ObjetivoController extends Controller
 			'data'			=> $objetivo->data,
 			'id_paciente'   => $objetivo->id_paciente, 
 			'id_usuario'    => $objetivo->id_usuario,
+			'id_fonos'    	=> $objetivo->id_fonos,
 			'objetivo'      => $objetivo->objetivo,
 			'prazo'    		=> $objetivo->prazo,
 			'conclusao'		=> $request->data,
@@ -240,26 +241,40 @@ class ObjetivoController extends Controller
     }
 
 
-	/**
-     * Mostrar meus objetivos.
-     *
-     */
-  //   public function mine($id)
-  //   {
-        
-		// $objetivos = DB::table('objetivos')
-  //           ->join('pacientes', 'objetivos.id_paciente', '=', 'pacientes.id')
-		// 	->join('usuarios', 'objetivos.id_usuario', '=', 'usuarios.id')
-		// 	->select('objetivos.*', 'pacientes.nome as paciente_nome', 'usuarios.nome as usuario_nome', 'usuarios.id as usuario_id')
-		// 	->where('objetivos.id_usuario', '=', $id)
-		// 	->orderBy('objetivos.prazo', 'asc')
-		// 	->orderBy('objetivos.id', 'desc')
-		// 	->paginate(10);
 
-		// $url = URL::route('objetivos.index', array('usuario'=>$id,'mo'=>true));
-		// return Redirect::to($url);
-		
-  //   }
+    public function corrigir_objetivos()
+    {
+
+    	// Recupera os pacientes em atendimento atualmente
+    	$fonos = DB::table('fonos')->get();
+
+    	foreach ($fonos as $fono) {
+    		
+    		// Busca os objetivos atuais
+    		$objetivos = DB::table('objetivos')
+    			->where('id_paciente', $fono->id_paciente)
+    			->get();
+
+    		$objetivos = DB::table('historico_objetivos')
+    			->where('id_paciente', $fono->id_paciente)
+    			->where('data', '<=', '2017-09-01')
+    			->get();
+
+    		foreach ($objetivos as $objetivo) {
+    			
+    			echo " &nbsp; Objetivo: " . $objetivo->id . " / ";
+    			// DB::table('historico_objetivos')
+    			// 	->where('id', $objetivo->id)
+    			// 	->update([
+    			// 		'id_fonos' => $fono->id
+    			// 	]);
+
+    		}
+
+    	}
+
+    }
+
 	
 	
 }

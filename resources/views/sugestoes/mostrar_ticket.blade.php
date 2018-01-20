@@ -34,7 +34,7 @@
 							@endif
 
 							<h5 style="text-transform: none"> 	
-								{{ $ticket->comentario }} 
+								{!! nl2br(e($ticket->comentario)) !!} 
 								<br>
 								<small>Criado por {{ $ticket->nome }}</small> 
 							</h5>

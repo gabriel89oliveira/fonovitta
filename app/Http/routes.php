@@ -46,6 +46,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 		// Pagina de busca
 		Route::get('busca', ['uses' => 'BuscaController@index', 'as' => 'busca.index']);
+
+		// Pagina para corrigir objetivos
+		Route::get('corrigir', ['uses' => 'ObjetivoController@corrigir_objetivos', 'as' => 'objetivo.corrigir']);
 	
 
 	/**
@@ -124,6 +127,15 @@ Route::group(['middleware' => ['auth']], function() {
 		Route::get('sugestoes/mostrar_ticket/{id}', ['uses' => 'SugestaoController@mostrar_ticket', 'as' => 'sugestao.mostrar_ticket']);
 		Route::post('sugestoes/store', ['uses' => 'SugestaoController@store', 'as' => 'sugestao.store']);
 		Route::post('sugestoes/comentar', ['uses' => 'SugestaoController@comentar', 'as' => 'sugestao.comentar']);
+
+
+	/**
+	 * Routes para pagina de broncoaspiração
+	 *
+	 */
+
+		// Resources para broncoaspiração
+		Route::resource('broncoaspiracao', 'BroncoaspiracaoController');
 
 	
 	/**

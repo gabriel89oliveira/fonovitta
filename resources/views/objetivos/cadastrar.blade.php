@@ -22,6 +22,11 @@
 							<div class="form-wrap">
 								
 								<div class="form-group">
+									{{ Form::label('data', 'Data') }}
+									{{ Form::date('data', '', ['class' => 'form-control']) }}
+								</div>
+
+								<div class="form-group">
 									{{ Form::label('id_paciente', 'Paciente') }}
 									{{ Form::select('id_paciente', $paciente, null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
 								</div>
