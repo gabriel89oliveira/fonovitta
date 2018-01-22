@@ -121,6 +121,7 @@
 											'Pneumonia'								=> 'Pneumonia',
 											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
+											'Sepse'									=> 'Sepse',
 											'TCE'									=> 'TCE',
 											'Outros'								=> 'Outros'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
@@ -157,6 +158,7 @@
 											'Pneumonia'								=> 'Pneumonia', 
 											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
+											'Sepse'									=> 'Sepse',
 											'TCE'									=> 'TCE',
 											'Outros'								=> 'Outros'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
@@ -193,6 +195,7 @@
 											'Pneumonia'								=> 'Pneumonia',
 											'Rebaixamento do Nível de Consciência'	=> 'Rebaixamento do Nível de Consciência',
 											'Sarcopenia'							=> 'Sarcopenia',
+											'Sepse'									=> 'Sepse',
 											'TCE'									=> 'TCE',
 											'Outros'								=> 'Outros'
 										], null, ['placeholder' => 'Escolher', 'class' => 'form-control']) }}
