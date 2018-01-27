@@ -374,7 +374,7 @@ class TerapiaController extends Controller
 			]);
 
 			// Cadastra a qualidade da terapia
-			if($request->qualidade == true){
+			if($request->qualidade == 'true'){
 
 				DB::table('qualidade_terapia')
 					->where('id_terapia', $id)
